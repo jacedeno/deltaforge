@@ -1,0 +1,18 @@
+{
+ "generated_at": "2026-08-28T21:16:12+00:00",
+ "source": "/home/geekendzone/repos/ml30-sp500-strategy/config/broad_liquid_universe.json",
+ "ml30_commit": "e99294227db3f9303b6031d8971cd3b0983260d7",
+ "filter": {
+  "price_cap": 150.0,
+  "as_of": "2020-01-01",
+  "basis": "first 30m close on/after start date (start-of-backtest price, not today's)"
+ },
+ "window": {
+  "start": "2020-01-01",
+  "end": "2026-08-01"
+ },
+ "symbols": [],
+ "detail": [],
+ "excluded": [],
+ "cap_flips_on_end_price": []
+}

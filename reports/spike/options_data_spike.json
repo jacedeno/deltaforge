@@ -1,0 +1,216 @@
+[
+ {
+  "symbol": "INTC",
+  "entry_day": "2024-05-06",
+  "spot": 30.97,
+  "listing_api": {
+   "returned": 0,
+   "error": null,
+   "sample": []
+  },
+  "occ_synthesis": {
+   "2024-05-24": {
+    "candidates": 7,
+    "with_data": 7,
+    "contracts": {
+     "INTC240524C00034000": {
+      "daily_bars": 15,
+      "daily_coverage_pct": 100.0
+     },
+     "INTC240524C00028000": {
+      "daily_bars": 14,
+      "daily_coverage_pct": 93.3
+     },
+     "INTC240524C00029000": {
+      "daily_bars": 15,
+      "daily_coverage_pct": 100.0
+     },
+     "INTC240524C00030000": {
+      "daily_bars": 15,
+      "daily_coverage_pct": 100.0
+     },
+     "INTC240524C00031000": {
+      "daily_bars": 15,
+      "daily_coverage_pct": 100.0
+     },
+     "INTC240524C00032000": {
+      "daily_bars": 15,
+      "daily_coverage_pct": 100.0
+     },
+     "INTC240524C00033000": {
+      "daily_bars": 15,
+      "daily_coverage_pct": 100.0
+     }
+    }
+   }
+  },
+  "minute_bars": {
+   "atm": {
+    "strike": 31.0,
+    "occ": "INTC240524C00031000",
+    "minute_bars_entry_day": 59
+   },
+   "target_wing": {
+    "strike": 33.0,
+    "occ": "INTC240524C00033000",
+    "minute_bars_entry_day": 71
+   }
+  }
+ },
+ {
+  "symbol": "BAC",
+  "entry_day": "2025-02-03",
+  "spot": 46.21,
+  "listing_api": {
+   "returned": 0,
+   "error": null,
+   "sample": []
+  },
+  "occ_synthesis": {
+   "2025-02-21": {
+    "candidates": 9,
+    "with_data": 9,
+    "contracts": {
+     "BAC250221C00046000": {
+      "daily_bars": 14,
+      "daily_coverage_pct": 93.3
+     },
+     "BAC250221C00049000": {
+      "daily_bars": 14,
+      "daily_coverage_pct": 93.3
+     },
+     "BAC250221C00043000": {
+      "daily_bars": 14,
+      "daily_coverage_pct": 93.3
+     },
+     "BAC250221C00044000": {
+      "daily_bars": 14,
+      "daily_coverage_pct": 93.3
+     },
+     "BAC250221C00047000": {
+      "daily_bars": 14,
+      "daily_coverage_pct": 93.3
+     },
+     "BAC250221C00048000": {
+      "daily_bars": 14,
+      "daily_coverage_pct": 93.3
+     },
+     "BAC250221C00050000": {
+      "daily_bars": 14,
+      "daily_coverage_pct": 93.3
+     },
+     "BAC250221C00042000": {
+      "daily_bars": 13,
+      "daily_coverage_pct": 86.7
+     },
+     "BAC250221C00045000": {
+      "daily_bars": 14,
+      "daily_coverage_pct": 93.3
+     }
+    }
+   }
+  },
+  "minute_bars": {
+   "atm": {
+    "strike": 46.0,
+    "occ": "BAC250221C00046000",
+    "minute_bars_entry_day": 49
+   },
+   "target_wing": {
+    "strike": 49.0,
+    "occ": "BAC250221C00049000",
+    "minute_bars_entry_day": 15
+   }
+  }
+ },
+ {
+  "symbol": "UBER",
+  "entry_day": "2026-03-02",
+  "spot": 75.95,
+  "listing_api": {
+   "returned": 0,
+   "error": null,
+   "sample": []
+  },
+  "occ_synthesis": {
+   "2026-03-20": {
+    "candidates": 15,
+    "with_data": 15,
+    "contracts": {
+     "UBER260320C00069000": {
+      "daily_bars": 11,
+      "daily_coverage_pct": 73.3
+     },
+     "UBER260320C00070000": {
+      "daily_bars": 15,
+      "daily_coverage_pct": 100.0
+     },
+     "UBER260320C00077000": {
+      "daily_bars": 15,
+      "daily_coverage_pct": 100.0
+     },
+     "UBER260320C00079000": {
+      "daily_bars": 15,
+      "daily_coverage_pct": 100.0
+     },
+     "UBER260320C00082000": {
+      "daily_bars": 15,
+      "daily_coverage_pct": 100.0
+     },
+     "UBER260320C00071000": {
+      "daily_bars": 10,
+      "daily_coverage_pct": 66.7
+     },
+     "UBER260320C00073000": {
+      "daily_bars": 15,
+      "daily_coverage_pct": 100.0
+     },
+     "UBER260320C00075000": {
+      "daily_bars": 15,
+      "daily_coverage_pct": 100.0
+     },
+     "UBER260320C00078000": {
+      "daily_bars": 15,
+      "daily_coverage_pct": 100.0
+     },
+     "UBER260320C00081000": {
+      "daily_bars": 15,
+      "daily_coverage_pct": 100.0
+     },
+     "UBER260320C00083000": {
+      "daily_bars": 15,
+      "daily_coverage_pct": 100.0
+     },
+     "UBER260320C00072000": {
+      "daily_bars": 15,
+      "daily_coverage_pct": 100.0
+     },
+     "UBER260320C00074000": {
+      "daily_bars": 15,
+      "daily_coverage_pct": 100.0
+     },
+     "UBER260320C00076000": {
+      "daily_bars": 15,
+      "daily_coverage_pct": 100.0
+     },
+     "UBER260320C00080000": {
+      "daily_bars": 15,
+      "daily_coverage_pct": 100.0
+     }
+    }
+   }
+  },
+  "minute_bars": {
+   "atm": {
+    "strike": 76.0,
+    "occ": "UBER260320C00076000",
+    "minute_bars_entry_day": 34
+   },
+   "target_wing": {
+    "strike": 80.0,
+    "occ": "UBER260320C00080000",
+    "minute_bars_entry_day": 111
+   }
+  }
+ }
+]
