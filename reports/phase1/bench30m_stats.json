@@ -1,0 +1,39 @@
+{
+ "label": "bench30m",
+ "config": {
+  "universe_file": "/home/geekendzone/repos/deltaforge/config/universe_sub150.json",
+  "symbols_requested": 45,
+  "start": "2020-01-01",
+  "end": "2026-08-01",
+  "timeframe": "30min",
+  "feed": "sip",
+  "max_concurrent": 3,
+  "max_position_pct": 0.33,
+  "r_target": 3.0,
+  "stop_lookback": 8,
+  "sma_fast": 21,
+  "sma_slow": 55,
+  "cooldown_bars": 13,
+  "min_dollar_risk": 0.01,
+  "entry_ranking": "file",
+  "ranking_seed": 42,
+  "ml30_commit": "e99294227db3f9303b6031d8971cd3b0983260d7",
+  "deltaforge_commit": "919413538ba222eb3832f7435d6386622fad7340"
+ },
+ "elapsed_seconds": 164.6,
+ "initial_equity": 3000.0,
+ "final_equity": 18788.4,
+ "total_return_pct": 526.28,
+ "num_trades": 830,
+ "win_rate_pct": 31.69,
+ "expectancy_r": 0.2675,
+ "profit_factor": 1.395,
+ "max_drawdown_pct": 23.14,
+ "sharpe_ratio": 0.144,
+ "exit_reason_counts": {
+  "TARGET": 263,
+  "STOP": 567
+ },
+ "skipped_entries_due_to_cap": 17616,
+ "symbols_traded": 45
+}

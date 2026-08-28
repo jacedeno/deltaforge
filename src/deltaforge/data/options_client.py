@@ -116,7 +116,7 @@ class DeltaForgeOptionsClient:
                 start=start,
                 end=end,
             )
-            data = self._client.get_option_bars(req).data
+            data = self._get_bars_with_retry(req)
             for occ in missing:
                 rows = data.get(occ, [])
                 df = _to_frame(rows)
@@ -134,6 +134,22 @@ class DeltaForgeOptionsClient:
                 )
                 out[occ] = df
         return out
+
+
+    def _get_bars_with_retry(self, req: OptionBarsRequest, attempts: int = 4):
+        """Rate-limit resilience for multi-hour replay runs."""
+        import time
+
+        for attempt in range(attempts):
+            try:
+                return self._client.get_option_bars(req).data
+            except Exception as exc:  # noqa: BLE001 — SDK raises generic APIError on 429
+                if attempt == attempts - 1:
+                    raise
+                wait = 30 * (attempt + 1)
+                log.warning("options.fetch.retry", error=str(exc)[:150], wait_s=wait)
+                time.sleep(wait)
+        raise RuntimeError("unreachable")
 
 
 def _as_utc(dt: datetime) -> datetime:

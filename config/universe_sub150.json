@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-08-28T21:16:12+00:00",
+ "generated_at": "2026-08-28T21:49:25+00:00",
  "source": "/home/geekendzone/repos/ml30-sp500-strategy/config/broad_liquid_universe.json",
  "ml30_commit": "e99294227db3f9303b6031d8971cd3b0983260d7",
  "filter": {
@@ -11,8 +11,717 @@
   "start": "2020-01-01",
   "end": "2026-08-01"
  },
- "symbols": [],
- "detail": [],
- "excluded": [],
- "cap_flips_on_end_price": []
+ "symbols": [
+  "MU",
+  "INTC",
+  "AMD",
+  "XOM",
+  "BAC",
+  "LLY",
+  "ORCL",
+  "WMT",
+  "CSCO",
+  "WFC",
+  "GE",
+  "KO",
+  "CVX",
+  "JPM",
+  "BSX",
+  "CAT",
+  "UBER",
+  "VZ",
+  "FCX",
+  "C",
+  "JNJ",
+  "T",
+  "SCHW",
+  "ABBV",
+  "CMCSA",
+  "PG",
+  "SLB",
+  "NKE",
+  "COP",
+  "COF",
+  "MRK",
+  "PFE",
+  "ETN",
+  "CEG",
+  "ABT",
+  "MS",
+  "DIS",
+  "MDT",
+  "TMUS",
+  "F",
+  "CSX",
+  "NEM",
+  "WBD",
+  "CCL",
+  "RCL"
+ ],
+ "detail": [
+  {
+   "symbol": "MU",
+   "start_price": 55.19,
+   "end_price": 822.59,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21417
+  },
+  {
+   "symbol": "INTC",
+   "start_price": 60.68,
+   "end_price": 90.2,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21417
+  },
+  {
+   "symbol": "AMD",
+   "start_price": 47.49,
+   "end_price": 476.24,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21417
+  },
+  {
+   "symbol": "XOM",
+   "start_price": 70.78,
+   "end_price": 155.5,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21369
+  },
+  {
+   "symbol": "BAC",
+   "start_price": 35.39,
+   "end_price": 61.98,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21370
+  },
+  {
+   "symbol": "LLY",
+   "start_price": 131.36,
+   "end_price": 1148.52,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21371
+  },
+  {
+   "symbol": "ORCL",
+   "start_price": 53.63,
+   "end_price": 129.88,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21371
+  },
+  {
+   "symbol": "WMT",
+   "start_price": 119.46,
+   "end_price": 111.21,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21369
+  },
+  {
+   "symbol": "CSCO",
+   "start_price": 48.16,
+   "end_price": 116.0,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21417
+  },
+  {
+   "symbol": "WFC",
+   "start_price": 53.62,
+   "end_price": 86.47,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21369
+  },
+  {
+   "symbol": "GE",
+   "start_price": 11.35,
+   "end_price": 360.24,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21381
+  },
+  {
+   "symbol": "KO",
+   "start_price": 55.2,
+   "end_price": 87.58,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21382
+  },
+  {
+   "symbol": "CVX",
+   "start_price": 121.33,
+   "end_price": 196.88,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21371
+  },
+  {
+   "symbol": "JPM",
+   "start_price": 139.63,
+   "end_price": 351.78,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21381
+  },
+  {
+   "symbol": "BSX",
+   "start_price": 45.34,
+   "end_price": 46.73,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21371
+  },
+  {
+   "symbol": "CAT",
+   "start_price": 149.31,
+   "end_price": 814.91,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21370
+  },
+  {
+   "symbol": "UBER",
+   "start_price": 30.12,
+   "end_price": 70.37,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21369
+  },
+  {
+   "symbol": "VZ",
+   "start_price": 61.02,
+   "end_price": 46.83,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21369
+  },
+  {
+   "symbol": "FCX",
+   "start_price": 13.39,
+   "end_price": 62.62,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21381
+  },
+  {
+   "symbol": "C",
+   "start_price": 80.38,
+   "end_price": 132.45,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21371
+  },
+  {
+   "symbol": "JNJ",
+   "start_price": 145.82,
+   "end_price": 256.42,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21380
+  },
+  {
+   "symbol": "T",
+   "start_price": 38.88,
+   "end_price": 23.27,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21369
+  },
+  {
+   "symbol": "SCHW",
+   "start_price": 47.78,
+   "end_price": 105.27,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21381
+  },
+  {
+   "symbol": "ABBV",
+   "start_price": 88.7,
+   "end_price": 251.06,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21383
+  },
+  {
+   "symbol": "CMCSA",
+   "start_price": 45.15,
+   "end_price": 23.96,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21417
+  },
+  {
+   "symbol": "PG",
+   "start_price": 124.03,
+   "end_price": 144.5,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21371
+  },
+  {
+   "symbol": "SLB",
+   "start_price": 40.47,
+   "end_price": 49.6,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21369
+  },
+  {
+   "symbol": "NKE",
+   "start_price": 101.61,
+   "end_price": 41.72,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21371
+  },
+  {
+   "symbol": "COP",
+   "start_price": 65.19,
+   "end_price": 120.49,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21371
+  },
+  {
+   "symbol": "COF",
+   "start_price": 102.89,
+   "end_price": 209.03,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21371
+  },
+  {
+   "symbol": "MRK",
+   "start_price": 90.81,
+   "end_price": 130.22,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21371
+  },
+  {
+   "symbol": "PFE",
+   "start_price": 39.03,
+   "end_price": 25.03,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21370
+  },
+  {
+   "symbol": "ETN",
+   "start_price": 95.36,
+   "end_price": 415.48,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21380
+  },
+  {
+   "symbol": "CEG",
+   "start_price": 52.41,
+   "end_price": 262.76,
+   "first_bar": "2022-02-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 14597
+  },
+  {
+   "symbol": "ABT",
+   "start_price": 86.26,
+   "end_price": 105.74,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21383
+  },
+  {
+   "symbol": "MS",
+   "start_price": 51.38,
+   "end_price": 210.51,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21371
+  },
+  {
+   "symbol": "DIS",
+   "start_price": 146.75,
+   "end_price": 96.2,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21371
+  },
+  {
+   "symbol": "MDT",
+   "start_price": 114.0,
+   "end_price": 85.4,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21370
+  },
+  {
+   "symbol": "TMUS",
+   "start_price": 78.41,
+   "end_price": 172.61,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21417
+  },
+  {
+   "symbol": "F",
+   "start_price": 9.23,
+   "end_price": 14.68,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21381
+  },
+  {
+   "symbol": "CSX",
+   "start_price": 72.71,
+   "end_price": 50.38,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21417
+  },
+  {
+   "symbol": "NEM",
+   "start_price": 43.69,
+   "end_price": 93.71,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21369
+  },
+  {
+   "symbol": "WBD",
+   "start_price": 25.11,
+   "end_price": 26.29,
+   "first_bar": "2022-04-04T09:30:00-04:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 14049
+  },
+  {
+   "symbol": "CCL",
+   "start_price": 51.12,
+   "end_price": 27.82,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21371
+  },
+  {
+   "symbol": "RCL",
+   "start_price": 133.96,
+   "end_price": 318.28,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21369
+  }
+ ],
+ "excluded": [
+  {
+   "symbol": "NVDA",
+   "start_price": 239.0,
+   "end_price": 200.81,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21417
+  },
+  {
+   "symbol": "AMZN",
+   "start_price": 1876.55,
+   "end_price": 271.57,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21417
+  },
+  {
+   "symbol": "MSFT",
+   "start_price": 159.53,
+   "end_price": 465.1,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21417
+  },
+  {
+   "symbol": "AAPL",
+   "start_price": 297.97,
+   "end_price": 309.03,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21417
+  },
+  {
+   "symbol": "TSLA",
+   "start_price": 424.5,
+   "end_price": 311.11,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21417
+  },
+  {
+   "symbol": "GOOGL",
+   "start_price": 1360.57,
+   "end_price": 356.32,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21417
+  },
+  {
+   "symbol": "META",
+   "start_price": 207.52,
+   "end_price": 556.5,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21417
+  },
+  {
+   "symbol": "AVGO",
+   "start_price": 320.13,
+   "end_price": 389.27,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21417
+  },
+  {
+   "symbol": "NFLX",
+   "start_price": 328.66,
+   "end_price": 71.69,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21417
+  },
+  {
+   "symbol": "GOOG",
+   "start_price": 1358.46,
+   "end_price": 356.71,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21417
+  },
+  {
+   "symbol": "V",
+   "start_price": 190.34,
+   "end_price": 366.11,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21368
+  },
+  {
+   "symbol": "BKNG",
+   "start_price": 2073.62,
+   "end_price": 192.89,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21397
+  },
+  {
+   "symbol": "MA",
+   "start_price": 303.4,
+   "end_price": 573.38,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21371
+  },
+  {
+   "symbol": "INTU",
+   "start_price": 266.2,
+   "end_price": 316.16,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21417
+  },
+  {
+   "symbol": "CRM",
+   "start_price": 165.17,
+   "end_price": 184.03,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21371
+  },
+  {
+   "symbol": "NOW",
+   "start_price": 289.75,
+   "end_price": 111.22,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21371
+  },
+  {
+   "symbol": "UNH",
+   "start_price": 292.3,
+   "end_price": 414.28,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21369
+  },
+  {
+   "symbol": "TMO",
+   "start_price": 326.16,
+   "end_price": 574.38,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21369
+  },
+  {
+   "symbol": "COST",
+   "start_price": 293.99,
+   "end_price": 951.89,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21417
+  },
+  {
+   "symbol": "GS",
+   "start_price": 231.19,
+   "end_price": 1017.96,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21381
+  },
+  {
+   "symbol": "HD",
+   "start_price": 218.83,
+   "end_price": 332.03,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21381
+  },
+  {
+   "symbol": "BA",
+   "start_price": 331.05,
+   "end_price": 216.14,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21371
+  },
+  {
+   "symbol": "BRK.B",
+   "start_price": 227.38,
+   "end_price": 511.66,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21371
+  },
+  {
+   "symbol": "SPGI",
+   "start_price": 276.22,
+   "end_price": 411.77,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21368
+  },
+  {
+   "symbol": "DHR",
+   "start_price": 154.34,
+   "end_price": 195.02,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21370
+  },
+  {
+   "symbol": "DE",
+   "start_price": 174.68,
+   "end_price": 592.75,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21371
+  },
+  {
+   "symbol": "LIN",
+   "start_price": 214.23,
+   "end_price": 478.32,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21371
+  },
+  {
+   "symbol": "PH",
+   "start_price": 207.84,
+   "end_price": 976.53,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21371
+  },
+  {
+   "symbol": "SYK",
+   "start_price": 210.5,
+   "end_price": 325.74,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21369
+  },
+  {
+   "symbol": "RTX",
+   "start_price": 150.99,
+   "end_price": 215.27,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21370
+  },
+  {
+   "symbol": "NEE",
+   "start_price": 241.46,
+   "end_price": 86.92,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21371
+  },
+  {
+   "symbol": "AZO",
+   "start_price": 1197.18,
+   "end_price": 3016.76,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21266
+  },
+  {
+   "symbol": "CMG",
+   "start_price": 842.3,
+   "end_price": 37.24,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21370
+  },
+  {
+   "symbol": "UNP",
+   "start_price": 180.84,
+   "end_price": 292.12,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21369
+  },
+  {
+   "symbol": "MCD",
+   "start_price": 198.26,
+   "end_price": 270.67,
+   "first_bar": "2020-01-02T09:30:00-05:00",
+   "last_bar": "2026-07-31T15:30:00-04:00",
+   "bars": 21371
+  }
+ ],
+ "cap_flips_on_end_price": [
+  "MU",
+  "NFLX",
+  "AMD",
+  "XOM",
+  "LLY",
+  "NOW",
+  "GE",
+  "CVX",
+  "JPM",
+  "CAT",
+  "JNJ",
+  "ABBV",
+  "COF",
+  "ETN",
+  "CEG",
+  "MS",
+  "TMUS",
+  "NEE",
+  "CMG",
+  "RCL"
+ ]
 }

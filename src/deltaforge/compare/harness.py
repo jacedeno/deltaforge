@@ -109,10 +109,16 @@ class EventPipeline:
             )
 
         def entry_delta(c: DiscoveredContract) -> float | None:
-            m = entry_mark(c.occ)
+            # Candidate ranking only — priced from the signal-day daily close
+            # already fetched by discovery, so scanning a chain costs zero
+            # extra requests. The chosen legs get the full mark ladder.
             t = _t_years(event.signal_ts, c.expiry)
             r = risk_free(event.signal_ts.year)
-            iv = m.iv or implied_vol(m.price, spot, c.strike, t, r, "C")
+            iv = None
+            if not c.daily_bars.empty:
+                prior = c.daily_bars.loc[c.daily_bars.index.date <= signal_day]
+                if not prior.empty:
+                    iv = implied_vol(float(prior["close"].iloc[-1]), spot, c.strike, t, r, "C")
             if iv is None:
                 iv = self.iv_model.predict(rv)
             return bs_greeks(spot, c.strike, t, r, iv, "C").delta

@@ -19,7 +19,7 @@ import argparse
 import itertools
 import json
 import time as _time
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 
 from alpaca.data.enums import DataFeed
@@ -76,7 +76,7 @@ def main() -> None:
 
     symbols = sorted({e.symbol for e in events})
     client = AlpacaHistoricalClient(feed=DataFeed.SIP, cache_dir=SIP_30M_CACHE_DIR)
-    span_start = min(e.signal_ts for e in events).astimezone(UTC)
+    span_start = min(e.signal_ts for e in events).astimezone(UTC) - timedelta(days=60)
     span_end = max((e.underlying_exit_ts or e.signal_ts) for e in events).astimezone(UTC)
     bars_by_symbol = {
         s: client.fetch_bars(s, span_start, span_end, timeframe=TF_30M) for s in symbols

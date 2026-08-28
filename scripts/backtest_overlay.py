@@ -18,7 +18,7 @@ from __future__ import annotations
 import argparse
 import json
 import time as _time
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 
 from alpaca.data.enums import DataFeed
@@ -103,7 +103,8 @@ def main() -> None:
 
     symbols = sorted({e.symbol for e in events})
     stock_client = AlpacaHistoricalClient(feed=DataFeed.SIP, cache_dir=SIP_30M_CACHE_DIR)
-    span_start = min(e.signal_ts for e in events)
+    # 60 days of pre-signal history so the first events still get a 20d RV.
+    span_start = min(e.signal_ts for e in events) - timedelta(days=60)
     span_end = max(
         e.underlying_exit_ts or e.signal_ts for e in events
     )
