@@ -5,3 +5,8 @@ data/cache/
 .env
 .env.*
 uv.lock
+
+# Run logs are verbose (MBs of per-request lines) and churn while a job is
+# live. The JSON artifacts next to them are the results worth keeping.
+reports/**/*.log
+data/snapshots/
