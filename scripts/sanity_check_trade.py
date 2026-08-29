@@ -14,7 +14,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
-from datetime import UTC
+from datetime import UTC, timedelta
 from pathlib import Path
 
 from alpaca.data.enums import DataFeed
@@ -49,7 +49,7 @@ def main() -> None:
     client = AlpacaHistoricalClient(feed=DataFeed.SIP, cache_dir=SIP_30M_CACHE_DIR)
     bars = client.fetch_bars(
         event.symbol,
-        event.signal_ts.astimezone(UTC),
+        event.signal_ts.astimezone(UTC) - timedelta(days=60),
         (event.underlying_exit_ts or event.signal_ts).astimezone(UTC),
         timeframe=TF_30M,
     )

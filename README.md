@@ -5,8 +5,25 @@ real-money account (~$3,000). Sibling of ThetaForge: where ThetaForge sells
 premium (theta) across a wide book, DeltaForge buys direction (delta) on the
 same validated signal, a few positions at a time, executed by hand.
 
-**Status: analysis phase.** The strategy analysis lives in
-[`docs/ANALYSIS.md`](docs/ANALYSIS.md). Nothing here trades yet.
+**Status: backtested (roadmap step 2 done, 2026-08-28).** The strategy
+analysis lives in [`docs/ANALYSIS.md`](docs/ANALYSIS.md); the backtest
+engine lives in `src/deltaforge/` and its results in `reports/`. Nothing
+here trades yet.
+
+Headline result (real Alpaca options data, Feb 2024 → Aug 2026, identical
+signal events, $3,000 account replay): debit spread **+286%** vs shares
+**+66%** vs long call **+51%**. Measured loss at stop: median **−35% of
+debit** (ANALYSIS.md had assumed −40 to −60). The binding constraint is the
+$150 max debit — 65% of signals skip because the spread costs more.
+
+Run it:
+
+```bash
+set -a; source ~/.secrets/alpaca-thetaforge-competition.env; set +a
+uv run python scripts/run_phase1_underlying.py --help   # phase 1: signal on shares
+uv run python scripts/backtest_overlay.py --help        # phase 2: options overlay
+uv run python scripts/sweep_overlay.py --help           # phase 3: variations
+```
 
 ## The one-line thesis
 

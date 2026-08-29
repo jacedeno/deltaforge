@@ -1,0 +1,35 @@
+{
+ "label": "real_window",
+ "events_file": "reports/phase1/events30m_trades.json",
+ "events": 2565,
+ "structures": [
+  "debit_spread",
+  "long_call"
+ ],
+ "pricing": "real",
+ "start": "2024-02-12",
+ "end": "2026-08-01",
+ "fill_haircut": 0.5,
+ "max_debit": 150.0,
+ "dte_exit_days": 5,
+ "next_bar_exit": false,
+ "initial_equity": 3000.0,
+ "max_concurrent": 3,
+ "fees": {
+  "per_contract": 0.65
+ },
+ "spread_model": {
+  "a": 0.02,
+  "b": 0.04,
+  "calibrated": false
+ },
+ "iv_model": {
+  "a": 0.04,
+  "b": 1.1,
+  "calibrated": false
+ },
+ "ml30_commit": "e99294227db3f9303b6031d8971cd3b0983260d7",
+ "deltaforge_commit": "40568aac48a70e10344c9b4f701842657d0e0c21",
+ "elapsed_seconds": 3835.8,
+ "generated_at": "2026-08-29T02:01:43+00:00"
+}
