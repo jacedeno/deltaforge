@@ -130,7 +130,10 @@ class Executor:
 
     def run_once(self) -> None:
         """One full pass: manage what is open, then look for what to open."""
-        if not self.broker.is_open():
+        # A dry run scans regardless of the clock: it submits nothing, and
+        # validating the signal path before the open is the whole reason it
+        # exists. Quotes will be stale, so selection may legitimately refuse.
+        if not self.broker.is_open() and not self.cfg.dry_run:
             self.events.beat(ok=True, note="market closed")
             return
 
