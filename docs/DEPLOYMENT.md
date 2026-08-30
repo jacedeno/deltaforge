@@ -82,6 +82,27 @@ The one in `cloudflare-dns-tunnel.env` is **revoked** (both the local copy and
 the one in the secrets repo) — as is ml30's main `.env` Alpaca pair, on both
 hosts.
 
+## Service
+
+The bot runs as `deltaforge-bot.service` on AlgoTrader (unit tracked at
+`deploy/deltaforge-bot.service`), enabled so it survives a reboot. It sleeps
+between 30-minute bars and only scans while the market is open.
+
+```bash
+systemctl status deltaforge-bot
+journalctl -u deltaforge-bot -n 50          # or logs/bot.log
+systemctl restart deltaforge-bot            # picks up a git pull
+```
+
+`Restart=on-failure` with a 30s delay, and `TimeoutStopSec=180` so a stop waits
+for the current pass rather than interrupting an order awaiting a fill.
+
+**First-open guard.** While the account still holds equity positions from the
+strategy it was handed over from, the bot logs a `foreign_positions` skip and
+opens nothing — reported equity would otherwise count money the buying power
+does not have. It manages its own positions normally throughout. The guard
+clears itself once those liquidations fill.
+
 ## Checks
 
 ```bash
