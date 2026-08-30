@@ -44,6 +44,7 @@ from deltaforge.ml30_bridge import (
     settings_with_credentials,
 )
 from deltaforge.pricing.fees import DEFAULT_FEES
+from deltaforge.settings import SIP_30M_CACHE_DIR
 
 log = get_logger(__name__)
 
@@ -89,8 +90,12 @@ class Executor:
         # ml30 repo's .env happens to hold — those are revoked on both hosts,
         # and inheriting keys silently is how a bot trades the wrong account.
         settings = settings_with_credentials(*credentials) if credentials else None
+        # SIP demands its own cache directory so feeds are never merged into one
+        # series, even though every live fetch bypasses the cache for fresh bars.
         self.bars = AlpacaHistoricalClient(
-            settings=settings, feed=DataFeed.SIP, cache_dir=cache_dir
+            settings=settings,
+            feed=DataFeed.SIP,
+            cache_dir=cache_dir or SIP_30M_CACHE_DIR,
         )
         self._entry = EntryLogic(
             sma_fast_period=self.cfg.sma_fast, sma_slow_period=self.cfg.sma_slow
