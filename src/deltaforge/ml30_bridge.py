@@ -67,10 +67,27 @@ from backtest.coordinator import (  # noqa: E402
     CoordinatorResult,
 )
 from backtest.trade import Trade  # noqa: E402
+from config.settings import Settings as Ml30Settings  # noqa: E402
 from data.alpaca_client import (  # noqa: E402
     AlpacaClientError,
     AlpacaHistoricalClient,
 )
+
+
+def settings_with_credentials(api_key: str, secret_key: str) -> "Ml30Settings":
+    """An ml30 Settings carrying credentials we chose, not ones it found.
+
+    ``AlpacaHistoricalClient`` otherwise resolves keys from the ml30 repo's
+    own ``.env``, which is dead on both machines as of 2026-08-30 (HTTP 401).
+    Inheriting whatever happens to be on disk is also how a bot ends up
+    trading an account nobody pointed it at, so the caller passes them in.
+    """
+    from pydantic import SecretStr
+
+    s = Ml30Settings()
+    s.alpaca.api_key = SecretStr(api_key)
+    s.alpaca.secret_key = SecretStr(secret_key)
+    return s
 from strategy.direction import Direction  # noqa: E402
 from strategy.entry import EntryLogic  # noqa: E402
 from strategy.exit import ExitLogic, ExitReason  # noqa: E402
@@ -87,9 +104,11 @@ __all__ = [
     "EntryLogic",
     "ExitLogic",
     "ExitReason",
+    "Ml30Settings",
     "Trade",
     "add_indicators",
     "calculate_initial_stop",
     "deltaforge_commit",
     "ml30_commit",
+    "settings_with_credentials",
 ]

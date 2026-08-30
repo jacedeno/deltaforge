@@ -108,7 +108,7 @@ def main() -> None:
         dte_max=args.dte_max,
         haircut_cap=args.haircut_cap,
     )
-    executor = Executor(broker, journal, eventlog, universe, cfg)
+    executor = Executor(broker, journal, eventlog, universe, cfg, credentials=(key, secret))
 
     log.info(
         "bot.start",

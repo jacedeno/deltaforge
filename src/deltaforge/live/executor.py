@@ -41,6 +41,7 @@ from deltaforge.ml30_bridge import (
     EntryLogic,
     add_indicators,
     calculate_initial_stop,
+    settings_with_credentials,
 )
 from deltaforge.pricing.fees import DEFAULT_FEES
 
@@ -76,13 +77,20 @@ class Executor:
         universe: list[str],
         config: BotConfig | None = None,
         cache_dir=None,
+        credentials: tuple[str, str] | None = None,
     ) -> None:
         self.broker = broker
         self.journal = journal
         self.events = eventlog
         self.universe = universe
         self.cfg = config or BotConfig()
-        self.bars = AlpacaHistoricalClient(feed=DataFeed.SIP, cache_dir=cache_dir)
+        # Market data uses the credentials we were handed, never whatever the
+        # ml30 repo's .env happens to hold — those are revoked on both hosts,
+        # and inheriting keys silently is how a bot trades the wrong account.
+        settings = settings_with_credentials(*credentials) if credentials else None
+        self.bars = AlpacaHistoricalClient(
+            settings=settings, feed=DataFeed.SIP, cache_dir=cache_dir
+        )
         self._entry = EntryLogic(
             sma_fast_period=self.cfg.sma_fast, sma_slow_period=self.cfg.sma_slow
         )
