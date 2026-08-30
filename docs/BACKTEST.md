@@ -255,6 +255,51 @@ already measured: a stop in shares costs a full R, a stop in the long call
 costs roughly a third of the debit. In a chopping year that gets stopped out
 often, truncating the loss is worth more than the leverage.
 
+### The filter the strategy was missing
+
+Bucketing the $300 run by how far the 3R target sits from entry separates the
+result almost completely:
+
+| Target distance | Trades | Win rate | Avg P&L | Total P&L |
+|---|---|---|---|---|
+| 0–2% | 99 | 39% | +3.1% | $596 |
+| 2–3% | 229 | 33% | +1.3% | $511 |
+| 3–5% | 532 | 33% | +0.6% | $737 |
+| **5–8%** | 425 | 41% | **+19.2%** | **$19,986** |
+| **8%+** | 306 | 38% | **+24.8%** | **$21,116** |
+
+The 860 signals under 5% — **54% of all trades** — returned $1,844 of roughly
+$42,000, about 4% of the profit. They are not merely weaker; they are close
+to free, and they carry the drawdown of a full position each.
+
+Requiring the target to sit at least 5% away:
+
+| Minimum target | Trades | Equity | Return | Max DD |
+|---|---|---|---|---|
+| none | 1,591 | $40,908 | +1,264% | −38% |
+| ≥3% | 1,263 | $41,143 | +1,271% | −28% |
+| ≥4% | 993 | $43,348 | +1,345% | −26% |
+| **≥5%** | **731** | **$43,860** | **+1,362%** | **−20%** |
+| ≥6% | 536 | $33,388 | +1,013% | −17% |
+
+Less than half the trades, a slightly higher return, and **half the
+drawdown**. The gradient is smooth to 5% and breaks at 6%, where too few
+signals remain — the shape of a real effect rather than a fitted number.
+
+It is also not a new idea. ANALYSIS.md ruled out the 5-minute variant because
+its 1–2% target distances cannot cover an option's bid-ask and theta, and
+expected 3–6% from the 30-minute levels. This filter simply enforces the
+premise the strategy was designed on, instead of assuming every 30-minute
+signal satisfies it. Roughly half do not.
+
+**Live consequence, felt immediately.** The first dry run against the market
+of 2026-08-28 produced two signals, at 1.77% and 1.14% — both inside the band
+that does not pay, both refused. Median 3R distance across the universe over
+the preceding month runs 1.6–4.4%, against the 5.57% median of the full
+2020–2026 sample. The current regime sits near the bottom of the historical
+volatility distribution, so a correctly-behaving bot will trade rarely until
+that changes. Few trades is the signal working, not the bot failing.
+
 ### Position sizing: grow the count, not the bet
 
 **This section has been wrong twice.** Its first version was computed on the
