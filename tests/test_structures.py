@@ -111,3 +111,22 @@ def test_rejects_implausibly_cheap_spread(event):
     result = DebitSpread().select(ctx)
     assert isinstance(result, Skip)
     assert result.reason == "debit_implausible"
+
+
+def test_long_call_rejects_implausible_premium(event):
+    """A near-ATM call with no time value is a stale print, not a bargain."""
+    chain = make_chain("TEST", date(2026, 3, 27), [90, 95, 97.5, 100])
+    ctx = make_ctx(event, chain, max_debit=800.0)
+    # Entry is 100, so a 97.5 strike has $2.50 intrinsic; mark it at barely
+    # over intrinsic and the position must be refused rather than sized.
+    ctx.mark = lambda occ: Mark(2.51, "minute", iv=SIGMA)
+
+    result = LongCall().select(ctx)
+    assert isinstance(result, Skip)
+    assert result.reason == "premium_implausible"
+
+
+def test_long_call_accepts_normal_premium(event):
+    chain = make_chain("TEST", date(2026, 3, 27), [90, 92.5, 95, 97.5, 100])
+    pos = LongCall().select(make_ctx(event, chain, max_debit=800.0))
+    assert isinstance(pos, Position)

@@ -26,10 +26,12 @@ class LongCall:
         delta: float = 0.675,
         dte_min: int = 21,
         dte_max: int = 28,
+        min_time_value_pct_of_spot: float = 0.003,
     ) -> None:
         self.delta = delta
         self.dte_min = dte_min
         self.dte_max = dte_max
+        self.min_time_value_pct_of_spot = min_time_value_pct_of_spot
 
     def select(self, ctx: EntryContext) -> Position | Skip:
         ev = ctx.event
@@ -55,6 +57,20 @@ class LongCall:
         debit = ctx.fills.buy(mark.price)
         if debit <= 0:
             return Skip("negative_debit", f"{debit:.4f}")
+
+        # A spread catches a stale mark by comparing the two legs; a single
+        # leg has nothing to compare against, so check the premium against
+        # the underlying instead. A call near 0.55 delta with days left to
+        # run carries real time value — a few cents on a $40 name is a stale
+        # print, and sizing would buy 70 contracts of it.
+        intrinsic = max(ctx.spot - long_c.strike, 0.0)
+        time_value = mark.price - intrinsic
+        floor = self.min_time_value_pct_of_spot * ctx.spot
+        if time_value < floor:
+            return Skip(
+                "premium_implausible",
+                f"time value {time_value:.3f} < {floor:.3f} (spot {ctx.spot:.2f})",
+            )
 
         n = size_contracts(debit, ctx.max_debit)
         if n < 1:
