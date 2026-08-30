@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Favicon: solid violet on a dark tile so it holds up against light and
+       dark browser chrome alike. The slit that splits the delta survives to
+       about 16px, which is the whole reason it is this wide. -->
+  <rect width="64" height="64" rx="14" fill="#16181c"/>
+  <g fill="#8b6ce0">
+    <path d="M32 10 L49 41 L15 41 Z"/>
+    <path d="M13.5 45 L50.5 45 L56 55 L8 55 Z"/>
+  </g>
+</svg>

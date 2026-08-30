@@ -8,6 +8,7 @@ import DailyPnl from "./DailyPnl";
 import TradeHistory from "./TradeHistory";
 import BrainFeed from "./BrainFeed";
 import PayoffDiagram from "./PayoffDiagram";
+import Logo from "./Logo";
 import TradeChart from "./TradeChart";
 
 type Position = {
@@ -59,8 +60,8 @@ export default function Dashboard() {
       <main className="max-w-6xl mx-auto px-5 py-8 space-y-5">
         <header className="flex items-start justify-between gap-4">
           <div>
-            <div className="flex items-baseline gap-3">
-              <span className="font-display text-2xl" style={{ color: "var(--accent)" }}>Δ</span>
+            <div className="flex items-center gap-3">
+              <Logo size={40} />
               <h1 className="font-display text-3xl">
                 Delta<span style={{ color: "var(--accent)" }}>Forge</span>
               </h1>
@@ -184,10 +185,66 @@ export default function Dashboard() {
         <TradeHistory />
         <BrainFeed />
 
-        <footer className="pt-4 pb-8 text-center font-mono2 text-[11px] space-y-1"
-                style={{ color: "var(--ink-muted)" }}>
-          <div>paper account · refreshes every 15s · not financial advice</div>
-          <div>Crafted by Jose Cedeño. Built on bare metal.</div>
+        <footer className="pt-6 pb-10 font-mono2 text-[11px]" style={{ color: "var(--ink-muted)" }}>
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <div className="flex flex-wrap gap-2">
+              {["Alpaca Options API", "ML30 30m signal", "Paper Trading", "Bare metal"].map((t) => (
+                <span key={t} className="rounded-full border px-3 py-1"
+                      style={{ borderColor: "var(--grid)" }}>
+                  {t}
+                </span>
+              ))}
+            </div>
+            <div className="text-right">
+              {acct ? `account ${acct.number} · ` : ""}refreshes every 15s · not financial advice
+            </div>
+          </div>
+
+          <div className="mt-5 flex flex-wrap items-center justify-between gap-4 border-t pt-4"
+               style={{ borderColor: "var(--grid)" }}>
+            <div>
+              <a href="https://geekendzone.com" target="_blank" rel="noopener noreferrer"
+                 className="font-display text-sm font-semibold underline-offset-2 hover:underline"
+                 style={{ color: "var(--accent)" }}>
+                GeekendZone
+              </a>
+              <p className="mt-0.5">Crafted by Jose Cedeño. Built on bare metal.</p>
+            </div>
+            <nav className="flex flex-wrap items-center gap-4" aria-label="Elsewhere">
+              {[
+                {
+                  href: "https://linkedin.com/in/joseangelcedeno", label: "LinkedIn",
+                  d: "M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.4c0-1.29-.02-2.95-1.8-2.95-1.8 0-2.08 1.4-2.08 2.85V21H9z",
+                },
+                {
+                  href: "https://github.com/jacedeno", label: "GitHub",
+                  d: "M12 .5C5.73.5.5 5.73.5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.54-3.88-1.54-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.12 3.05.74.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.4-5.26 5.69.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5z",
+                },
+                {
+                  href: "mailto:jacedeno@geekendzone.com", label: "Email",
+                  d: "M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4.24-8 4.62-8-4.62V6l8 4.62L20 6z",
+                },
+              ].map((l) => (
+                <a key={l.label} href={l.href}
+                   {...(l.href.startsWith("http")
+                     ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                   className="flex items-center gap-1.5 transition-colors"
+                   style={{ color: "var(--ink-secondary)" }}
+                   onMouseEnter={(e) => (e.currentTarget.style.color = "var(--accent)")}
+                   onMouseLeave={(e) => (e.currentTarget.style.color = "var(--ink-secondary)")}>
+                  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="h-3.5 w-3.5">
+                    <path d={l.d} />
+                  </svg>
+                  {l.label}
+                </a>
+              ))}
+              <a href="https://geekendzone.com" target="_blank" rel="noopener noreferrer"
+                 className="font-mono2 underline-offset-2 hover:underline"
+                 style={{ color: "var(--ink-secondary)" }}>
+                geekendzone.com
+              </a>
+            </nav>
+          </div>
         </footer>
       </main>
     </>

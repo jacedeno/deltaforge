@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="DeltaForge">
+  <!-- The mark: a delta split by a forge line. The upper triangle carries the
+       gradient (light at the apex, deep at the cut) so the shape reads as
+       struck metal rather than flat geometry; the base sits solid beneath it.
+       No background tile here — this version sits on the page surface, so it
+       inherits whatever theme is active. -->
+  <defs>
+    <linearGradient id="df-mark" x1="32" y1="10" x2="32" y2="55" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#a98bea"/>
+      <stop offset="1" stop-color="#6f4bcc"/>
+    </linearGradient>
+  </defs>
+  <path d="M32 10 L49 41 L15 41 Z" fill="url(#df-mark)"/>
+  <path d="M13.5 45 L50.5 45 L56 55 L8 55 Z" fill="#6f4bcc"/>
+</svg>
