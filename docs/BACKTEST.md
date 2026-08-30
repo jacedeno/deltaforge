@@ -151,6 +151,23 @@ long call pays it twice. That asymmetry is invisible at good fills and
 decisive at bad ones — at haircut 1.0 every spread configuration tested
 loses money while every long call configuration stays profitable.
 
+Swept on the final configuration ($300, 7–14 DTE, 0.55Δ, both guards), the
+whole result lives on this line:
+
+| Fills | Trades | PF | Avg P&L | Equity | Max DD |
+|---|---|---|---|---|---|
+| Exact mid | 1,617 | 1.86 | +17.9% | $20,693 | −28% |
+| Patient limit | 1,597 | 1.65 | +14.2% | $18,875 | −33% |
+| Base assumption | 1,591 | 1.45 | +10.5% | $15,168 | −32% |
+| Crossing the spread | 1,564 | 1.15 | +3.8% | $5,598 | −44% |
+
+Two things to take from it. The strategy survives even the worst execution —
+profit factor 1.15, $3,000 to $5,598 — which is more than the debit spread
+managed at *any* fill quality. And the spread between best and worst
+execution is nearly four times the ending account, on identical signals and
+identical contracts. **Which row you land on is not a modelling question, it
+is an execution question**, and it is the one thing paper trading is for.
+
 **Consequence for trading this**: the edge lives in the execution. Patient
 limit orders near the mid are not a refinement of this strategy, they are a
 precondition. Paper trading is the only real test of the fill model, and it
