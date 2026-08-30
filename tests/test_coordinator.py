@@ -69,3 +69,18 @@ def test_equity_compounds():
     expected = 3000.0 + sum(t.pnl_dollars for t in res.trades)
     assert res.final_equity == expected
     assert res.final_equity > 3000.0
+
+
+def test_never_deploys_more_cash_than_the_account_holds():
+    """Long options are paid in full, so open debits are cash that is gone."""
+    # Five overlapping $1,000 positions against a $3,000 account: only three
+    # can be funded, however many slots the cap allows.
+    trades = [make_trade(s, open_day=0, close_day=20, debit=10.0) for s in "ABCDE"]
+    res = run_portfolio(trades, FEES, initial_equity=3000.0, max_concurrent=5,
+                        max_debit_cap=1000.0, max_debit_equity_pct=1.0)
+    assert len(res.trades) == 3
+    assert res.skipped_by_budget == 2
+    peak = max(
+        sum(t.debit_dollars for t in res.trades[:n]) for n in range(1, len(res.trades) + 1)
+    )
+    assert peak <= 3000.0

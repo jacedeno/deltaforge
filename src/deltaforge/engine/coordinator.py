@@ -84,7 +84,13 @@ def run_portfolio(
             skipped_cap += 1
             continue
 
-        budget = min(max_debit_cap, equity * max_debit_equity_pct)
+        # Long options are paid for in full (Reg T, under nine months), so the
+        # debits of everything already open are cash that is gone until those
+        # positions close. Without this the replay happily runs ten $300
+        # positions on a $2,000 account during a drawdown — deploying money
+        # that does not exist, exactly when the account can least afford it.
+        cash_available = equity - sum(t.debit_dollars for t in open_trades)
+        budget = min(max_debit_cap, equity * max_debit_equity_pct, cash_available)
         per_contract_debit = trade.position.debit_per_share * CONTRACT_MULTIPLIER
         contracts = int(budget // per_contract_debit) if per_contract_debit > 0 else 0
         if contracts < 1:
