@@ -63,3 +63,8 @@ def test_budget_capped_at_position_size_when_cash_is_ample():
 def test_dry_run_defaults_to_off():
     """A safety flag that defaults on would make live trading the accident."""
     assert BotConfig().dry_run is False
+
+
+def test_min_target_distance_defaults_to_the_backtested_floor():
+    """Below 5% the backtest's signals returned 4% of the profit for 54% of trades."""
+    assert BotConfig().min_target_distance_pct == 5.0

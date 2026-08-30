@@ -70,6 +70,13 @@ class BotConfig:
     reprice_steps: int = 3
     lookback_days: int = 90          # underlying history for indicators
     dry_run: bool = False            # scan and journal intent, submit nothing
+    # A signal whose 3R target is a short walk cannot pay for the option's
+    # bid-ask and theta, whatever happens to the underlying. In the backtest
+    # the 860 signals under 5% returned $1,844 of $42,000 — 4% of the profit
+    # for 54% of the trades — and cutting them halved the drawdown while
+    # slightly raising the return. ANALYSIS.md predicted this when it ruled
+    # out the 5-minute variant for the same reason.
+    min_target_distance_pct: float = 5.0
 
 
 class Executor:
@@ -268,11 +275,18 @@ class Executor:
             target = entry_price + self.cfg.r_target * risk
             signal_ts = bars.index[i].to_pydatetime()
 
+            target_pct = 100 * (target - entry_price) / entry_price
             self.events.emit(
                 ev.SIGNAL, symbol=symbol, entry=round(entry_price, 2),
                 stop=round(stop, 2), target=round(target, 2),
-                target_pct=round(100 * (target - entry_price) / entry_price, 2),
+                target_pct=round(target_pct, 2),
             )
+            if target_pct < self.cfg.min_target_distance_pct:
+                self.events.emit(
+                    ev.SKIP, symbol=symbol, reason="target_too_close",
+                    detail=f"{target_pct:.2f}% < {self.cfg.min_target_distance_pct:.1f}%",
+                )
+                continue
 
             budget = self.budget(equity)
             picked = select_call(

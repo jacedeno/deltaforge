@@ -84,6 +84,7 @@ def main() -> None:
     parser.add_argument("--dte-min", type=int, default=7)
     parser.add_argument("--dte-max", type=int, default=14)
     parser.add_argument("--haircut-cap", type=float, default=0.5)
+    parser.add_argument("--min-target-pct", type=float, default=5.0)
     parser.add_argument("--once", action="store_true", help="single pass, then exit")
     parser.add_argument("--dry-run", action="store_true", help="scan and log, place no orders")
     args = parser.parse_args()
@@ -107,6 +108,7 @@ def main() -> None:
         dte_max=args.dte_max,
         haircut_cap=args.haircut_cap,
         dry_run=args.dry_run,
+        min_target_distance_pct=args.min_target_pct,
     )
     executor = Executor(broker, journal, eventlog, universe, cfg, credentials=(key, secret))
 
@@ -118,6 +120,7 @@ def main() -> None:
         position_size=cfg.position_size,
         slots=executor.slots(float(account.equity)),
         dry_run=args.dry_run,
+        min_target_distance_pct=args.min_target_pct,
     )
     if args.dry_run:
         log.warning("bot.dry_run", note="scans and logs intent; submits nothing")
