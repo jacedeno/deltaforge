@@ -15,7 +15,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import os
 import signal
 import sys
 import time
@@ -107,6 +106,7 @@ def main() -> None:
         dte_min=args.dte_min,
         dte_max=args.dte_max,
         haircut_cap=args.haircut_cap,
+        dry_run=args.dry_run,
     )
     executor = Executor(broker, journal, eventlog, universe, cfg, credentials=(key, secret))
 
@@ -120,8 +120,7 @@ def main() -> None:
         dry_run=args.dry_run,
     )
     if args.dry_run:
-        log.warning("bot.dry_run", note="no orders will be placed")
-        os.environ["DELTAFORGE_DRY_RUN"] = "1"
+        log.warning("bot.dry_run", note="scans and logs intent; submits nothing")
 
     try:
         while not _stop:

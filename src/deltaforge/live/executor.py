@@ -66,6 +66,7 @@ class BotConfig:
     reprice_after_s: int = 45
     reprice_steps: int = 3
     lookback_days: int = 90          # underlying history for indicators
+    dry_run: bool = False            # scan and journal intent, submit nothing
 
 
 class Executor:
@@ -190,6 +191,12 @@ class Executor:
             return
         limit = q.mid - self.cfg.haircut_cap * (q.spread / 2)
         self.journal.set_exit_limit(row["id"], limit)
+        if self.cfg.dry_run:
+            log.info(
+                "bot.dry_run.would_sell", occ=row["occ"], qty=int(row["contracts"]),
+                limit=round(limit, 2), reason=reason,
+            )
+            return
         order_id = self.broker.sell_to_close(row["occ"], int(row["contracts"]), limit)
         self.events.emit(
             ev.ORDER_CLOSE, symbol=row["symbol"], occ=row["occ"], qty=int(row["contracts"]),
@@ -273,6 +280,19 @@ class Executor:
         target: float, risk: float, sel: Selection,
     ) -> bool:
         q = sel.quote
+        if self.cfg.dry_run:
+            self.events.emit(
+                ev.ORDER_OPEN, symbol=symbol, occ=q.occ, qty=sel.contracts,
+                limit=round(sel.limit, 2), bid=q.bid, ask=q.ask,
+                delta=round(q.delta, 3) if q.delta else None,
+                debit=round(sel.debit, 2), dry_run=True,
+            )
+            log.info(
+                "bot.dry_run.would_buy", symbol=symbol, occ=q.occ, qty=sel.contracts,
+                limit=round(sel.limit, 2), debit=round(sel.debit, 2),
+            )
+            return True  # occupies a slot for this pass, so the scan stays realistic
+
         trade_id = self.journal.open_pending(
             TradeRecord(
                 symbol=symbol, occ=q.occ, strike=q.strike, expiry=q.expiry.isoformat(),

@@ -58,3 +58,8 @@ def test_budget_never_negative_when_fully_deployed():
 def test_budget_capped_at_position_size_when_cash_is_ample():
     ex = make_executor(deployed=0.0)
     assert ex.budget(50_000.0) == pytest.approx(300.0)
+
+
+def test_dry_run_defaults_to_off():
+    """A safety flag that defaults on would make live trading the accident."""
+    assert BotConfig().dry_run is False
