@@ -11,10 +11,14 @@ engine lives in `src/deltaforge/` and its results in `reports/`. Nothing
 here trades yet.
 
 Headline result (real Alpaca options data, Feb 2024 → Aug 2026, identical
-signal events, $3,000 account replay): debit spread **+286%** vs shares
-**+66%** vs long call **+51%**. Measured loss at stop: median **−35% of
-debit** (ANALYSIS.md had assumed −40 to −60). The binding constraint is the
-$150 max debit — 65% of signals skip because the spread costs more.
+signal events, $3,000 account replay): the **slightly-ITM long call at 7–14
+DTE and 0.55 delta** turns $3,000 into **$12,130 (+304%)** against **+66%**
+for the underlying shares, over 1,000 trades.
+
+**The debit spread — this repo's original thesis — did not survive
+verification.** Its apparent +286% rested on 5 trades out of 772 and on a
+cohort of implausibly cheap spreads that contributed more than all of the
+profit. See "What did not survive" in [`docs/BACKTEST.md`](docs/BACKTEST.md).
 
 Run it:
 

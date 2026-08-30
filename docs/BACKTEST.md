@@ -53,6 +53,44 @@ thinnest exactly where execution is worst. This is an argument *for* the
 overlay, where the maximum loss is the debit and there is no stop order in
 the underlying to be slipped.
 
+## What did not survive verification
+
+**Read this before the tables below.** The first pass of this document led
+with the debit spread returning +286% against the underlying's +66%, and
+recommended moving to 7–14 DTE. Re-running the winning configuration through
+a control run exposed both claims as artifacts. The tables further down are
+kept as recorded, with this section as their correction.
+
+Three independent checks, each of which the spread fails and the long call
+passes:
+
+| Check | Spread (14–21 DTE) | Long call (7–14 DTE, 0.55Δ) |
+|---|---|---|
+| P&L without its 5 best trades | **−$213** (loses) | +$11,791 of $16,217 |
+| Trades with debit < 15% of spread width | 29 trades = **122% of P&L** | n/a (single leg) |
+| P&L from real prints vs model marks | 85% from model-marked | **114% from real prints**; model-marked cohort *loses* $2,278 |
+
+The mechanism: when one leg of a spread is marked by Black-Scholes instead
+of an actual trade, the *net* debit of the two legs can come out
+implausibly small — cents on a $2-wide spread. Every percentage metric then
+divides by that tiny debit, and position sizing buys up to 24 contracts of
+it. A handful of such trades carried the entire result. `DebitSpread` now
+rejects any debit under 15% of width (`debit_implausible`); with that guard
+the same configuration that scored $19,316 in the sweep returns **$955 with
+a profit factor of 0.96** — it loses money.
+
+The long call inverts every one of these signals. It has no second leg for a
+net debit to collapse through; its profit is distributed across 1,000 trades
+rather than concentrated in a handful; and the trades priced entirely from
+real prints are the profitable ones, while the model-marked cohort loses
+money. That is the opposite of what a pricing artifact looks like.
+
+**Residual concern, not yet resolved:** a few long-call positions size to 21
+contracts on a $150 budget, implying a $7 contract at 0.55 delta. That is
+implausible for these underlyings and suggests the same class of stale mark,
+without a width to measure it against. The single-leg structure needs its
+own plausibility floor before any live deployment.
+
 ## Phase 2 — the real-data window (Feb 2024 → Aug 2026)
 
 2,565 signal events, real Alpaca option bars, $3,000 portfolio replay
