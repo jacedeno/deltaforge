@@ -199,31 +199,57 @@ one cell:
    clear the $150 budget more often. It also fits Phase 1's measured median
    duration of 2-3 trading days, which the longer window was overpaying for.
 
-### Position sizing
+### Budget: how much per position
 
-Replaying the trades at larger budgets (`scripts/sizing_study.py`) crosses
-two ways of deploying the same capital: bigger positions, or more of them.
+Re-running the full pipeline at three budgets (the $150 run doubling as a
+control) shows the debit cap was throttling the signal stream:
 
-| Per position | Slots | Deployed | Return | Max DD |
-|---|---|---|---|---|
-| $150 | 3 | 15% | +285% | −21% |
-| $300 | 3 | 30% | **+576%** | −41% |
-| $300 | 10 | 100% | +551% | −87% |
-| $500 | 3 | 50% | +987% | −70% |
-| $1,000 | 3 | 100% | −104% | ruin |
-| $500 | 5 | 83% | −101% | ruin |
+| Budget | Signals traded | Skipped on budget | PF | Equity | Max DD | Top 10 trades | P&L without them |
+|---|---|---|---|---|---|---|---|
+| $150 | 1,000 | 1,383 | 1.54 | $12,130 | −22% | 45% | $8,984 |
+| $300 | 1,623 | 760 | 1.49 | **$14,851** | −28% | 32% | $32,096 |
+| $500 | 1,954 | 429 | 1.47 | $11,055 | −39% | 29% | $65,534 |
 
-Position size drives return; position *count* does not. Ten $300 positions
-capture 751 of 772 signals against 401 for three — and return slightly less
-(+551% vs +576%) for twice the drawdown. The signals are long-only momentum
-on correlated large caps, so ten concurrent positions is much closer to one
-big bet than to ten independent ones.
+Per-trade edge is flat across budgets (PF 1.47–1.54), so the budget is not
+buying a better strategy, it is buying access to more of the same one. The
+gross edge grows steadily with it — the "P&L without the top 10 trades"
+column rises from $9k to $66k — while portfolio equity peaks at $300 because
+a 3-slot account cannot harvest the larger edge without also taking the
+larger drawdowns.
 
-Deployment past roughly 50% is where this stops being survivable. The data
-contains a **run of 20 consecutive losing trades**; at 5% of equity per
-position that leaves 70% of the account, at 33% it leaves 8%, at 100% it
-leaves nothing. Options cannot be held through a drawdown — they expire — so
-a long losing run is not a drawdown, it is ruin.
+### Position sizing (corrected)
+
+**The first version of this section was computed on the debit-spread trades
+and is retracted along with them.** Concentrated P&L made slot count look
+harmful: with three slots you either caught one of the few artifact trades or
+you did not, and more slots diluted them. On the long call's distributed P&L
+the relationship inverts, which is what a real edge is supposed to look like.
+
+| Per position | Slots | Deployed | Return | Max DD | Trades taken |
+|---|---|---|---|---|---|
+| $150 | 3 | 15% | +302% | −26% | 518 |
+| $150 | 20 | 100% | +541% | −22% | 1,000 |
+| $300 | 3 | 30% | +403% | −41% | 601 |
+| $300 | 10 | 100% | +1,332% | −42% | 1,409 |
+| $500 | 5 | 83% | **+1,732%** | **−30%** | 908 |
+
+Diversification works here: going from 3 to 10 concurrent positions at $300
+raises the return more than threefold while leaving drawdown essentially
+unchanged (−41% → −42%). Slot count, not position size, is what the account
+was starving for — at 3 slots roughly a thousand qualifying signals are
+turned away for want of a slot.
+
+Rows past 100% deployment are arithmetic only: long options are **not
+marginable** (Reg T requires payment in full under nine months to expiry), so
+leverage can come from the structure's delta and never from borrowing.
+
+**Two cautions on these numbers.** They replay trades selected under the $300
+budget filter, so the $500 rows understate how many signals a real $500 run
+would admit. And the unresolved stale-mark concern scales exactly with them:
+maximum contracts per position runs 21 at $150, 42 at $300, 70 at $500, so
+the configurations that look best are also the ones most exposed to a
+mispriced contract. That must be closed before the sizing question is
+settled.
 
 Long options are also **not marginable** (Reg T requires 100% payment under
 nine months to expiry), so leverage here can only come from the structure's
