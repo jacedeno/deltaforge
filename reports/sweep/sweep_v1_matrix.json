@@ -1,0 +1,2459 @@
+{
+ "label": "sweep_v1",
+ "events": 2565,
+ "pricing": "real",
+ "grid_cells": 144,
+ "ml30_commit": "e99294227db3f9303b6031d8971cd3b0983260d7",
+ "deltaforge_commit": "a3058363e1cc2103d0cc6f15fb67530a52e71988",
+ "elapsed_seconds": 92682.9,
+ "cells": [
+  {
+   "dte": [
+    7,
+    14
+   ],
+   "long_delta": 0.55,
+   "short_at_r": 3.0,
+   "haircut": 0.0,
+   "events_traded": 1270,
+   "events_skipped": 1295,
+   "win_rate_pct": 43.46,
+   "avg_pnl_pct_of_debit": 36.65,
+   "profit_factor": 2.914,
+   "total_pnl_dollars": 59364.09,
+   "final_equity": 40765.62,
+   "max_drawdown_pct": -17.73
+  },
+  {
+   "dte": [
+    7,
+    14
+   ],
+   "long_delta": 0.55,
+   "short_at_r": 3.0,
+   "haircut": 0.25,
+   "events_traded": 1250,
+   "events_skipped": 1315,
+   "win_rate_pct": 38.72,
+   "avg_pnl_pct_of_debit": 23.49,
+   "profit_factor": 2.044,
+   "total_pnl_dollars": 37314.26,
+   "final_equity": 27379.38,
+   "max_drawdown_pct": -19.47
+  },
+  {
+   "dte": [
+    7,
+    14
+   ],
+   "long_delta": 0.55,
+   "short_at_r": 3.0,
+   "haircut": 0.5,
+   "events_traded": 1232,
+   "events_skipped": 1333,
+   "win_rate_pct": 35.55,
+   "avg_pnl_pct_of_debit": 13.82,
+   "profit_factor": 1.557,
+   "total_pnl_dollars": 22278.75,
+   "final_equity": 19316.16,
+   "max_drawdown_pct": -26.68
+  },
+  {
+   "dte": [
+    7,
+    14
+   ],
+   "long_delta": 0.55,
+   "short_at_r": 3.0,
+   "haircut": 1.0,
+   "events_traded": 1198,
+   "events_skipped": 1367,
+   "win_rate_pct": 30.13,
+   "avg_pnl_pct_of_debit": -3.46,
+   "profit_factor": 0.907,
+   "total_pnl_dollars": -4514.52,
+   "final_equity": 1426.53,
+   "max_drawdown_pct": -65.72
+  },
+  {
+   "dte": [
+    7,
+    14
+   ],
+   "long_delta": 0.55,
+   "short_at_r": 2.0,
+   "haircut": 0.0,
+   "events_traded": 1372,
+   "events_skipped": 1193,
+   "win_rate_pct": 45.12,
+   "avg_pnl_pct_of_debit": 67.19,
+   "profit_factor": 4.81,
+   "total_pnl_dollars": 129111.64,
+   "final_equity": 109185.62,
+   "max_drawdown_pct": -16.39
+  },
+  {
+   "dte": [
+    7,
+    14
+   ],
+   "long_delta": 0.55,
+   "short_at_r": 2.0,
+   "haircut": 0.25,
+   "events_traded": 1353,
+   "events_skipped": 1212,
+   "win_rate_pct": 40.43,
+   "avg_pnl_pct_of_debit": 32.47,
+   "profit_factor": 2.502,
+   "total_pnl_dollars": 59903.41,
+   "final_equity": 17350.93,
+   "max_drawdown_pct": -23.27
+  },
+  {
+   "dte": [
+    7,
+    14
+   ],
+   "long_delta": 0.55,
+   "short_at_r": 2.0,
+   "haircut": 0.5,
+   "events_traded": 1338,
+   "events_skipped": 1227,
+   "win_rate_pct": 36.25,
+   "avg_pnl_pct_of_debit": 65.45,
+   "profit_factor": 3.827,
+   "total_pnl_dollars": 127982.92,
+   "final_equity": 9074.87,
+   "max_drawdown_pct": -41.98
+  },
+  {
+   "dte": [
+    7,
+    14
+   ],
+   "long_delta": 0.55,
+   "short_at_r": 2.0,
+   "haircut": 1.0,
+   "events_traded": 1306,
+   "events_skipped": 1259,
+   "win_rate_pct": 29.56,
+   "avg_pnl_pct_of_debit": -6.22,
+   "profit_factor": 0.837,
+   "total_pnl_dollars": -9048.38,
+   "final_equity": 2652.66,
+   "max_drawdown_pct": -79.76
+  },
+  {
+   "dte": [
+    7,
+    14
+   ],
+   "long_delta": 0.55,
+   "short_at_r": null,
+   "haircut": 0.0,
+   "events_traded": 1021,
+   "events_skipped": 1544,
+   "win_rate_pct": 37.9,
+   "avg_pnl_pct_of_debit": 21.36,
+   "profit_factor": 2.0,
+   "total_pnl_dollars": 26822.77,
+   "final_equity": 16442.78,
+   "max_drawdown_pct": -18.25
+  },
+  {
+   "dte": [
+    7,
+    14
+   ],
+   "long_delta": 0.55,
+   "short_at_r": null,
+   "haircut": 0.25,
+   "events_traded": 1004,
+   "events_skipped": 1561,
+   "win_rate_pct": 36.95,
+   "avg_pnl_pct_of_debit": 17.1,
+   "profit_factor": 1.764,
+   "total_pnl_dollars": 21388.26,
+   "final_equity": 14048.78,
+   "max_drawdown_pct": -22.77
+  },
+  {
+   "dte": [
+    7,
+    14
+   ],
+   "long_delta": 0.55,
+   "short_at_r": null,
+   "haircut": 0.5,
+   "events_traded": 995,
+   "events_skipped": 1570,
+   "win_rate_pct": 35.88,
+   "avg_pnl_pct_of_debit": 13.0,
+   "profit_factor": 1.55,
+   "total_pnl_dollars": 16444.04,
+   "final_equity": 12082.95,
+   "max_drawdown_pct": -21.99
+  },
+  {
+   "dte": [
+    7,
+    14
+   ],
+   "long_delta": 0.55,
+   "short_at_r": null,
+   "haircut": 1.0,
+   "events_traded": 969,
+   "events_skipped": 1596,
+   "win_rate_pct": 33.02,
+   "avg_pnl_pct_of_debit": 4.95,
+   "profit_factor": 1.188,
+   "total_pnl_dollars": 6221.77,
+   "final_equity": 6499.48,
+   "max_drawdown_pct": -34.0
+  },
+  {
+   "dte": [
+    7,
+    14
+   ],
+   "long_delta": 0.6,
+   "short_at_r": 3.0,
+   "haircut": 0.0,
+   "events_traded": 1050,
+   "events_skipped": 1515,
+   "win_rate_pct": 43.05,
+   "avg_pnl_pct_of_debit": 21.23,
+   "profit_factor": 2.143,
+   "total_pnl_dollars": 27367.26,
+   "final_equity": 17053.42,
+   "max_drawdown_pct": -15.11
+  },
+  {
+   "dte": [
+    7,
+    14
+   ],
+   "long_delta": 0.6,
+   "short_at_r": 3.0,
+   "haircut": 0.25,
+   "events_traded": 1028,
+   "events_skipped": 1537,
+   "win_rate_pct": 38.81,
+   "avg_pnl_pct_of_debit": 12.96,
+   "profit_factor": 1.609,
+   "total_pnl_dollars": 16636.02,
+   "final_equity": 11212.23,
+   "max_drawdown_pct": -19.78
+  },
+  {
+   "dte": [
+    7,
+    14
+   ],
+   "long_delta": 0.6,
+   "short_at_r": 3.0,
+   "haircut": 0.5,
+   "events_traded": 1007,
+   "events_skipped": 1558,
+   "win_rate_pct": 35.35,
+   "avg_pnl_pct_of_debit": 7.23,
+   "profit_factor": 1.311,
+   "total_pnl_dollars": 9363.5,
+   "final_equity": 8989.29,
+   "max_drawdown_pct": -33.7
+  },
+  {
+   "dte": [
+    7,
+    14
+   ],
+   "long_delta": 0.6,
+   "short_at_r": 3.0,
+   "haircut": 1.0,
+   "events_traded": 982,
+   "events_skipped": 1583,
+   "win_rate_pct": 29.74,
+   "avg_pnl_pct_of_debit": -7.01,
+   "profit_factor": 0.785,
+   "total_pnl_dollars": -7892.48,
+   "final_equity": 996.3,
+   "max_drawdown_pct": -67.57
+  },
+  {
+   "dte": [
+    7,
+    14
+   ],
+   "long_delta": 0.6,
+   "short_at_r": 2.0,
+   "haircut": 0.0,
+   "events_traded": 1153,
+   "events_skipped": 1412,
+   "win_rate_pct": 44.58,
+   "avg_pnl_pct_of_debit": 21.22,
+   "profit_factor": 2.167,
+   "total_pnl_dollars": 30712.04,
+   "final_equity": 17970.44,
+   "max_drawdown_pct": -15.08
+  },
+  {
+   "dte": [
+    7,
+    14
+   ],
+   "long_delta": 0.6,
+   "short_at_r": 2.0,
+   "haircut": 0.25,
+   "events_traded": 1132,
+   "events_skipped": 1433,
+   "win_rate_pct": 40.02,
+   "avg_pnl_pct_of_debit": 16.67,
+   "profit_factor": 1.804,
+   "total_pnl_dollars": 24550.25,
+   "final_equity": 11103.78,
+   "max_drawdown_pct": -19.93
+  },
+  {
+   "dte": [
+    7,
+    14
+   ],
+   "long_delta": 0.6,
+   "short_at_r": 2.0,
+   "haircut": 0.5,
+   "events_traded": 1113,
+   "events_skipped": 1452,
+   "win_rate_pct": 35.85,
+   "avg_pnl_pct_of_debit": 5.33,
+   "profit_factor": 1.197,
+   "total_pnl_dollars": 6789.8,
+   "final_equity": 5418.0,
+   "max_drawdown_pct": -44.34
+  },
+  {
+   "dte": [
+    7,
+    14
+   ],
+   "long_delta": 0.6,
+   "short_at_r": 2.0,
+   "haircut": 1.0,
+   "events_traded": 1076,
+   "events_skipped": 1489,
+   "win_rate_pct": 29.37,
+   "avg_pnl_pct_of_debit": -9.76,
+   "profit_factor": 0.709,
+   "total_pnl_dollars": -12279.85,
+   "final_equity": 1049.96,
+   "max_drawdown_pct": -65.85
+  },
+  {
+   "dte": [
+    7,
+    14
+   ],
+   "long_delta": 0.6,
+   "short_at_r": null,
+   "haircut": 0.0,
+   "events_traded": 849,
+   "events_skipped": 1716,
+   "win_rate_pct": 39.34,
+   "avg_pnl_pct_of_debit": 19.51,
+   "profit_factor": 1.973,
+   "total_pnl_dollars": 20079.21,
+   "final_equity": 14064.74,
+   "max_drawdown_pct": -12.34
+  },
+  {
+   "dte": [
+    7,
+    14
+   ],
+   "long_delta": 0.6,
+   "short_at_r": null,
+   "haircut": 0.25,
+   "events_traded": 832,
+   "events_skipped": 1733,
+   "win_rate_pct": 37.98,
+   "avg_pnl_pct_of_debit": 15.69,
+   "profit_factor": 1.748,
+   "total_pnl_dollars": 15992.38,
+   "final_equity": 12478.0,
+   "max_drawdown_pct": -13.87
+  },
+  {
+   "dte": [
+    7,
+    14
+   ],
+   "long_delta": 0.6,
+   "short_at_r": null,
+   "haircut": 0.5,
+   "events_traded": 823,
+   "events_skipped": 1742,
+   "win_rate_pct": 36.94,
+   "avg_pnl_pct_of_debit": 12.3,
+   "profit_factor": 1.571,
+   "total_pnl_dollars": 12854.07,
+   "final_equity": 10779.55,
+   "max_drawdown_pct": -15.37
+  },
+  {
+   "dte": [
+    7,
+    14
+   ],
+   "long_delta": 0.6,
+   "short_at_r": null,
+   "haircut": 1.0,
+   "events_traded": 800,
+   "events_skipped": 1765,
+   "win_rate_pct": 34.0,
+   "avg_pnl_pct_of_debit": 4.94,
+   "profit_factor": 1.202,
+   "total_pnl_dollars": 5074.03,
+   "final_equity": 5957.76,
+   "max_drawdown_pct": -25.38
+  },
+  {
+   "dte": [
+    7,
+    14
+   ],
+   "long_delta": 0.65,
+   "short_at_r": 3.0,
+   "haircut": 0.0,
+   "events_traded": 841,
+   "events_skipped": 1724,
+   "win_rate_pct": 41.14,
+   "avg_pnl_pct_of_debit": 16.53,
+   "profit_factor": 1.972,
+   "total_pnl_dollars": 17338.65,
+   "final_equity": 13408.89,
+   "max_drawdown_pct": -17.42
+  },
+  {
+   "dte": [
+    7,
+    14
+   ],
+   "long_delta": 0.65,
+   "short_at_r": 3.0,
+   "haircut": 0.25,
+   "events_traded": 816,
+   "events_skipped": 1749,
+   "win_rate_pct": 38.36,
+   "avg_pnl_pct_of_debit": 9.91,
+   "profit_factor": 1.516,
+   "total_pnl_dollars": 10356.75,
+   "final_equity": 9908.91,
+   "max_drawdown_pct": -30.44
+  },
+  {
+   "dte": [
+    7,
+    14
+   ],
+   "long_delta": 0.65,
+   "short_at_r": 3.0,
+   "haircut": 0.5,
+   "events_traded": 798,
+   "events_skipped": 1767,
+   "win_rate_pct": 34.46,
+   "avg_pnl_pct_of_debit": 4.85,
+   "profit_factor": 1.23,
+   "total_pnl_dollars": 5111.37,
+   "final_equity": 8125.74,
+   "max_drawdown_pct": -33.96
+  },
+  {
+   "dte": [
+    7,
+    14
+   ],
+   "long_delta": 0.65,
+   "short_at_r": 3.0,
+   "haircut": 1.0,
+   "events_traded": 772,
+   "events_skipped": 1793,
+   "win_rate_pct": 28.24,
+   "avg_pnl_pct_of_debit": -8.45,
+   "profit_factor": 0.708,
+   "total_pnl_dollars": -7870.48,
+   "final_equity": 1017.31,
+   "max_drawdown_pct": -66.47
+  },
+  {
+   "dte": [
+    7,
+    14
+   ],
+   "long_delta": 0.65,
+   "short_at_r": 2.0,
+   "haircut": 0.0,
+   "events_traded": 937,
+   "events_skipped": 1628,
+   "win_rate_pct": 42.26,
+   "avg_pnl_pct_of_debit": 16.17,
+   "profit_factor": 1.892,
+   "total_pnl_dollars": 17960.56,
+   "final_equity": 11939.56,
+   "max_drawdown_pct": -13.81
+  },
+  {
+   "dte": [
+    7,
+    14
+   ],
+   "long_delta": 0.65,
+   "short_at_r": 2.0,
+   "haircut": 0.25,
+   "events_traded": 912,
+   "events_skipped": 1653,
+   "win_rate_pct": 38.82,
+   "avg_pnl_pct_of_debit": 14.15,
+   "profit_factor": 1.745,
+   "total_pnl_dollars": 16942.13,
+   "final_equity": 8679.28,
+   "max_drawdown_pct": -20.56
+  },
+  {
+   "dte": [
+    7,
+    14
+   ],
+   "long_delta": 0.65,
+   "short_at_r": 2.0,
+   "haircut": 0.5,
+   "events_traded": 894,
+   "events_skipped": 1671,
+   "win_rate_pct": 34.68,
+   "avg_pnl_pct_of_debit": 3.56,
+   "profit_factor": 1.16,
+   "total_pnl_dollars": 4095.44,
+   "final_equity": 5313.96,
+   "max_drawdown_pct": -44.76
+  },
+  {
+   "dte": [
+    7,
+    14
+   ],
+   "long_delta": 0.65,
+   "short_at_r": 2.0,
+   "haircut": 1.0,
+   "events_traded": 859,
+   "events_skipped": 1706,
+   "win_rate_pct": 27.71,
+   "avg_pnl_pct_of_debit": -10.14,
+   "profit_factor": 0.681,
+   "total_pnl_dollars": -9958.79,
+   "final_equity": 957.83,
+   "max_drawdown_pct": -68.66
+  },
+  {
+   "dte": [
+    7,
+    14
+   ],
+   "long_delta": 0.65,
+   "short_at_r": null,
+   "haircut": 0.0,
+   "events_traded": 675,
+   "events_skipped": 1890,
+   "win_rate_pct": 38.37,
+   "avg_pnl_pct_of_debit": 14.41,
+   "profit_factor": 1.736,
+   "total_pnl_dollars": 11497.93,
+   "final_equity": 11115.16,
+   "max_drawdown_pct": -13.36
+  },
+  {
+   "dte": [
+    7,
+    14
+   ],
+   "long_delta": 0.65,
+   "short_at_r": null,
+   "haircut": 0.25,
+   "events_traded": 657,
+   "events_skipped": 1908,
+   "win_rate_pct": 36.68,
+   "avg_pnl_pct_of_debit": 10.87,
+   "profit_factor": 1.527,
+   "total_pnl_dollars": 8560.68,
+   "final_equity": 9358.34,
+   "max_drawdown_pct": -16.1
+  },
+  {
+   "dte": [
+    7,
+    14
+   ],
+   "long_delta": 0.65,
+   "short_at_r": null,
+   "haircut": 0.5,
+   "events_traded": 650,
+   "events_skipped": 1915,
+   "win_rate_pct": 35.54,
+   "avg_pnl_pct_of_debit": 7.79,
+   "profit_factor": 1.369,
+   "total_pnl_dollars": 6315.99,
+   "final_equity": 7933.22,
+   "max_drawdown_pct": -18.92
+  },
+  {
+   "dte": [
+    7,
+    14
+   ],
+   "long_delta": 0.65,
+   "short_at_r": null,
+   "haircut": 1.0,
+   "events_traded": 628,
+   "events_skipped": 1937,
+   "win_rate_pct": 32.48,
+   "avg_pnl_pct_of_debit": 1.06,
+   "profit_factor": 1.04,
+   "total_pnl_dollars": 759.78,
+   "final_equity": 3406.05,
+   "max_drawdown_pct": -39.94
+  },
+  {
+   "dte": [
+    7,
+    14
+   ],
+   "long_delta": 0.7,
+   "short_at_r": 3.0,
+   "haircut": 0.0,
+   "events_traded": 638,
+   "events_skipped": 1927,
+   "win_rate_pct": 39.18,
+   "avg_pnl_pct_of_debit": 12.24,
+   "profit_factor": 1.748,
+   "total_pnl_dollars": 9720.48,
+   "final_equity": 9121.7,
+   "max_drawdown_pct": -13.99
+  },
+  {
+   "dte": [
+    7,
+    14
+   ],
+   "long_delta": 0.7,
+   "short_at_r": 3.0,
+   "haircut": 0.25,
+   "events_traded": 620,
+   "events_skipped": 1945,
+   "win_rate_pct": 36.29,
+   "avg_pnl_pct_of_debit": 6.38,
+   "profit_factor": 1.34,
+   "total_pnl_dollars": 5031.81,
+   "final_equity": 5897.31,
+   "max_drawdown_pct": -22.41
+  },
+  {
+   "dte": [
+    7,
+    14
+   ],
+   "long_delta": 0.7,
+   "short_at_r": 3.0,
+   "haircut": 0.5,
+   "events_traded": 605,
+   "events_skipped": 1960,
+   "win_rate_pct": 32.23,
+   "avg_pnl_pct_of_debit": 1.67,
+   "profit_factor": 1.099,
+   "total_pnl_dollars": 1634.87,
+   "final_equity": 4677.8,
+   "max_drawdown_pct": -28.62
+  },
+  {
+   "dte": [
+    7,
+    14
+   ],
+   "long_delta": 0.7,
+   "short_at_r": 3.0,
+   "haircut": 1.0,
+   "events_traded": 585,
+   "events_skipped": 1980,
+   "win_rate_pct": 25.64,
+   "avg_pnl_pct_of_debit": -11.25,
+   "profit_factor": 0.585,
+   "total_pnl_dollars": -8422.0,
+   "final_equity": 1126.75,
+   "max_drawdown_pct": -62.75
+  },
+  {
+   "dte": [
+    7,
+    14
+   ],
+   "long_delta": 0.7,
+   "short_at_r": 2.0,
+   "haircut": 0.0,
+   "events_traded": 693,
+   "events_skipped": 1872,
+   "win_rate_pct": 40.12,
+   "avg_pnl_pct_of_debit": 11.78,
+   "profit_factor": 1.689,
+   "total_pnl_dollars": 9862.2,
+   "final_equity": 8851.51,
+   "max_drawdown_pct": -15.84
+  },
+  {
+   "dte": [
+    7,
+    14
+   ],
+   "long_delta": 0.7,
+   "short_at_r": 2.0,
+   "haircut": 0.25,
+   "events_traded": 675,
+   "events_skipped": 1890,
+   "win_rate_pct": 36.15,
+   "avg_pnl_pct_of_debit": 4.96,
+   "profit_factor": 1.269,
+   "total_pnl_dollars": 4361.08,
+   "final_equity": 5061.46,
+   "max_drawdown_pct": -24.81
+  },
+  {
+   "dte": [
+    7,
+    14
+   ],
+   "long_delta": 0.7,
+   "short_at_r": 2.0,
+   "haircut": 0.5,
+   "events_traded": 662,
+   "events_skipped": 1903,
+   "win_rate_pct": 32.02,
+   "avg_pnl_pct_of_debit": -1.38,
+   "profit_factor": 0.966,
+   "total_pnl_dollars": -616.6,
+   "final_equity": 2232.08,
+   "max_drawdown_pct": -44.3
+  },
+  {
+   "dte": [
+    7,
+    14
+   ],
+   "long_delta": 0.7,
+   "short_at_r": 2.0,
+   "haircut": 1.0,
+   "events_traded": 636,
+   "events_skipped": 1929,
+   "win_rate_pct": 24.53,
+   "avg_pnl_pct_of_debit": -13.97,
+   "profit_factor": 0.541,
+   "total_pnl_dollars": -10392.27,
+   "final_equity": 1002.16,
+   "max_drawdown_pct": -66.59
+  },
+  {
+   "dte": [
+    7,
+    14
+   ],
+   "long_delta": 0.7,
+   "short_at_r": null,
+   "haircut": 0.0,
+   "events_traded": 514,
+   "events_skipped": 2051,
+   "win_rate_pct": 36.96,
+   "avg_pnl_pct_of_debit": 11.88,
+   "profit_factor": 1.626,
+   "total_pnl_dollars": 7078.17,
+   "final_equity": 8353.11,
+   "max_drawdown_pct": -12.55
+  },
+  {
+   "dte": [
+    7,
+    14
+   ],
+   "long_delta": 0.7,
+   "short_at_r": null,
+   "haircut": 0.25,
+   "events_traded": 500,
+   "events_skipped": 2065,
+   "win_rate_pct": 35.0,
+   "avg_pnl_pct_of_debit": 8.37,
+   "profit_factor": 1.396,
+   "total_pnl_dollars": 4771.5,
+   "final_equity": 6492.69,
+   "max_drawdown_pct": -17.12
+  },
+  {
+   "dte": [
+    7,
+    14
+   ],
+   "long_delta": 0.7,
+   "short_at_r": null,
+   "haircut": 0.5,
+   "events_traded": 495,
+   "events_skipped": 2070,
+   "win_rate_pct": 33.94,
+   "avg_pnl_pct_of_debit": 5.18,
+   "profit_factor": 1.233,
+   "total_pnl_dollars": 2988.86,
+   "final_equity": 4908.36,
+   "max_drawdown_pct": -23.56
+  },
+  {
+   "dte": [
+    7,
+    14
+   ],
+   "long_delta": 0.7,
+   "short_at_r": null,
+   "haircut": 1.0,
+   "events_traded": 481,
+   "events_skipped": 2084,
+   "win_rate_pct": 30.35,
+   "avg_pnl_pct_of_debit": -0.97,
+   "profit_factor": 0.935,
+   "total_pnl_dollars": -939.53,
+   "final_equity": 1555.23,
+   "max_drawdown_pct": -55.7
+  },
+  {
+   "dte": [
+    14,
+    21
+   ],
+   "long_delta": 0.55,
+   "short_at_r": 3.0,
+   "haircut": 0.0,
+   "events_traded": 1154,
+   "events_skipped": 1411,
+   "win_rate_pct": 42.29,
+   "avg_pnl_pct_of_debit": 33.66,
+   "profit_factor": 2.738,
+   "total_pnl_dollars": 49637.37,
+   "final_equity": 24647.01,
+   "max_drawdown_pct": -15.64
+  },
+  {
+   "dte": [
+    14,
+    21
+   ],
+   "long_delta": 0.55,
+   "short_at_r": 3.0,
+   "haircut": 0.25,
+   "events_traded": 1135,
+   "events_skipped": 1430,
+   "win_rate_pct": 38.59,
+   "avg_pnl_pct_of_debit": 20.87,
+   "profit_factor": 1.946,
+   "total_pnl_dollars": 31248.74,
+   "final_equity": 17217.58,
+   "max_drawdown_pct": -22.71
+  },
+  {
+   "dte": [
+    14,
+    21
+   ],
+   "long_delta": 0.55,
+   "short_at_r": 3.0,
+   "haircut": 0.5,
+   "events_traded": 1105,
+   "events_skipped": 1460,
+   "win_rate_pct": 34.21,
+   "avg_pnl_pct_of_debit": 10.35,
+   "profit_factor": 1.397,
+   "total_pnl_dollars": 14757.06,
+   "final_equity": 9602.64,
+   "max_drawdown_pct": -37.42
+  },
+  {
+   "dte": [
+    14,
+    21
+   ],
+   "long_delta": 0.55,
+   "short_at_r": 3.0,
+   "haircut": 1.0,
+   "events_traded": 1041,
+   "events_skipped": 1524,
+   "win_rate_pct": 28.05,
+   "avg_pnl_pct_of_debit": -6.61,
+   "profit_factor": 0.814,
+   "total_pnl_dollars": -8300.77,
+   "final_equity": 1266.82,
+   "max_drawdown_pct": -60.31
+  },
+  {
+   "dte": [
+    14,
+    21
+   ],
+   "long_delta": 0.55,
+   "short_at_r": 2.0,
+   "haircut": 0.0,
+   "events_traded": 1294,
+   "events_skipped": 1271,
+   "win_rate_pct": 42.97,
+   "avg_pnl_pct_of_debit": 33.93,
+   "profit_factor": 2.731,
+   "total_pnl_dollars": 56666.14,
+   "final_equity": 26683.22,
+   "max_drawdown_pct": -12.49
+  },
+  {
+   "dte": [
+    14,
+    21
+   ],
+   "long_delta": 0.55,
+   "short_at_r": 2.0,
+   "haircut": 0.25,
+   "events_traded": 1281,
+   "events_skipped": 1284,
+   "win_rate_pct": 38.17,
+   "avg_pnl_pct_of_debit": 27.0,
+   "profit_factor": 2.193,
+   "total_pnl_dollars": 46907.61,
+   "final_equity": 34913.15,
+   "max_drawdown_pct": -20.03
+  },
+  {
+   "dte": [
+    14,
+    21
+   ],
+   "long_delta": 0.55,
+   "short_at_r": 2.0,
+   "haircut": 0.5,
+   "events_traded": 1251,
+   "events_skipped": 1314,
+   "win_rate_pct": 34.21,
+   "avg_pnl_pct_of_debit": 27.06,
+   "profit_factor": 2.099,
+   "total_pnl_dollars": 49451.6,
+   "final_equity": 10795.17,
+   "max_drawdown_pct": -41.84
+  },
+  {
+   "dte": [
+    14,
+    21
+   ],
+   "long_delta": 0.55,
+   "short_at_r": 2.0,
+   "haircut": 1.0,
+   "events_traded": 1195,
+   "events_skipped": 1370,
+   "win_rate_pct": 26.36,
+   "avg_pnl_pct_of_debit": 31.54,
+   "profit_factor": 2.092,
+   "total_pnl_dollars": 60648.46,
+   "final_equity": 982.4,
+   "max_drawdown_pct": -78.74
+  },
+  {
+   "dte": [
+    14,
+    21
+   ],
+   "long_delta": 0.55,
+   "short_at_r": null,
+   "haircut": 0.0,
+   "events_traded": 753,
+   "events_skipped": 1812,
+   "win_rate_pct": 34.66,
+   "avg_pnl_pct_of_debit": 14.4,
+   "profit_factor": 1.619,
+   "total_pnl_dollars": 13096.33,
+   "final_equity": 11371.55,
+   "max_drawdown_pct": -22.67
+  },
+  {
+   "dte": [
+    14,
+    21
+   ],
+   "long_delta": 0.55,
+   "short_at_r": null,
+   "haircut": 0.25,
+   "events_traded": 738,
+   "events_skipped": 1827,
+   "win_rate_pct": 33.6,
+   "avg_pnl_pct_of_debit": 10.82,
+   "profit_factor": 1.435,
+   "total_pnl_dollars": 9639.86,
+   "final_equity": 9603.23,
+   "max_drawdown_pct": -27.37
+  },
+  {
+   "dte": [
+    14,
+    21
+   ],
+   "long_delta": 0.55,
+   "short_at_r": null,
+   "haircut": 0.5,
+   "events_traded": 721,
+   "events_skipped": 1844,
+   "win_rate_pct": 33.01,
+   "avg_pnl_pct_of_debit": 7.0,
+   "profit_factor": 1.254,
+   "total_pnl_dollars": 5896.95,
+   "final_equity": 8257.35,
+   "max_drawdown_pct": -30.95
+  },
+  {
+   "dte": [
+    14,
+    21
+   ],
+   "long_delta": 0.55,
+   "short_at_r": null,
+   "haircut": 1.0,
+   "events_traded": 701,
+   "events_skipped": 1864,
+   "win_rate_pct": 31.53,
+   "avg_pnl_pct_of_debit": 0.03,
+   "profit_factor": 0.986,
+   "total_pnl_dollars": -354.56,
+   "final_equity": 5966.72,
+   "max_drawdown_pct": -41.29
+  },
+  {
+   "dte": [
+    14,
+    21
+   ],
+   "long_delta": 0.6,
+   "short_at_r": 3.0,
+   "haircut": 0.0,
+   "events_traded": 930,
+   "events_skipped": 1635,
+   "win_rate_pct": 41.18,
+   "avg_pnl_pct_of_debit": 23.86,
+   "profit_factor": 2.258,
+   "total_pnl_dollars": 27632.97,
+   "final_equity": 19352.04,
+   "max_drawdown_pct": -14.81
+  },
+  {
+   "dte": [
+    14,
+    21
+   ],
+   "long_delta": 0.6,
+   "short_at_r": 3.0,
+   "haircut": 0.25,
+   "events_traded": 910,
+   "events_skipped": 1655,
+   "win_rate_pct": 37.8,
+   "avg_pnl_pct_of_debit": 14.44,
+   "profit_factor": 1.677,
+   "total_pnl_dollars": 17071.82,
+   "final_equity": 14425.64,
+   "max_drawdown_pct": -21.98
+  },
+  {
+   "dte": [
+    14,
+    21
+   ],
+   "long_delta": 0.6,
+   "short_at_r": 3.0,
+   "haircut": 0.5,
+   "events_traded": 880,
+   "events_skipped": 1685,
+   "win_rate_pct": 34.2,
+   "avg_pnl_pct_of_debit": 9.99,
+   "profit_factor": 1.433,
+   "total_pnl_dollars": 12072.67,
+   "final_equity": 9864.33,
+   "max_drawdown_pct": -26.49
+  },
+  {
+   "dte": [
+    14,
+    21
+   ],
+   "long_delta": 0.6,
+   "short_at_r": 3.0,
+   "haircut": 1.0,
+   "events_traded": 823,
+   "events_skipped": 1742,
+   "win_rate_pct": 28.43,
+   "avg_pnl_pct_of_debit": -7.06,
+   "profit_factor": 0.781,
+   "total_pnl_dollars": -7193.61,
+   "final_equity": 1796.04,
+   "max_drawdown_pct": -55.89
+  },
+  {
+   "dte": [
+    14,
+    21
+   ],
+   "long_delta": 0.6,
+   "short_at_r": 2.0,
+   "haircut": 0.0,
+   "events_traded": 1053,
+   "events_skipped": 1512,
+   "win_rate_pct": 42.07,
+   "avg_pnl_pct_of_debit": 42.74,
+   "profit_factor": 3.323,
+   "total_pnl_dollars": 58299.14,
+   "final_equity": 42811.99,
+   "max_drawdown_pct": -15.27
+  },
+  {
+   "dte": [
+    14,
+    21
+   ],
+   "long_delta": 0.6,
+   "short_at_r": 2.0,
+   "haircut": 0.25,
+   "events_traded": 1043,
+   "events_skipped": 1522,
+   "win_rate_pct": 37.49,
+   "avg_pnl_pct_of_debit": 17.66,
+   "profit_factor": 1.746,
+   "total_pnl_dollars": 22478.86,
+   "final_equity": 17685.31,
+   "max_drawdown_pct": -29.86
+  },
+  {
+   "dte": [
+    14,
+    21
+   ],
+   "long_delta": 0.6,
+   "short_at_r": 2.0,
+   "haircut": 0.5,
+   "events_traded": 1013,
+   "events_skipped": 1552,
+   "win_rate_pct": 33.07,
+   "avg_pnl_pct_of_debit": 28.63,
+   "profit_factor": 2.25,
+   "total_pnl_dollars": 42569.7,
+   "final_equity": 32159.0,
+   "max_drawdown_pct": -45.1
+  },
+  {
+   "dte": [
+    14,
+    21
+   ],
+   "long_delta": 0.6,
+   "short_at_r": 2.0,
+   "haircut": 1.0,
+   "events_traded": 956,
+   "events_skipped": 1609,
+   "win_rate_pct": 25.31,
+   "avg_pnl_pct_of_debit": -11.24,
+   "profit_factor": 0.668,
+   "total_pnl_dollars": -13780.58,
+   "final_equity": 1093.31,
+   "max_drawdown_pct": -75.02
+  },
+  {
+   "dte": [
+    14,
+    21
+   ],
+   "long_delta": 0.6,
+   "short_at_r": null,
+   "haircut": 0.0,
+   "events_traded": 607,
+   "events_skipped": 1958,
+   "win_rate_pct": 36.74,
+   "avg_pnl_pct_of_debit": 14.13,
+   "profit_factor": 1.644,
+   "total_pnl_dollars": 10361.52,
+   "final_equity": 10954.72,
+   "max_drawdown_pct": -13.23
+  },
+  {
+   "dte": [
+    14,
+    21
+   ],
+   "long_delta": 0.6,
+   "short_at_r": null,
+   "haircut": 0.25,
+   "events_traded": 592,
+   "events_skipped": 1973,
+   "win_rate_pct": 34.97,
+   "avg_pnl_pct_of_debit": 10.73,
+   "profit_factor": 1.471,
+   "total_pnl_dollars": 7823.69,
+   "final_equity": 9495.87,
+   "max_drawdown_pct": -16.07
+  },
+  {
+   "dte": [
+    14,
+    21
+   ],
+   "long_delta": 0.6,
+   "short_at_r": null,
+   "haircut": 0.5,
+   "events_traded": 578,
+   "events_skipped": 1987,
+   "win_rate_pct": 34.43,
+   "avg_pnl_pct_of_debit": 7.69,
+   "profit_factor": 1.311,
+   "total_pnl_dollars": 5363.97,
+   "final_equity": 8526.6,
+   "max_drawdown_pct": -17.95
+  },
+  {
+   "dte": [
+    14,
+    21
+   ],
+   "long_delta": 0.6,
+   "short_at_r": null,
+   "haircut": 1.0,
+   "events_traded": 562,
+   "events_skipped": 2003,
+   "win_rate_pct": 32.74,
+   "avg_pnl_pct_of_debit": 0.59,
+   "profit_factor": 1.012,
+   "total_pnl_dollars": 216.0,
+   "final_equity": 5252.02,
+   "max_drawdown_pct": -24.56
+  },
+  {
+   "dte": [
+    14,
+    21
+   ],
+   "long_delta": 0.65,
+   "short_at_r": 3.0,
+   "haircut": 0.0,
+   "events_traded": 698,
+   "events_skipped": 1867,
+   "win_rate_pct": 37.82,
+   "avg_pnl_pct_of_debit": 17.67,
+   "profit_factor": 1.929,
+   "total_pnl_dollars": 15254.19,
+   "final_equity": 12912.93,
+   "max_drawdown_pct": -12.45
+  },
+  {
+   "dte": [
+    14,
+    21
+   ],
+   "long_delta": 0.65,
+   "short_at_r": 3.0,
+   "haircut": 0.25,
+   "events_traded": 681,
+   "events_skipped": 1884,
+   "win_rate_pct": 34.8,
+   "avg_pnl_pct_of_debit": 7.58,
+   "profit_factor": 1.363,
+   "total_pnl_dollars": 6718.32,
+   "final_equity": 7939.02,
+   "max_drawdown_pct": -17.09
+  },
+  {
+   "dte": [
+    14,
+    21
+   ],
+   "long_delta": 0.65,
+   "short_at_r": 3.0,
+   "haircut": 0.5,
+   "events_traded": 654,
+   "events_skipped": 1911,
+   "win_rate_pct": 31.65,
+   "avg_pnl_pct_of_debit": 0.83,
+   "profit_factor": 1.025,
+   "total_pnl_dollars": 506.6,
+   "final_equity": 1920.76,
+   "max_drawdown_pct": -48.82
+  },
+  {
+   "dte": [
+    14,
+    21
+   ],
+   "long_delta": 0.65,
+   "short_at_r": 3.0,
+   "haircut": 1.0,
+   "events_traded": 613,
+   "events_skipped": 1952,
+   "win_rate_pct": 26.1,
+   "avg_pnl_pct_of_debit": -11.56,
+   "profit_factor": 0.648,
+   "total_pnl_dollars": -8370.24,
+   "final_equity": 1175.76,
+   "max_drawdown_pct": -63.69
+  },
+  {
+   "dte": [
+    14,
+    21
+   ],
+   "long_delta": 0.65,
+   "short_at_r": 2.0,
+   "haircut": 0.0,
+   "events_traded": 805,
+   "events_skipped": 1760,
+   "win_rate_pct": 39.25,
+   "avg_pnl_pct_of_debit": 14.8,
+   "profit_factor": 1.812,
+   "total_pnl_dollars": 15079.94,
+   "final_equity": 9403.01,
+   "max_drawdown_pct": -16.92
+  },
+  {
+   "dte": [
+    14,
+    21
+   ],
+   "long_delta": 0.65,
+   "short_at_r": 2.0,
+   "haircut": 0.25,
+   "events_traded": 778,
+   "events_skipped": 1787,
+   "win_rate_pct": 34.83,
+   "avg_pnl_pct_of_debit": 6.22,
+   "profit_factor": 1.277,
+   "total_pnl_dollars": 5898.51,
+   "final_equity": 4911.71,
+   "max_drawdown_pct": -26.33
+  },
+  {
+   "dte": [
+    14,
+    21
+   ],
+   "long_delta": 0.65,
+   "short_at_r": 2.0,
+   "haircut": 0.5,
+   "events_traded": 749,
+   "events_skipped": 1816,
+   "win_rate_pct": 30.71,
+   "avg_pnl_pct_of_debit": 29.04,
+   "profit_factor": 2.382,
+   "total_pnl_dollars": 33145.77,
+   "final_equity": 21739.89,
+   "max_drawdown_pct": -44.6
+  },
+  {
+   "dte": [
+    14,
+    21
+   ],
+   "long_delta": 0.65,
+   "short_at_r": 2.0,
+   "haircut": 1.0,
+   "events_traded": 703,
+   "events_skipped": 1862,
+   "win_rate_pct": 24.04,
+   "avg_pnl_pct_of_debit": -9.25,
+   "profit_factor": 0.769,
+   "total_pnl_dollars": -6668.61,
+   "final_equity": 1177.37,
+   "max_drawdown_pct": -66.76
+  },
+  {
+   "dte": [
+    14,
+    21
+   ],
+   "long_delta": 0.65,
+   "short_at_r": null,
+   "haircut": 0.0,
+   "events_traded": 475,
+   "events_skipped": 2090,
+   "win_rate_pct": 35.79,
+   "avg_pnl_pct_of_debit": 11.39,
+   "profit_factor": 1.574,
+   "total_pnl_dollars": 6900.57,
+   "final_equity": 8044.08,
+   "max_drawdown_pct": -11.75
+  },
+  {
+   "dte": [
+    14,
+    21
+   ],
+   "long_delta": 0.65,
+   "short_at_r": null,
+   "haircut": 0.25,
+   "events_traded": 465,
+   "events_skipped": 2100,
+   "win_rate_pct": 33.98,
+   "avg_pnl_pct_of_debit": 8.33,
+   "profit_factor": 1.408,
+   "total_pnl_dollars": 5076.65,
+   "final_equity": 6702.86,
+   "max_drawdown_pct": -15.75
+  },
+  {
+   "dte": [
+    14,
+    21
+   ],
+   "long_delta": 0.65,
+   "short_at_r": null,
+   "haircut": 0.5,
+   "events_traded": 456,
+   "events_skipped": 2109,
+   "win_rate_pct": 33.33,
+   "avg_pnl_pct_of_debit": 5.05,
+   "profit_factor": 1.199,
+   "total_pnl_dollars": 2609.4,
+   "final_equity": 5248.12,
+   "max_drawdown_pct": -19.3
+  },
+  {
+   "dte": [
+    14,
+    21
+   ],
+   "long_delta": 0.65,
+   "short_at_r": null,
+   "haircut": 1.0,
+   "events_traded": 439,
+   "events_skipped": 2126,
+   "win_rate_pct": 31.44,
+   "avg_pnl_pct_of_debit": -2.17,
+   "profit_factor": 0.9,
+   "total_pnl_dollars": -1410.09,
+   "final_equity": 3229.65,
+   "max_drawdown_pct": -29.43
+  },
+  {
+   "dte": [
+    14,
+    21
+   ],
+   "long_delta": 0.7,
+   "short_at_r": 3.0,
+   "haircut": 0.0,
+   "events_traded": 503,
+   "events_skipped": 2062,
+   "win_rate_pct": 35.39,
+   "avg_pnl_pct_of_debit": 10.33,
+   "profit_factor": 1.554,
+   "total_pnl_dollars": 6281.74,
+   "final_equity": 5811.53,
+   "max_drawdown_pct": -16.12
+  },
+  {
+   "dte": [
+    14,
+    21
+   ],
+   "long_delta": 0.7,
+   "short_at_r": 3.0,
+   "haircut": 0.25,
+   "events_traded": 489,
+   "events_skipped": 2076,
+   "win_rate_pct": 32.92,
+   "avg_pnl_pct_of_debit": 4.35,
+   "profit_factor": 1.212,
+   "total_pnl_dollars": 2648.62,
+   "final_equity": 3665.41,
+   "max_drawdown_pct": -33.27
+  },
+  {
+   "dte": [
+    14,
+    21
+   ],
+   "long_delta": 0.7,
+   "short_at_r": 3.0,
+   "haircut": 0.5,
+   "events_traded": 466,
+   "events_skipped": 2099,
+   "win_rate_pct": 30.04,
+   "avg_pnl_pct_of_debit": -1.22,
+   "profit_factor": 0.939,
+   "total_pnl_dollars": -826.15,
+   "final_equity": 2525.36,
+   "max_drawdown_pct": -41.36
+  },
+  {
+   "dte": [
+    14,
+    21
+   ],
+   "long_delta": 0.7,
+   "short_at_r": 3.0,
+   "haircut": 1.0,
+   "events_traded": 437,
+   "events_skipped": 2128,
+   "win_rate_pct": 24.94,
+   "avg_pnl_pct_of_debit": -13.09,
+   "profit_factor": 0.58,
+   "total_pnl_dollars": -6865.22,
+   "final_equity": 1184.66,
+   "max_drawdown_pct": -63.75
+  },
+  {
+   "dte": [
+    14,
+    21
+   ],
+   "long_delta": 0.7,
+   "short_at_r": 2.0,
+   "haircut": 0.0,
+   "events_traded": 564,
+   "events_skipped": 2001,
+   "win_rate_pct": 37.59,
+   "avg_pnl_pct_of_debit": 9.89,
+   "profit_factor": 1.559,
+   "total_pnl_dollars": 7090.01,
+   "final_equity": 5103.97,
+   "max_drawdown_pct": -21.57
+  },
+  {
+   "dte": [
+    14,
+    21
+   ],
+   "long_delta": 0.7,
+   "short_at_r": 2.0,
+   "haircut": 0.25,
+   "events_traded": 540,
+   "events_skipped": 2025,
+   "win_rate_pct": 34.26,
+   "avg_pnl_pct_of_debit": 2.39,
+   "profit_factor": 1.128,
+   "total_pnl_dollars": 1834.08,
+   "final_equity": 2464.04,
+   "max_drawdown_pct": -43.71
+  },
+  {
+   "dte": [
+    14,
+    21
+   ],
+   "long_delta": 0.7,
+   "short_at_r": 2.0,
+   "haircut": 0.5,
+   "events_traded": 518,
+   "events_skipped": 2047,
+   "win_rate_pct": 30.31,
+   "avg_pnl_pct_of_debit": -4.37,
+   "profit_factor": 0.837,
+   "total_pnl_dollars": -2580.09,
+   "final_equity": 1794.8,
+   "max_drawdown_pct": -58.25
+  },
+  {
+   "dte": [
+    14,
+    21
+   ],
+   "long_delta": 0.7,
+   "short_at_r": 2.0,
+   "haircut": 1.0,
+   "events_traded": 489,
+   "events_skipped": 2076,
+   "win_rate_pct": 23.93,
+   "avg_pnl_pct_of_debit": -16.06,
+   "profit_factor": 0.517,
+   "total_pnl_dollars": -9134.58,
+   "final_equity": 1238.42,
+   "max_drawdown_pct": -65.2
+  },
+  {
+   "dte": [
+    14,
+    21
+   ],
+   "long_delta": 0.7,
+   "short_at_r": null,
+   "haircut": 0.0,
+   "events_traded": 357,
+   "events_skipped": 2208,
+   "win_rate_pct": 34.17,
+   "avg_pnl_pct_of_debit": 9.66,
+   "profit_factor": 1.519,
+   "total_pnl_dollars": 4487.27,
+   "final_equity": 6804.22,
+   "max_drawdown_pct": -12.29
+  },
+  {
+   "dte": [
+    14,
+    21
+   ],
+   "long_delta": 0.7,
+   "short_at_r": null,
+   "haircut": 0.25,
+   "events_traded": 350,
+   "events_skipped": 2215,
+   "win_rate_pct": 32.86,
+   "avg_pnl_pct_of_debit": 6.36,
+   "profit_factor": 1.33,
+   "total_pnl_dollars": 2976.3,
+   "final_equity": 5690.79,
+   "max_drawdown_pct": -16.88
+  },
+  {
+   "dte": [
+    14,
+    21
+   ],
+   "long_delta": 0.7,
+   "short_at_r": null,
+   "haircut": 0.5,
+   "events_traded": 343,
+   "events_skipped": 2222,
+   "win_rate_pct": 31.49,
+   "avg_pnl_pct_of_debit": 3.45,
+   "profit_factor": 1.142,
+   "total_pnl_dollars": 1344.68,
+   "final_equity": 4952.02,
+   "max_drawdown_pct": -18.94
+  },
+  {
+   "dte": [
+    14,
+    21
+   ],
+   "long_delta": 0.7,
+   "short_at_r": null,
+   "haircut": 1.0,
+   "events_traded": 332,
+   "events_skipped": 2233,
+   "win_rate_pct": 28.61,
+   "avg_pnl_pct_of_debit": -4.62,
+   "profit_factor": 0.805,
+   "total_pnl_dollars": -2045.37,
+   "final_equity": 2627.63,
+   "max_drawdown_pct": -39.44
+  },
+  {
+   "dte": [
+    21,
+    35
+   ],
+   "long_delta": 0.55,
+   "short_at_r": 3.0,
+   "haircut": 0.0,
+   "events_traded": 1024,
+   "events_skipped": 1541,
+   "win_rate_pct": 41.89,
+   "avg_pnl_pct_of_debit": 45.76,
+   "profit_factor": 3.74,
+   "total_pnl_dollars": 64890.15,
+   "final_equity": 19251.97,
+   "max_drawdown_pct": -13.7
+  },
+  {
+   "dte": [
+    21,
+    35
+   ],
+   "long_delta": 0.55,
+   "short_at_r": 3.0,
+   "haircut": 0.25,
+   "events_traded": 989,
+   "events_skipped": 1576,
+   "win_rate_pct": 35.79,
+   "avg_pnl_pct_of_debit": 81.63,
+   "profit_factor": 5.166,
+   "total_pnl_dollars": 116423.9,
+   "final_equity": 100978.3,
+   "max_drawdown_pct": -21.45
+  },
+  {
+   "dte": [
+    21,
+    35
+   ],
+   "long_delta": 0.55,
+   "short_at_r": 3.0,
+   "haircut": 0.5,
+   "events_traded": 967,
+   "events_skipped": 1598,
+   "win_rate_pct": 30.3,
+   "avg_pnl_pct_of_debit": 6.8,
+   "profit_factor": 1.286,
+   "total_pnl_dollars": 9565.84,
+   "final_equity": 6580.24,
+   "max_drawdown_pct": -33.84
+  },
+  {
+   "dte": [
+    21,
+    35
+   ],
+   "long_delta": 0.55,
+   "short_at_r": 3.0,
+   "haircut": 1.0,
+   "events_traded": 912,
+   "events_skipped": 1653,
+   "win_rate_pct": 23.46,
+   "avg_pnl_pct_of_debit": -15.6,
+   "profit_factor": 0.612,
+   "total_pnl_dollars": -16362.73,
+   "final_equity": 958.4,
+   "max_drawdown_pct": -69.45
+  },
+  {
+   "dte": [
+    21,
+    35
+   ],
+   "long_delta": 0.55,
+   "short_at_r": 2.0,
+   "haircut": 0.0,
+   "events_traded": 1178,
+   "events_skipped": 1387,
+   "win_rate_pct": 42.28,
+   "avg_pnl_pct_of_debit": 38.03,
+   "profit_factor": 2.913,
+   "total_pnl_dollars": 58594.06,
+   "final_equity": 24205.84,
+   "max_drawdown_pct": -23.2
+  },
+  {
+   "dte": [
+    21,
+    35
+   ],
+   "long_delta": 0.55,
+   "short_at_r": 2.0,
+   "haircut": 0.25,
+   "events_traded": 1142,
+   "events_skipped": 1423,
+   "win_rate_pct": 36.6,
+   "avg_pnl_pct_of_debit": 142.22,
+   "profit_factor": 7.535,
+   "total_pnl_dollars": 240306.83,
+   "final_equity": 100054.72,
+   "max_drawdown_pct": -25.34
+  },
+  {
+   "dte": [
+    21,
+    35
+   ],
+   "long_delta": 0.55,
+   "short_at_r": 2.0,
+   "haircut": 0.5,
+   "events_traded": 1111,
+   "events_skipped": 1454,
+   "win_rate_pct": 30.06,
+   "avg_pnl_pct_of_debit": 28.47,
+   "profit_factor": 2.123,
+   "total_pnl_dollars": 48109.41,
+   "final_equity": 10144.02,
+   "max_drawdown_pct": -46.72
+  },
+  {
+   "dte": [
+    21,
+    35
+   ],
+   "long_delta": 0.55,
+   "short_at_r": 2.0,
+   "haircut": 1.0,
+   "events_traded": 1058,
+   "events_skipped": 1507,
+   "win_rate_pct": 21.46,
+   "avg_pnl_pct_of_debit": -8.71,
+   "profit_factor": 0.88,
+   "total_pnl_dollars": -6892.57,
+   "final_equity": 5858.45,
+   "max_drawdown_pct": -73.4
+  },
+  {
+   "dte": [
+    21,
+    35
+   ],
+   "long_delta": 0.55,
+   "short_at_r": null,
+   "haircut": 0.0,
+   "events_traded": 512,
+   "events_skipped": 2053,
+   "win_rate_pct": 33.98,
+   "avg_pnl_pct_of_debit": 12.66,
+   "profit_factor": 1.643,
+   "total_pnl_dollars": 7959.38,
+   "final_equity": 8205.31,
+   "max_drawdown_pct": -9.06
+  },
+  {
+   "dte": [
+    21,
+    35
+   ],
+   "long_delta": 0.55,
+   "short_at_r": null,
+   "haircut": 0.25,
+   "events_traded": 498,
+   "events_skipped": 2067,
+   "win_rate_pct": 32.53,
+   "avg_pnl_pct_of_debit": 8.74,
+   "profit_factor": 1.427,
+   "total_pnl_dollars": 5450.33,
+   "final_equity": 6699.25,
+   "max_drawdown_pct": -12.06
+  },
+  {
+   "dte": [
+    21,
+    35
+   ],
+   "long_delta": 0.55,
+   "short_at_r": null,
+   "haircut": 0.5,
+   "events_traded": 494,
+   "events_skipped": 2071,
+   "win_rate_pct": 31.98,
+   "avg_pnl_pct_of_debit": 5.46,
+   "profit_factor": 1.219,
+   "total_pnl_dollars": 2961.51,
+   "final_equity": 5478.55,
+   "max_drawdown_pct": -14.46
+  },
+  {
+   "dte": [
+    21,
+    35
+   ],
+   "long_delta": 0.55,
+   "short_at_r": null,
+   "haircut": 1.0,
+   "events_traded": 465,
+   "events_skipped": 2100,
+   "win_rate_pct": 29.68,
+   "avg_pnl_pct_of_debit": -1.03,
+   "profit_factor": 0.961,
+   "total_pnl_dollars": -557.31,
+   "final_equity": 3077.57,
+   "max_drawdown_pct": -37.76
+  },
+  {
+   "dte": [
+    21,
+    35
+   ],
+   "long_delta": 0.6,
+   "short_at_r": 3.0,
+   "haircut": 0.0,
+   "events_traded": 780,
+   "events_skipped": 1785,
+   "win_rate_pct": 41.54,
+   "avg_pnl_pct_of_debit": 56.41,
+   "profit_factor": 4.485,
+   "total_pnl_dollars": 60898.37,
+   "final_equity": 39609.79,
+   "max_drawdown_pct": -12.05
+  },
+  {
+   "dte": [
+    21,
+    35
+   ],
+   "long_delta": 0.6,
+   "short_at_r": 3.0,
+   "haircut": 0.25,
+   "events_traded": 746,
+   "events_skipped": 1819,
+   "win_rate_pct": 36.6,
+   "avg_pnl_pct_of_debit": 51.72,
+   "profit_factor": 3.994,
+   "total_pnl_dollars": 55001.4,
+   "final_equity": 15869.19,
+   "max_drawdown_pct": -16.81
+  },
+  {
+   "dte": [
+    21,
+    35
+   ],
+   "long_delta": 0.6,
+   "short_at_r": 3.0,
+   "haircut": 0.5,
+   "events_traded": 726,
+   "events_skipped": 1839,
+   "win_rate_pct": 30.85,
+   "avg_pnl_pct_of_debit": 8.77,
+   "profit_factor": 1.381,
+   "total_pnl_dollars": 8441.86,
+   "final_equity": 8596.85,
+   "max_drawdown_pct": -34.38
+  },
+  {
+   "dte": [
+    21,
+    35
+   ],
+   "long_delta": 0.6,
+   "short_at_r": 3.0,
+   "haircut": 1.0,
+   "events_traded": 691,
+   "events_skipped": 1874,
+   "win_rate_pct": 24.75,
+   "avg_pnl_pct_of_debit": -9.38,
+   "profit_factor": 0.763,
+   "total_pnl_dollars": -6642.5,
+   "final_equity": 1147.19,
+   "max_drawdown_pct": -74.07
+  },
+  {
+   "dte": [
+    21,
+    35
+   ],
+   "long_delta": 0.6,
+   "short_at_r": 2.0,
+   "haircut": 0.0,
+   "events_traded": 935,
+   "events_skipped": 1630,
+   "win_rate_pct": 43.42,
+   "avg_pnl_pct_of_debit": 23.93,
+   "profit_factor": 2.22,
+   "total_pnl_dollars": 27449.17,
+   "final_equity": 14048.47,
+   "max_drawdown_pct": -22.15
+  },
+  {
+   "dte": [
+    21,
+    35
+   ],
+   "long_delta": 0.6,
+   "short_at_r": 2.0,
+   "haircut": 0.25,
+   "events_traded": 903,
+   "events_skipped": 1662,
+   "win_rate_pct": 37.1,
+   "avg_pnl_pct_of_debit": 9.71,
+   "profit_factor": 1.366,
+   "total_pnl_dollars": 10866.25,
+   "final_equity": 6830.51,
+   "max_drawdown_pct": -22.73
+  },
+  {
+   "dte": [
+    21,
+    35
+   ],
+   "long_delta": 0.6,
+   "short_at_r": 2.0,
+   "haircut": 0.5,
+   "events_traded": 878,
+   "events_skipped": 1687,
+   "win_rate_pct": 31.66,
+   "avg_pnl_pct_of_debit": 9.27,
+   "profit_factor": 1.378,
+   "total_pnl_dollars": 11835.37,
+   "final_equity": 2943.55,
+   "max_drawdown_pct": -48.37
+  },
+  {
+   "dte": [
+    21,
+    35
+   ],
+   "long_delta": 0.6,
+   "short_at_r": 2.0,
+   "haircut": 1.0,
+   "events_traded": 831,
+   "events_skipped": 1734,
+   "win_rate_pct": 22.14,
+   "avg_pnl_pct_of_debit": -15.25,
+   "profit_factor": 0.628,
+   "total_pnl_dollars": -14380.76,
+   "final_equity": 1006.8,
+   "max_drawdown_pct": -73.03
+  },
+  {
+   "dte": [
+    21,
+    35
+   ],
+   "long_delta": 0.6,
+   "short_at_r": null,
+   "haircut": 0.0,
+   "events_traded": 406,
+   "events_skipped": 2159,
+   "win_rate_pct": 35.96,
+   "avg_pnl_pct_of_debit": 19.38,
+   "profit_factor": 2.207,
+   "total_pnl_dollars": 10163.69,
+   "final_equity": 10150.24,
+   "max_drawdown_pct": -6.71
+  },
+  {
+   "dte": [
+    21,
+    35
+   ],
+   "long_delta": 0.6,
+   "short_at_r": null,
+   "haircut": 0.25,
+   "events_traded": 394,
+   "events_skipped": 2171,
+   "win_rate_pct": 35.03,
+   "avg_pnl_pct_of_debit": 15.55,
+   "profit_factor": 1.95,
+   "total_pnl_dollars": 8309.73,
+   "final_equity": 9068.76,
+   "max_drawdown_pct": -8.58
+  },
+  {
+   "dte": [
+    21,
+    35
+   ],
+   "long_delta": 0.6,
+   "short_at_r": null,
+   "haircut": 0.5,
+   "events_traded": 389,
+   "events_skipped": 2176,
+   "win_rate_pct": 33.68,
+   "avg_pnl_pct_of_debit": 11.83,
+   "profit_factor": 1.629,
+   "total_pnl_dollars": 5868.34,
+   "final_equity": 7691.61,
+   "max_drawdown_pct": -11.38
+  },
+  {
+   "dte": [
+    21,
+    35
+   ],
+   "long_delta": 0.6,
+   "short_at_r": null,
+   "haircut": 1.0,
+   "events_traded": 370,
+   "events_skipped": 2195,
+   "win_rate_pct": 30.27,
+   "avg_pnl_pct_of_debit": 5.15,
+   "profit_factor": 1.305,
+   "total_pnl_dollars": 3089.93,
+   "final_equity": 5218.25,
+   "max_drawdown_pct": -29.07
+  },
+  {
+   "dte": [
+    21,
+    35
+   ],
+   "long_delta": 0.65,
+   "short_at_r": 3.0,
+   "haircut": 0.0,
+   "events_traded": 568,
+   "events_skipped": 1997,
+   "win_rate_pct": 37.85,
+   "avg_pnl_pct_of_debit": 43.86,
+   "profit_factor": 4.31,
+   "total_pnl_dollars": 34203.42,
+   "final_equity": 33466.71,
+   "max_drawdown_pct": -5.87
+  },
+  {
+   "dte": [
+    21,
+    35
+   ],
+   "long_delta": 0.65,
+   "short_at_r": 3.0,
+   "haircut": 0.25,
+   "events_traded": 543,
+   "events_skipped": 2022,
+   "win_rate_pct": 32.97,
+   "avg_pnl_pct_of_debit": 15.66,
+   "profit_factor": 1.933,
+   "total_pnl_dollars": 11533.42,
+   "final_equity": 13938.68,
+   "max_drawdown_pct": -12.11
+  },
+  {
+   "dte": [
+    21,
+    35
+   ],
+   "long_delta": 0.65,
+   "short_at_r": 3.0,
+   "haircut": 0.5,
+   "events_traded": 525,
+   "events_skipped": 2040,
+   "win_rate_pct": 28.76,
+   "avg_pnl_pct_of_debit": 5.7,
+   "profit_factor": 1.303,
+   "total_pnl_dollars": 4433.07,
+   "final_equity": 8312.37,
+   "max_drawdown_pct": -20.88
+  },
+  {
+   "dte": [
+    21,
+    35
+   ],
+   "long_delta": 0.65,
+   "short_at_r": 3.0,
+   "haircut": 1.0,
+   "events_traded": 494,
+   "events_skipped": 2071,
+   "win_rate_pct": 21.86,
+   "avg_pnl_pct_of_debit": -10.15,
+   "profit_factor": 0.721,
+   "total_pnl_dollars": -5280.05,
+   "final_equity": 1970.4,
+   "max_drawdown_pct": -62.84
+  },
+  {
+   "dte": [
+    21,
+    35
+   ],
+   "long_delta": 0.65,
+   "short_at_r": 2.0,
+   "haircut": 0.0,
+   "events_traded": 655,
+   "events_skipped": 1910,
+   "win_rate_pct": 39.24,
+   "avg_pnl_pct_of_debit": 11.83,
+   "profit_factor": 1.719,
+   "total_pnl_dollars": 9258.82,
+   "final_equity": 9156.46,
+   "max_drawdown_pct": -11.08
+  },
+  {
+   "dte": [
+    21,
+    35
+   ],
+   "long_delta": 0.65,
+   "short_at_r": 2.0,
+   "haircut": 0.25,
+   "events_traded": 632,
+   "events_skipped": 1933,
+   "win_rate_pct": 32.91,
+   "avg_pnl_pct_of_debit": 1.07,
+   "profit_factor": 1.038,
+   "total_pnl_dollars": 596.26,
+   "final_equity": 4350.17,
+   "max_drawdown_pct": -29.84
+  },
+  {
+   "dte": [
+    21,
+    35
+   ],
+   "long_delta": 0.65,
+   "short_at_r": 2.0,
+   "haircut": 0.5,
+   "events_traded": 611,
+   "events_skipped": 1954,
+   "win_rate_pct": 27.99,
+   "avg_pnl_pct_of_debit": -8.28,
+   "profit_factor": 0.67,
+   "total_pnl_dollars": -6173.08,
+   "final_equity": 1346.75,
+   "max_drawdown_pct": -55.11
+  },
+  {
+   "dte": [
+    21,
+    35
+   ],
+   "long_delta": 0.65,
+   "short_at_r": 2.0,
+   "haircut": 1.0,
+   "events_traded": 575,
+   "events_skipped": 1990,
+   "win_rate_pct": 19.65,
+   "avg_pnl_pct_of_debit": -23.85,
+   "profit_factor": 0.306,
+   "total_pnl_dollars": -16904.95,
+   "final_equity": 793.42,
+   "max_drawdown_pct": -74.02
+  },
+  {
+   "dte": [
+    21,
+    35
+   ],
+   "long_delta": 0.65,
+   "short_at_r": null,
+   "haircut": 0.0,
+   "events_traded": 318,
+   "events_skipped": 2247,
+   "win_rate_pct": 36.16,
+   "avg_pnl_pct_of_debit": 19.62,
+   "profit_factor": 2.325,
+   "total_pnl_dollars": 8221.71,
+   "final_equity": 10311.23,
+   "max_drawdown_pct": -6.36
+  },
+  {
+   "dte": [
+    21,
+    35
+   ],
+   "long_delta": 0.65,
+   "short_at_r": null,
+   "haircut": 0.25,
+   "events_traded": 308,
+   "events_skipped": 2257,
+   "win_rate_pct": 34.74,
+   "avg_pnl_pct_of_debit": 16.7,
+   "profit_factor": 2.1,
+   "total_pnl_dollars": 7135.59,
+   "final_equity": 9584.6,
+   "max_drawdown_pct": -6.29
+  },
+  {
+   "dte": [
+    21,
+    35
+   ],
+   "long_delta": 0.65,
+   "short_at_r": null,
+   "haircut": 0.5,
+   "events_traded": 304,
+   "events_skipped": 2261,
+   "win_rate_pct": 33.22,
+   "avg_pnl_pct_of_debit": 12.39,
+   "profit_factor": 1.753,
+   "total_pnl_dollars": 5259.74,
+   "final_equity": 8206.78,
+   "max_drawdown_pct": -8.25
+  },
+  {
+   "dte": [
+    21,
+    35
+   ],
+   "long_delta": 0.65,
+   "short_at_r": null,
+   "haircut": 1.0,
+   "events_traded": 291,
+   "events_skipped": 2274,
+   "win_rate_pct": 29.21,
+   "avg_pnl_pct_of_debit": 4.56,
+   "profit_factor": 1.322,
+   "total_pnl_dollars": 2543.57,
+   "final_equity": 5308.08,
+   "max_drawdown_pct": -15.42
+  },
+  {
+   "dte": [
+    21,
+    35
+   ],
+   "long_delta": 0.7,
+   "short_at_r": 3.0,
+   "haircut": 0.0,
+   "events_traded": 407,
+   "events_skipped": 2158,
+   "win_rate_pct": 36.12,
+   "avg_pnl_pct_of_debit": 2.83,
+   "profit_factor": 1.098,
+   "total_pnl_dollars": 910.66,
+   "final_equity": 3299.22,
+   "max_drawdown_pct": -45.62
+  },
+  {
+   "dte": [
+    21,
+    35
+   ],
+   "long_delta": 0.7,
+   "short_at_r": 3.0,
+   "haircut": 0.25,
+   "events_traded": 392,
+   "events_skipped": 2173,
+   "win_rate_pct": 31.89,
+   "avg_pnl_pct_of_debit": -2.01,
+   "profit_factor": 0.886,
+   "total_pnl_dollars": -1064.62,
+   "final_equity": 2334.31,
+   "max_drawdown_pct": -43.97
+  },
+  {
+   "dte": [
+    21,
+    35
+   ],
+   "long_delta": 0.7,
+   "short_at_r": 3.0,
+   "haircut": 0.5,
+   "events_traded": 373,
+   "events_skipped": 2192,
+   "win_rate_pct": 28.42,
+   "avg_pnl_pct_of_debit": -7.83,
+   "profit_factor": 0.678,
+   "total_pnl_dollars": -3326.89,
+   "final_equity": 1899.04,
+   "max_drawdown_pct": -39.48
+  },
+  {
+   "dte": [
+    21,
+    35
+   ],
+   "long_delta": 0.7,
+   "short_at_r": 3.0,
+   "haircut": 1.0,
+   "events_traded": 348,
+   "events_skipped": 2217,
+   "win_rate_pct": 20.69,
+   "avg_pnl_pct_of_debit": -16.88,
+   "profit_factor": 0.48,
+   "total_pnl_dollars": -6765.24,
+   "final_equity": 1733.5,
+   "max_drawdown_pct": -52.17
+  },
+  {
+   "dte": [
+    21,
+    35
+   ],
+   "long_delta": 0.7,
+   "short_at_r": 2.0,
+   "haircut": 0.0,
+   "events_traded": 467,
+   "events_skipped": 2098,
+   "win_rate_pct": 37.9,
+   "avg_pnl_pct_of_debit": 3.96,
+   "profit_factor": 1.146,
+   "total_pnl_dollars": 1568.4,
+   "final_equity": 2178.69,
+   "max_drawdown_pct": -59.74
+  },
+  {
+   "dte": [
+    21,
+    35
+   ],
+   "long_delta": 0.7,
+   "short_at_r": 2.0,
+   "haircut": 0.25,
+   "events_traded": 449,
+   "events_skipped": 2116,
+   "win_rate_pct": 32.29,
+   "avg_pnl_pct_of_debit": 537.12,
+   "profit_factor": 33.736,
+   "total_pnl_dollars": 361330.84,
+   "final_equity": 333268.99,
+   "max_drawdown_pct": -16.95
+  },
+  {
+   "dte": [
+    21,
+    35
+   ],
+   "long_delta": 0.7,
+   "short_at_r": 2.0,
+   "haircut": 0.5,
+   "events_traded": 434,
+   "events_skipped": 2131,
+   "win_rate_pct": 27.19,
+   "avg_pnl_pct_of_debit": -3.13,
+   "profit_factor": 0.905,
+   "total_pnl_dollars": -1212.71,
+   "final_equity": 2520.16,
+   "max_drawdown_pct": -47.57
+  },
+  {
+   "dte": [
+    21,
+    35
+   ],
+   "long_delta": 0.7,
+   "short_at_r": 2.0,
+   "haircut": 1.0,
+   "events_traded": 402,
+   "events_skipped": 2163,
+   "win_rate_pct": 18.41,
+   "avg_pnl_pct_of_debit": -21.37,
+   "profit_factor": 0.325,
+   "total_pnl_dollars": -10736.51,
+   "final_equity": 1138.78,
+   "max_drawdown_pct": -62.27
+  },
+  {
+   "dte": [
+    21,
+    35
+   ],
+   "long_delta": 0.7,
+   "short_at_r": null,
+   "haircut": 0.0,
+   "events_traded": 221,
+   "events_skipped": 2344,
+   "win_rate_pct": 33.03,
+   "avg_pnl_pct_of_debit": 8.2,
+   "profit_factor": 1.623,
+   "total_pnl_dollars": 2586.69,
+   "final_equity": 5764.32,
+   "max_drawdown_pct": -8.88
+  },
+  {
+   "dte": [
+    21,
+    35
+   ],
+   "long_delta": 0.7,
+   "short_at_r": null,
+   "haircut": 0.25,
+   "events_traded": 216,
+   "events_skipped": 2349,
+   "win_rate_pct": 31.48,
+   "avg_pnl_pct_of_debit": 5.35,
+   "profit_factor": 1.407,
+   "total_pnl_dollars": 1833.44,
+   "final_equity": 5135.89,
+   "max_drawdown_pct": -10.69
+  },
+  {
+   "dte": [
+    21,
+    35
+   ],
+   "long_delta": 0.7,
+   "short_at_r": null,
+   "haircut": 0.5,
+   "events_traded": 215,
+   "events_skipped": 2350,
+   "win_rate_pct": 30.7,
+   "avg_pnl_pct_of_debit": 2.28,
+   "profit_factor": 1.238,
+   "total_pnl_dollars": 1157.42,
+   "final_equity": 4580.64,
+   "max_drawdown_pct": -12.72
+  },
+  {
+   "dte": [
+    21,
+    35
+   ],
+   "long_delta": 0.7,
+   "short_at_r": null,
+   "haircut": 1.0,
+   "events_traded": 205,
+   "events_skipped": 2360,
+   "win_rate_pct": 26.83,
+   "avg_pnl_pct_of_debit": -4.51,
+   "profit_factor": 0.893,
+   "total_pnl_dollars": -587.79,
+   "final_equity": 2188.65,
+   "max_drawdown_pct": -28.84
+  }
+ ]
+}

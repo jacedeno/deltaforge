@@ -3,9 +3,18 @@
 The sweep varies the fill haircut alongside the strategy knobs, and the
 real-window run showed fills dominate everything else: a configuration that
 only wins at haircut 0 (fills at mid, every time) is a fantasy, not an edge.
-So the ranking key is the **worst** equity across the haircut axis, and a
-configuration only counts as robust when it beats the starting account at
-every haircut it was tested at.
+So the ranking key is the **worst** result across the haircut axis, and a
+configuration only counts as robust when it clears the bar at every haircut
+it was tested at.
+
+Ranking uses **profit factor**, not final equity. Final equity compounds
+through a 3-slot portfolio whose composition changes with every knob — the
+budget filter admits different events, slot collisions resolve differently —
+so one lucky early winner can swamp the parameter under test. (The sweep
+contains cells where *worse* fills produced four times the equity, which is
+mechanically impossible at fixed trade selection.) Profit factor is
+per-trade and does not compound, so it measures the knob rather than the
+path. Equity is still reported, as scale, not as ranking.
 
 Reports, in order:
   1. Robust configurations (profitable at every haircut), best worst-case first.
@@ -87,41 +96,54 @@ def main() -> None:
 
     print(f"{len(cells)} cells, {len(by_config)} configurations\n")
 
+    has_pf = all("profit_factor" in c for cells_ in by_config.values() for c in cells_.values())
     rows = []
     for key, by_haircut in by_config.items():
         equities = {h: c["final_equity"] for h, c in sorted(by_haircut.items())}
-        worst = min(equities.values())
+        pfs = (
+            {h: c["profit_factor"] for h, c in sorted(by_haircut.items())} if has_pf else {}
+        )
+        worst_pf = min(pfs.values()) if pfs else None
         rows.append(
             {
                 "key": key,
                 "equities": equities,
-                "worst": worst,
-                "median": st.median(equities.values()),
-                "best": max(equities.values()),
+                "pfs": pfs,
+                "worst_pf": worst_pf,
+                "worst_eq": min(equities.values()),
+                "best_eq": max(equities.values()),
                 "traded": max(c["events_traded"] for c in by_haircut.values()),
                 "complete": len(equities) >= 4,
-                "robust": worst > INITIAL_EQUITY,
+                # Robust = still makes money per trade at every fill quality.
+                "robust": (worst_pf > 1.0) if pfs else min(equities.values()) > INITIAL_EQUITY,
             }
         )
 
     def fmt(r: dict) -> str:
-        eq = "  ".join(f"h{h:g}=${v:,.0f}" for h, v in r["equities"].items())
         flag = "" if r["complete"] else "  [partial]"
+        if r["pfs"]:
+            line = "  ".join(f"h{h:g}: PF {v:.2f}" for h, v in r["pfs"].items())
+            head = f"worst PF {r['worst_pf']:.2f}"
+        else:
+            line = "  ".join(f"h{h:g}=${v:,.0f}" for h, v in r["equities"].items())
+            head = f"worst ${r['worst_eq']:>9,.0f}"
         return (
-            f"  {label(r['key']):<42} worst ${r['worst']:>9,.0f}   "
-            f"trades {r['traded']:>4}{flag}\n      {eq}"
+            f"  {label(r['key']):<42} {head}   trades {r['traded']:>4}{flag}\n"
+            f"      {line}\n      equity range ${r['worst_eq']:,.0f} - ${r['best_eq']:,.0f}"
         )
 
-    robust = sorted([r for r in rows if r["robust"]], key=lambda r: -r["worst"])
-    print(f"== ROBUST ({len(robust)}): profitable even at the worst fills ==")
+    key_fn = (lambda r: -r["worst_pf"]) if has_pf else (lambda r: -r["worst_eq"])
+    robust = sorted([r for r in rows if r["robust"]], key=key_fn)
+    bar = "PF > 1.0 at every haircut" if has_pf else "beats the starting account"
+    print(f"== ROBUST ({len(robust)}): {bar} ==")
     for r in robust[: args.top]:
         print(fmt(r))
     if not robust:
-        print("  (none — no configuration survives crossing the spread)")
+        print("  (none — nothing survives crossing the spread)")
 
     fragile = sorted(
-        [r for r in rows if not r["robust"] and r["best"] > INITIAL_EQUITY],
-        key=lambda r: -(r["best"] - r["worst"]),
+        [r for r in rows if not r["robust"]],
+        key=lambda r: -(max(r["pfs"].values()) if r["pfs"] else r["best_eq"]),
     )
     print(f"\n== FRAGILE ({len(fragile)}): win on good fills, lose on bad ==")
     for r in fragile[:5]:

@@ -116,6 +116,81 @@ limit orders near the mid are not a refinement of this strategy, they are a
 precondition. Paper trading is the only real test of the fill model, and it
 should be run before any live money.
 
+## The variation sweep (144 configurations)
+
+DTE window × long-leg delta × short-strike placement × fill haircut, every
+cell replaying the same 2,565 events. 25.7 hours of wall clock.
+
+**Two families had to be excluded before reading anything.** Configurations
+placing the short strike at 2R produced profit factors of 33 and average
+returns of 537% of debit — the signature of a collapsing denominator, not an
+edge. Diagnosis: a nearer short strike collects more premium, and when one
+leg carries a stale or synthetic mark the net debit falls to a few cents on
+a $2-wide spread. Position sizing then buys 17 contracts of it and one trade
+dominates the aggregate. `DebitSpread` now refuses any debit under 15% of
+the spread's width (`debit_implausible`). Verified that the 3R family is
+unaffected — its minimum debit was $0.219/share, none below the floor — so
+the headline result above stands. The 2R family needs a re-run to be judged.
+
+**Ranking is by profit factor at the worst fill quality**, not by final
+equity: equity compounds through a 3-slot portfolio whose composition shifts
+with every knob, so a lucky early winner can outweigh the parameter being
+tested.
+
+| Configuration | PF @mid | @0.25 | @0.5 | @cross | Trades | Equity @0.5 |
+|---|---|---|---|---|---|---|
+| DTE 21-35, 0.65Δ long call | 2.33 | 2.10 | 1.75 | **1.32** | 318 | $8,207 |
+| DTE 7-14, 0.60Δ long call | 1.97 | 1.75 | 1.57 | **1.20** | 849 | $10,780 |
+| DTE 7-14, 0.55Δ long call | 2.00 | 1.76 | 1.55 | **1.19** | 1,021 | $12,083 |
+| DTE 7-14, 0.55Δ spread@3R | 2.91 | 2.04 | 1.56 | 0.91 | 1,270 | **$19,316** |
+| DTE 14-21, 0.55Δ spread@3R | 2.74 | 1.95 | 1.40 | 0.81 | 1,154 | $9,603 |
+
+Three findings, each consistent across the whole grid rather than resting on
+one cell:
+
+1. **Every long call stays profitable per trade at the worst fills; no
+   spread does.** The spread crosses the bid-ask four times against the long
+   call's two. That asymmetry is invisible at good fills and decisive at bad
+   ones.
+2. **Lower delta is monotonically better**: 0.55 → 0.60 → 0.65 → 0.70 walks
+   the median equity down $10,470 → $9,680 → $7,992 → $4,793. Paying more
+   premium for a capped move does not pay.
+3. **The original parameters were not the best ones.** ANALYSIS.md proposed
+   14-21 DTE at 0.60-0.65Δ; moving to **7-14 DTE at 0.55Δ** doubles the
+   result ($19,316 vs $9,603) and takes 10% more trades — cheaper contracts
+   clear the $150 budget more often. It also fits Phase 1's measured median
+   duration of 2-3 trading days, which the longer window was overpaying for.
+
+### Position sizing
+
+Replaying the trades at larger budgets (`scripts/sizing_study.py`) crosses
+two ways of deploying the same capital: bigger positions, or more of them.
+
+| Per position | Slots | Deployed | Return | Max DD |
+|---|---|---|---|---|
+| $150 | 3 | 15% | +285% | −21% |
+| $300 | 3 | 30% | **+576%** | −41% |
+| $300 | 10 | 100% | +551% | −87% |
+| $500 | 3 | 50% | +987% | −70% |
+| $1,000 | 3 | 100% | −104% | ruin |
+| $500 | 5 | 83% | −101% | ruin |
+
+Position size drives return; position *count* does not. Ten $300 positions
+capture 751 of 772 signals against 401 for three — and return slightly less
+(+551% vs +576%) for twice the drawdown. The signals are long-only momentum
+on correlated large caps, so ten concurrent positions is much closer to one
+big bet than to ten independent ones.
+
+Deployment past roughly 50% is where this stops being survivable. The data
+contains a **run of 20 consecutive losing trades**; at 5% of equity per
+position that leaves 70% of the account, at 33% it leaves 8%, at 100% it
+leaves nothing. Options cannot be held through a drawdown — they expire — so
+a long losing run is not a drawdown, it is ruin.
+
+Long options are also **not marginable** (Reg T requires 100% payment under
+nine months to expiry), so leverage here can only come from the structure's
+delta, never from borrowing.
+
 ## Why the pre-2024 extension was abandoned
 
 The plan called for extending the backtest to 2020–2024 with Black-Scholes

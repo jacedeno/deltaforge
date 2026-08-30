@@ -29,11 +29,13 @@ class DebitSpread:
         dte_min: int = 14,
         dte_max: int = 21,
         short_at_r: float | None = None,  # None = at the event's own target
+        min_debit_pct_of_width: float = 0.15,
     ) -> None:
         self.long_delta = long_delta
         self.dte_min = dte_min
         self.dte_max = dte_max
         self.short_at_r = short_at_r
+        self.min_debit_pct_of_width = min_debit_pct_of_width
 
     def select(self, ctx: EntryContext) -> Position | Skip:
         ev = ctx.event
@@ -72,6 +74,18 @@ class DebitSpread:
         debit = ctx.fills.buy(long_mark.price) - ctx.fills.sell(short_mark.price)
         if debit <= 0:
             return Skip("negative_debit", f"{debit:.4f}")
+
+        # A debit far below the spread's width means one leg was marked from a
+        # stale or synthetic print: the market does not sell a $2-wide ITM
+        # spread for $0.09. Such a quote is not tradeable, and because every
+        # percentage metric divides by the debit, one of them can dominate a
+        # whole run (the 2026-08-29 sweep produced profit factors of 33 and
+        # 17-contract positions this way). Reject rather than believe it.
+        width = short_c.strike - long_c.strike
+        if debit < self.min_debit_pct_of_width * width:
+            return Skip(
+                "debit_implausible", f"debit {debit:.3f} vs width {width:.2f}"
+            )
 
         n = size_contracts(debit, ctx.max_debit)
         if n < 1:

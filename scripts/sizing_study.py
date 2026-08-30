@@ -36,17 +36,12 @@ from deltaforge.structures.base import Leg, Position
 FEES = FeeSchedule()
 INITIAL = 3000.0
 
-# (label, max_debit_per_position, slots, pct_of_equity_deployed_at_start)
-SCENARIOS = [
-    ("conservative (as backtested)", 150.0, 3, None),
-    ("double the debit", 300.0, 3, None),
-    ("$500 per position", 500.0, 3, None),
-    ("all-in, 3 slots", 1000.0, 3, None),
-    ("all-in, 2 slots", 1500.0, 2, None),
-    ("all-in, 1 slot", 3000.0, 1, None),
-    ("equity-scaled 5% (compounding)", 150.0, 3, 0.05),
-    ("equity-scaled 33% (compounding)", 150.0, 3, 0.333),
-]
+# Two ways to deploy the same capital: bigger positions, or more of them.
+# Concentration (few large) and diversification (many small) reach 100%
+# deployment by opposite routes and do not behave alike, so the grid crosses
+# both axes rather than walking one.
+DEBITS = [150.0, 300.0, 500.0]
+SLOTS = [3, 5, 8, 10, 15, 20]
 
 
 def load_trades(path: Path) -> list[OptionTrade]:
@@ -90,27 +85,29 @@ def main() -> None:
 
     trades = load_trades(args.trades)
     print(f"replaying {len(trades)} trades from {args.trades.name}\n")
-    print(f"{'scenario':<34}{'final':>12}{'return':>10}{'maxDD':>9}"
-          f"{'taken':>8}{'capped':>8}{'deployed':>10}")
-    print("-" * 91)
+    print(f"{'per position':>13}{'slots':>7}{'deployed':>10}{'final':>12}"
+          f"{'return':>9}{'maxDD':>8}{'taken':>8}{'capped':>8}")
+    print("-" * 75)
 
-    for label, debit, slots, pct in SCENARIOS:
-        res = run_portfolio(
-            trades,
-            FEES,
-            initial_equity=INITIAL,
-            max_concurrent=slots,
-            max_debit_cap=debit,
-            max_debit_equity_pct=pct if pct is not None else 1.0,
-        )
-        s = portfolio_stats(res)
-        deployed = min(debit * slots, INITIAL * (pct or 1.0) * slots)
-        print(
-            f"{label:<34}${s['final_equity']:>11,.0f}"
-            f"{s['total_return_pct']:>9.0f}%{s['max_drawdown_pct']:>8.0f}%"
-            f"{s['trades_taken']:>8}{res.skipped_by_cap:>8}"
-            f"{deployed / INITIAL * 100:>9.0f}%"
-        )
+    for debit in DEBITS:
+        for slots in SLOTS:
+            res = run_portfolio(
+                trades,
+                FEES,
+                initial_equity=INITIAL,
+                max_concurrent=slots,
+                max_debit_cap=debit,
+                max_debit_equity_pct=1.0,
+            )
+            s = portfolio_stats(res)
+            deployed = debit * slots / INITIAL * 100
+            print(
+                f"${debit:>12,.0f}{slots:>7}{deployed:>9.0f}%"
+                f"${s['final_equity']:>11,.0f}{s['total_return_pct']:>8.0f}%"
+                f"{s['max_drawdown_pct']:>7.0f}%{s['trades_taken']:>8}"
+                f"{res.skipped_by_cap:>8}"
+            )
+        print()
 
     print(
         "\nCaveats: replayed trades all passed the original $150 filter, so"

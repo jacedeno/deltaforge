@@ -97,3 +97,17 @@ def test_short_at_2r_overrides_target(event):
     assert isinstance(pos, Position)
     # 2R = entry 100 + 2*3 = 106.
     assert pos.legs[1].strike == 106
+
+
+def test_rejects_implausibly_cheap_spread(event):
+    """A debit far below the spread's width means a stale mark, not a bargain."""
+    chain = make_chain("TEST", date(2026, 3, 20), [95, 97.5, 100, 105, 110])
+    ctx = make_ctx(event, chain, max_debit=600.0)
+    # Both legs marked identically — what a stale print on one strike looks
+    # like. The net debit collapses to the fill haircut alone, far under the
+    # spread's width, and the position must be refused rather than sized on it.
+    ctx.mark = lambda occ: Mark(5.0, "bs_model", iv=SIGMA)
+
+    result = DebitSpread().select(ctx)
+    assert isinstance(result, Skip)
+    assert result.reason == "debit_implausible"
