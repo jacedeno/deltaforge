@@ -246,7 +246,30 @@ class Executor:
 
     # -- entries ------------------------------------------------------------
 
+    def _holds_foreign_equity(self) -> bool:
+        """True while the account still carries stock this bot did not open.
+
+        The account was handed over from another strategy whose positions
+        liquidate at the next open. Until they clear, `equity` counts money
+        that is not actually available, so sizing would open positions the
+        buying power cannot cover. Managing our own trades stays safe; opening
+        new ones does not.
+        """
+        try:
+            positions = self.broker.trading.get_all_positions()
+        except Exception as exc:  # noqa: BLE001 — a failed check must not open trades
+            log.warning("bot.position_check_failed", error=str(exc)[:150])
+            return True
+        return any("option" not in str(getattr(p, "asset_class", "")).lower() for p in positions)
+
     def _look_for_entries(self, bars_by_symbol: dict[str, pd.DataFrame], equity: float) -> None:
+        if self._holds_foreign_equity():
+            self.events.emit(
+                ev.SKIP, symbol="*", reason="foreign_positions",
+                detail="account still holds stock from the previous strategy",
+            )
+            return
+
         open_rows = self.journal.open_trades()
         held = {r["symbol"] for r in open_rows}
         free_slots = self.slots(equity) - len(open_rows)

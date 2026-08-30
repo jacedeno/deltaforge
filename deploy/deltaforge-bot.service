@@ -1,0 +1,22 @@
+[Unit]
+Description=DeltaForge Paper Bot (ML30 30m signal, long calls, 7-14 DTE, $300/position)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/root/repos/deltaforge
+ExecStart=/root/.local/bin/uv run python scripts/run_paper_bot.py \
+    --env-file /root/.secrets/alpaca-deltaforge.env
+Restart=on-failure
+RestartSec=30
+# The bot sleeps between 30-minute bars, so a stop can wait for the current
+# pass to finish rather than interrupting an order it is waiting on a fill for.
+KillSignal=SIGTERM
+TimeoutStopSec=180
+StandardOutput=append:/root/repos/deltaforge/logs/bot.log
+StandardError=append:/root/repos/deltaforge/logs/bot.log
+
+[Install]
+WantedBy=multi-user.target

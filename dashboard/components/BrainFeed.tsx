@@ -27,6 +27,7 @@ const WHY: Record<string, string> = {
   no_chain: "no two-sided market in the expiry window",
   no_greeks: "the chain came back without deltas",
   no_stop: "not enough history to freeze a pivot stop",
+  foreign_positions: "the account still holds stock from the previous strategy — waiting for it to clear",
   stop_above_entry: "the pivot stop sits above entry",
   unfilled: "the limit order never filled inside the band",
 };
