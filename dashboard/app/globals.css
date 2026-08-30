@@ -1,0 +1,85 @@
+@import "tailwindcss";
+
+/* ---- DeltaForge tokens — dark-first, sibling of ThetaForge ----
+   Same structure and the same signal blue; the accent moves from ThetaForge's
+   ember to violet so the two dashboards are never mistaken for each other at a
+   glance, and so the accent never collides with the green/red P&L semantics
+   that matter more on a directional book. */
+:root {
+  color-scheme: dark;
+  --page: #0d0e10;
+  --surface-1: #16181c;
+  --surface-2: #1c1f24;
+  --ink-primary: #f5f2ee;
+  --ink-secondary: #b9b5ae;
+  --ink-muted: #7d7a74;
+  --grid: #26282c;
+  --baseline: #383835;
+  --border: rgba(255, 255, 255, 0.08);
+  --series-1: #3987e5;      /* signal blue — shared with ThetaForge */
+  --series-2: #8b6ce0;      /* delta violet */
+  --accent: #8b6ce0;
+  --good: #0ca30c;
+  --critical: #d03b3b;
+  --delta-up: #0ca30c;
+  --delta-down: #e66767;
+  --level-stop: #d03b3b;
+  --level-target: #0ca30c;
+  --level-entry: #7d7a74;
+}
+
+/* ---- light: the daylight desk ---- */
+:root[data-theme="light"] {
+  color-scheme: light;
+  --page: #f9f9f7;
+  --surface-1: #fcfcfb;
+  --surface-2: #f3f2ef;
+  --ink-primary: #0b0b0b;
+  --ink-secondary: #52514e;
+  --ink-muted: #898781;
+  --grid: #e1e0d9;
+  --baseline: #c3c2b7;
+  --border: rgba(11, 11, 11, 0.1);
+  --series-1: #2a78d6;
+  --series-2: #6a45cc;
+  --accent: #5b36bd;        /* violet darkened for light-surface contrast */
+  --good: #0ca30c;
+  --critical: #d03b3b;
+  --delta-up: #006300;
+  --delta-down: #d03b3b;
+  --level-stop: #c02f2f;
+  --level-target: #067806;
+  --level-entry: #898781;
+}
+
+body {
+  background: var(--page);
+  color: var(--ink-primary);
+  font-family: var(--font-body, system-ui), -apple-system, "Segoe UI", sans-serif;
+}
+
+.font-display { font-family: var(--font-display, system-ui), sans-serif; }
+.font-mono2 { font-family: var(--font-mono2, ui-monospace), monospace; }
+
+.card {
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.eyebrow {
+  font-family: var(--font-mono2, ui-monospace), monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+.live-dot { animation: pulse-dot 2s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .live-dot { animation: none; }
+}
