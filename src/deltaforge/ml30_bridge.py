@@ -89,11 +89,14 @@ def settings_with_credentials(api_key: str, secret_key: str) -> "Ml30Settings":
     s.alpaca.api_key = SecretStr(api_key)
     s.alpaca.secret_key = SecretStr(secret_key)
     return s
-from strategy.direction import Direction  # noqa: E402
 from strategy.entry import EntryLogic  # noqa: E402
 from strategy.indicators import add_indicators  # noqa: E402
 from strategy.sizing import calculate_initial_stop  # noqa: E402
 
+# The eager set above is exactly what the live bot calls, and every one of
+# those signatures is compatible across both checkouts (AlgoTrader sits a
+# month behind at ccade12). Everything else — including `Direction`, which
+# that checkout predates entirely — resolves on first use.
 _LAZY = {
     "Coordinator": ("backtest.coordinator", "Coordinator"),
     "CoordinatorResult": ("backtest.coordinator", "CoordinatorResult"),
@@ -101,6 +104,7 @@ _LAZY = {
     "Trade": ("backtest.trade", "Trade"),
     "ExitLogic": ("strategy.exit", "ExitLogic"),
     "ExitReason": ("strategy.exit", "ExitReason"),
+    "Direction": ("strategy.direction", "Direction"),
 }
 
 
