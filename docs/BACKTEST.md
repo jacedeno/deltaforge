@@ -85,11 +85,13 @@ rather than concentrated in a handful; and the trades priced entirely from
 real prints are the profitable ones, while the model-marked cohort loses
 money. That is the opposite of what a pricing artifact looks like.
 
-**Residual concern, not yet resolved:** a few long-call positions size to 21
-contracts on a $150 budget, implying a $7 contract at 0.55 delta. That is
-implausible for these underlyings and suggests the same class of stale mark,
-without a width to measure it against. The single-leg structure needs its
-own plausibility floor before any live deployment.
+**Resolved since:** `LongCall` now refuses any premium whose time value is
+under 0.3% of spot (`premium_implausible`), the single-leg analogue of the
+width test. It rejected 37 contracts, and the result barely moved — 982
+trades at PF 1.50 against 1,000 at PF 1.54, equity $11,305 against $12,130.
+That is the difference between a guard that removes noise and one that
+removes the result: the same guard applied to the spread took it from
+$19,316 to $955.
 
 ## Phase 2 — the real-data window (Feb 2024 → Aug 2026)
 
@@ -201,59 +203,79 @@ one cell:
 
 ### Budget: how much per position
 
-Re-running the full pipeline at three budgets (the $150 run doubling as a
-control) shows the debit cap was throttling the signal stream:
+Three full pipeline runs with both plausibility guards in place, the $150 run
+doubling as a control against the sweep. The debit cap was throttling the
+signal stream:
 
-| Budget | Signals traded | Skipped on budget | PF | Equity | Max DD | Top 10 trades | P&L without them |
-|---|---|---|---|---|---|---|---|
-| $150 | 1,000 | 1,383 | 1.54 | $12,130 | −22% | 45% | $8,984 |
-| $300 | 1,623 | 760 | 1.49 | **$14,851** | −28% | 32% | $32,096 |
-| $500 | 1,954 | 429 | 1.47 | $11,055 | −39% | 29% | $65,534 |
+| Budget | Signals traded | Skipped on budget | PF | Equity | Max DD | P&L without top 10 |
+|---|---|---|---|---|---|---|
+| $150 | 982 | 1,364 | 1.50 | $11,305 | −23% | $7,838 |
+| $300 | 1,591 | 755 | 1.45 | **$15,168** | −32% | $27,957 |
+| $500 | 1,918 | 428 | 1.43 | $12,664 | −40% | $56,778 |
 
-Per-trade edge is flat across budgets (PF 1.47–1.54), so the budget is not
+Per-trade edge is flat across budgets (PF 1.43–1.50), so the budget is not
 buying a better strategy, it is buying access to more of the same one. The
-gross edge grows steadily with it — the "P&L without the top 10 trades"
-column rises from $9k to $66k — while portfolio equity peaks at $300 because
-a 3-slot account cannot harvest the larger edge without also taking the
+gross edge keeps growing with it — the P&L surviving removal of the ten best
+trades rises from $8k to $57k — while portfolio equity peaks at $300, because
+a three-slot account cannot harvest the larger edge without also taking the
 larger drawdowns.
 
-### Position sizing (corrected)
+### It works in the year the shares strategy does not
 
-**The first version of this section was computed on the debit-spread trades
-and is retracted along with them.** Concentrated P&L made slot count look
-harmful: with three slots you either caught one of the few artifact trades or
-you did not, and more slots diluted them. On the long call's distributed P&L
-the relationship inverts, which is what a real edge is supposed to look like.
+Splitting the $300 run by calendar year answers the question that matters for
+deploying now rather than in hindsight:
 
-| Per position | Slots | Deployed | Return | Max DD | Trades taken |
-|---|---|---|---|---|---|
-| $150 | 3 | 15% | +302% | −26% | 518 |
-| $150 | 20 | 100% | +541% | −22% | 1,000 |
-| $300 | 3 | 30% | +403% | −41% | 601 |
-| $300 | 10 | 100% | +1,332% | −42% | 1,409 |
-| $500 | 5 | 83% | **+1,732%** | **−30%** | 908 |
+| Year | Trades | Win rate | PF | P&L |
+|---|---|---|---|---|
+| 2024 | 680 | 36% | 1.37 | $15,820 |
+| 2025 | 586 | 39% | 1.65 | $20,732 |
+| **2026** | **325** | **33%** | **1.31** | **$6,395** |
 
-Diversification works here: going from 3 to 10 concurrent positions at $300
-raises the return more than threefold while leaving drawdown essentially
-unchanged (−41% → −42%). Slot count, not position size, is what the account
-was starving for — at 3 slots roughly a thousand qualifying signals are
-turned away for want of a slot.
+2026 is the *only losing year* for the underlying shares strategy (PF 0.82,
+−0.14 R — the flat live account that started this investigation), and the
+overlay is comfortably profitable in it. The mechanism is the asymmetry
+already measured: a stop in shares costs a full R, a stop in the long call
+costs roughly a third of the debit. In a chopping year that gets stopped out
+often, truncating the loss is worth more than the leverage.
 
-Rows past 100% deployment are arithmetic only: long options are **not
-marginable** (Reg T requires payment in full under nine months to expiry), so
-leverage can come from the structure's delta and never from borrowing.
+### Position sizing: grow the count, not the bet
 
-**Two cautions on these numbers.** They replay trades selected under the $300
-budget filter, so the $500 rows understate how many signals a real $500 run
-would admit. And the unresolved stale-mark concern scales exactly with them:
-maximum contracts per position runs 21 at $150, 42 at $300, 70 at $500, so
-the configurations that look best are also the ones most exposed to a
-mispriced contract. That must be closed before the sizing question is
-settled.
+**This section has been wrong twice.** Its first version was computed on the
+debit-spread trades and died with them. Its second concluded that fixed-
+fractional sizing was safer because it shrinks positions during a drawdown —
+true in isolation, and swamped by an effect it ignored.
 
-Long options are also **not marginable** (Reg T requires 100% payment under
-nine months to expiry), so leverage here can only come from the structure's
-delta, never from borrowing.
+Two policies, both reaching 100% deployment, differing only in where growth
+goes:
+
+| Policy | Equity | Return | Max DD | Trades |
+|---|---|---|---|---|
+| 10% of equity per position, 10 slots | $216,032 | +7,101% | **−76%** | 1,384 |
+| **$300 fixed, one more slot per $300 of growth** | $46,372 | +1,446% | **−38%** | 1,583 |
+| 10% of equity, no liquidity ceiling | $563,213 | +18,674% | −96% | 1,382 |
+
+**At $3,000 the two are the same thing** — 10% of equity is $300, ten
+positions either way. They diverge only as the account moves, and then
+sharply: compounding the *bet* compounds the risk with it, so the
+fixed-fractional path reaches a higher peak and gives back three quarters of
+it. The fixed-dollar path takes more trades, halves the drawdown, and keeps a
+return that is still far beyond the underlying.
+
+Each policy also fails differently at scale, which decides it. Fixed-dollar
+runs into signal availability — roughly 1.6 signals a day means there is no
+fortieth concurrent position to open, so it stops scaling on its own. Fixed-
+fractional runs into liquidity: $3,000 into one weekly option on a mid-cap
+name is not a fill, and the third row above shows what the model prints when
+nothing stops it. The first wall is free to discover; the second is expensive.
+
+Slot count within the tradeable range barely matters. From 6 to 12 concurrent
+positions the outcome sits between $35k and $44k; 8 slots gives −34% drawdown
+and 10 gives −38%. Being above roughly five slots is what counts.
+
+Long options are **not marginable** (Reg T requires payment in full under nine
+months to expiry), so leverage here comes from the structure's delta and never
+from borrowing. Rows implying more than 100% deployment are arithmetic, not
+plans.
 
 ## Why the pre-2024 extension was abandoned
 
