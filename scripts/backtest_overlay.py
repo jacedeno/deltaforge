@@ -63,6 +63,11 @@ def main() -> None:
     parser.add_argument("--end", default=None)
     parser.add_argument("--fill-haircut", type=float, default=0.5)
     parser.add_argument("--max-debit", type=float, default=150.0)
+    # Structure parameters. Defaults are ANALYSIS.md's original proposal; the
+    # 2026-08-29 sweep found 7-14 DTE at 0.55 delta roughly twice as good.
+    parser.add_argument("--long-delta", type=float, default=None)
+    parser.add_argument("--dte-min", type=int, default=None)
+    parser.add_argument("--dte-max", type=int, default=None)
     parser.add_argument("--dte-exit-days", type=int, default=5)
     parser.add_argument("--next-bar-exit", action="store_true")
     parser.add_argument("--initial-equity", type=float, default=3000.0)
@@ -124,9 +129,23 @@ def main() -> None:
     results_by_structure = {}
     stats_by_structure = {}
     for name in wanted:
+        kwargs: dict[str, float | int] = {}
+        if args.long_delta is not None:
+            kwargs["long_delta" if name == "debit_spread" else "delta"] = args.long_delta
+        if args.dte_min is not None:
+            kwargs["dte_min"] = args.dte_min
+        if args.dte_max is not None:
+            kwargs["dte_max"] = args.dte_max
+        structure = STRUCTURES[name](**kwargs)
+        envelope = (
+            (args.dte_min, args.dte_max)
+            if args.dte_min is not None and args.dte_max is not None
+            else (14, 28)
+        )
         pipeline = EventPipeline(
-            structure=STRUCTURES[name](),
+            structure=structure,
             pricing=args.pricing,
+            dte_envelope=envelope,
             fills=fills,
             fees=fees,
             iv_model=iv_model,
@@ -199,6 +218,9 @@ def main() -> None:
         "events_file": str(args.events_file),
         "events": len(events),
         "structures": wanted,
+        "long_delta": args.long_delta,
+        "dte_min": args.dte_min,
+        "dte_max": args.dte_max,
         "pricing": args.pricing,
         "start": args.start,
         "end": args.end,
