@@ -61,12 +61,13 @@ def deltaforge_commit() -> str:
 _ensure_repo_on_path()
 
 # Re-exports — the whole ml30 surface DeltaForge is allowed to touch.
-from backtest.coordinator import (  # noqa: E402
-    ENTRY_RANKINGS,
-    Coordinator,
-    CoordinatorResult,
-)
-from backtest.trade import Trade  # noqa: E402
+#
+# Only what the *live* bot needs is imported eagerly. The backtest-only
+# symbols (Coordinator, Trade, …) load on first use instead, because the
+# ml30 checkout on AlgoTrader trails the one here — it is pinned to whatever
+# the real-money bot runs and must not be pulled forward — and it lacks some
+# of them. The bot has no business failing to start over a symbol it never
+# calls.
 from config.settings import Settings as Ml30Settings  # noqa: E402
 from data.alpaca_client import (  # noqa: E402
     AlpacaClientError,
@@ -90,9 +91,27 @@ def settings_with_credentials(api_key: str, secret_key: str) -> "Ml30Settings":
     return s
 from strategy.direction import Direction  # noqa: E402
 from strategy.entry import EntryLogic  # noqa: E402
-from strategy.exit import ExitLogic, ExitReason  # noqa: E402
 from strategy.indicators import add_indicators  # noqa: E402
 from strategy.sizing import calculate_initial_stop  # noqa: E402
+
+_LAZY = {
+    "Coordinator": ("backtest.coordinator", "Coordinator"),
+    "CoordinatorResult": ("backtest.coordinator", "CoordinatorResult"),
+    "ENTRY_RANKINGS": ("backtest.coordinator", "ENTRY_RANKINGS"),
+    "Trade": ("backtest.trade", "Trade"),
+    "ExitLogic": ("strategy.exit", "ExitLogic"),
+    "ExitReason": ("strategy.exit", "ExitReason"),
+}
+
+
+def __getattr__(name: str):
+    """Resolve backtest-only symbols on first use (PEP 562)."""
+    if name in _LAZY:
+        module, attr = _LAZY[name]
+        import importlib
+
+        return getattr(importlib.import_module(module), attr)
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
 
 __all__ = [
     "ENTRY_RANKINGS",
