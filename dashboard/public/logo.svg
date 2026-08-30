@@ -1,15 +1,21 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="DeltaForge">
-  <!-- The mark: a delta split by a forge line. The upper triangle carries the
-       gradient (light at the apex, deep at the cut) so the shape reads as
-       struck metal rather than flat geometry; the base sits solid beneath it.
-       No background tile here — this version sits on the page surface, so it
-       inherits whatever theme is active. -->
+  <!-- Standalone mark, for anywhere outside the app that cannot read the theme
+       tokens. Transparent behind the strike line so it sits on any surface. -->
   <defs>
-    <linearGradient id="df-mark" x1="32" y1="10" x2="32" y2="55" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#a98bea"/>
-      <stop offset="1" stop-color="#6f4bcc"/>
+    <linearGradient id="lit" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#b79ef0"/><stop offset="1" stop-color="#8b6ce0"/>
     </linearGradient>
+    <linearGradient id="shade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8b6ce0"/><stop offset="1" stop-color="#5f3cc0"/>
+    </linearGradient>
+    <mask id="strike">
+      <rect width="64" height="64" fill="#fff"/>
+      <rect x="0" y="44.5" width="64" height="2.6" fill="#000"/>
+    </mask>
+    <clipPath id="tri"><path d="M32 9 L55 52 L9 52 Z"/></clipPath>
   </defs>
-  <path d="M32 10 L49 41 L15 41 Z" fill="url(#df-mark)"/>
-  <path d="M13.5 45 L50.5 45 L56 55 L8 55 Z" fill="#6f4bcc"/>
+  <g clip-path="url(#tri)" mask="url(#strike)">
+    <rect x="0" y="0" width="32" height="64" fill="url(#lit)"/>
+    <rect x="32" y="0" width="32" height="64" fill="url(#shade)"/>
+  </g>
 </svg>
