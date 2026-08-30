@@ -10,17 +10,22 @@ not run the bot.
 
 ## Account
 
-Alpaca paper **PA35JTJLBB0O**, options trading level 3. Reassigned on
-2026-08-30 from the retired `ml30-paper-bot-v1-5m-frac` service, which was
-stopped, disabled, and its 39 positions liquidated first. Keys:
+Alpaca paper **PA3HBSB6VT9C**, nickname "DeltaForge", options trading level 3,
+opened 2026-08-30 with $3,000.
+
+It briefly ran against PA35JTJLBB0O, borrowed from the retired
+`ml30-paper-bot-v1-5m-frac` service. That was abandoned the same day: the
+inherited positions and months of unrelated portfolio history made every
+number ambiguous, and a second paper account costs nothing. The old bot stays
+stopped and disabled, and its liquidation orders remain queued so that account
+closes itself out. Keys:
 `homelab-secrets/alpaca-deltaforge.env`, mirrored to
 `/root/.secrets/alpaca-deltaforge.env` on AlgoTrader and to
 `dashboard/.env.local` (Next reads that at boot — a running dashboard keeps
 using an old key until restarted).
 
-Inception is **2026-08-31** at **$3,030.85**. Everything the dashboard reports
-is measured from there, because the account's own history belongs to the bot
-that used to own it.
+Inception is **2026-08-31** at **$3,000.00** — the account's opening balance,
+now that its history starts with DeltaForge.
 
 ## Bot
 
@@ -97,11 +102,11 @@ systemctl restart deltaforge-bot            # picks up a git pull
 `Restart=on-failure` with a 30s delay, and `TimeoutStopSec=180` so a stop waits
 for the current pass rather than interrupting an order awaiting a fill.
 
-**First-open guard.** While the account still holds equity positions from the
-strategy it was handed over from, the bot logs a `foreign_positions` skip and
-opens nothing — reported equity would otherwise count money the buying power
-does not have. It manages its own positions normally throughout. The guard
-clears itself once those liquidations fill.
+**Foreign-position guard.** If the broker ever reports equity positions this
+bot did not open, it logs a `foreign_positions` skip and opens nothing —
+reported equity would otherwise count money the buying power does not have.
+Written for the borrowed account and kept for the clean one, where it should
+never fire; if it does, something else is trading this account.
 
 ## Checks
 
