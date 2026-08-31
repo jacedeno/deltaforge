@@ -2,7 +2,13 @@
 
 Same rule the backtest settled on — the call nearest 0.55 delta in the 7-14
 DTE window — but decided on real greeks and a real two-sided market instead
-of modelled ones, with two guards the backtest could not apply:
+of modelled ones, with two guards the backtest could not apply.
+
+Where the window holds several expiries the backtest had no such choice to
+make, because it priced a single synthesised expiry. Live, the choice is
+real and it matters: pick the **best-quoted** expiry, not the furthest.
+
+The two guards:
 
 - **Plausibility**: the same time-value floor that stopped the backtest from
   believing stale marks. Live it should almost never fire; if it does, the
@@ -62,12 +68,21 @@ def select_call(
     if not quotes:
         return Rejection("no_chain", f"no two-sided calls {lo}..{hi}")
 
-    expiry = max(q.expiry for q in quotes)
-    chain = [q for q in quotes if q.expiry == expiry and q.delta is not None]
-    if not chain:
-        return Rejection("no_greeks", f"expiry {expiry} has no deltas")
+    # One candidate per expiry — the call nearest the target delta — then the
+    # best-quoted of those. Taking the furthest expiry instead (what this did
+    # until 2026-08-31) lands on Monday and Wednesday weeklies, which carry
+    # the same strikes at a fraction of the volume: AAPL quoted 26.8% wide on
+    # the 14-Sep weekly while the 11-Sep Friday in the same window quoted
+    # 0.7%. The whole name was then rejected as illiquid.
+    per_expiry = []
+    for expiry in {q.expiry for q in quotes}:
+        chain = [q for q in quotes if q.expiry == expiry and q.delta is not None]
+        if chain:
+            per_expiry.append(min(chain, key=lambda x: abs(x.delta - target_delta)))
+    if not per_expiry:
+        return Rejection("no_greeks", f"no deltas in {lo}..{hi}")
 
-    q = min(chain, key=lambda x: abs(x.delta - target_delta))
+    q = min(per_expiry, key=lambda x: x.spread_pct)
 
     intrinsic = max(spot - q.strike, 0.0)
     if q.mid - intrinsic < MIN_TIME_VALUE_PCT * spot:
