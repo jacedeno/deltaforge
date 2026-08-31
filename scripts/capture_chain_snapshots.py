@@ -6,6 +6,9 @@ each run appends today's chain snapshots (real bid/ask, IV, delta) to
   - ``scripts/calibrate_spread_model.py`` fits the bid-ask width model, and
   - the paper-trading phase validates modeled fills against reality.
 
+Captures the **live** universe: these snapshots exist to be checked
+against what the bot actually trades.
+
 Run daily during market hours (herdr job or cron). Idempotent per day —
 re-running overwrites today's file.
 
@@ -23,7 +26,7 @@ from alpaca.data.historical.option import OptionHistoricalDataClient
 from alpaca.data.requests import OptionChainRequest
 from structlog import get_logger
 
-from deltaforge.settings import PROJECT_ROOT, UNIVERSE_FILE, alpaca_keys
+from deltaforge.settings import LIVE_UNIVERSE_FILE, PROJECT_ROOT, alpaca_keys
 
 log = get_logger(__name__)
 
@@ -35,7 +38,7 @@ STRIKE_BAND = 0.15
 def main() -> None:
     key, secret = alpaca_keys()
     client = OptionHistoricalDataClient(api_key=key, secret_key=secret)
-    symbols = json.loads(UNIVERSE_FILE.read_text())["symbols"]
+    symbols = json.loads(LIVE_UNIVERSE_FILE.read_text())["symbols"]
     now = datetime.now(UTC)
 
     rows = []

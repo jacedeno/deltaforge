@@ -1,0 +1,1440 @@
+{
+ "generated_at": "2026-08-31T16:11:40+00:00",
+ "source": "/home/geekendzone/repos/ml30-sp500-strategy/config/sp500_constituents.json",
+ "ml30_commit": "e99294227db3f9303b6031d8971cd3b0983260d7",
+ "method": "top 160 by mean per-bar dollar volume (30m SIP bars, 2026-01-01..2026-06-01), per-sector cap=24; no price cap \u2014 the live budget check prices the real contract instead",
+ "window": {
+  "start": "2026-01-01",
+  "end": "2026-06-01"
+ },
+ "size": 160,
+ "sector_breakdown": {
+  "Communication Services": 11,
+  "Consumer Discretionary": 22,
+  "Consumer Staples": 10,
+  "Energy": 13,
+  "Financials": 22,
+  "Health Care": 23,
+  "Industrials": 24,
+  "Information Technology": 24,
+  "Materials": 5,
+  "Real Estate": 3,
+  "Utilities": 3
+ },
+ "symbols": [
+  "NVDA",
+  "TSLA",
+  "MU",
+  "MSFT",
+  "AMD",
+  "AMZN",
+  "AAPL",
+  "GOOGL",
+  "META",
+  "INTC",
+  "AVGO",
+  "GOOG",
+  "ORCL",
+  "NFLX",
+  "LLY",
+  "XOM",
+  "UNH",
+  "NOW",
+  "JPM",
+  "WMT",
+  "CRM",
+  "QCOM",
+  "LRCX",
+  "V",
+  "AMAT",
+  "BRK.B",
+  "STX",
+  "CVX",
+  "GS",
+  "CAT",
+  "BAC",
+  "COST",
+  "MA",
+  "GLW",
+  "CSCO",
+  "INTU",
+  "BA",
+  "CRWD",
+  "GE",
+  "JNJ",
+  "IBM",
+  "DELL",
+  "PANW",
+  "BKNG",
+  "TXN",
+  "KLAC",
+  "UBER",
+  "C",
+  "ADBE",
+  "HD",
+  "WFC",
+  "PG",
+  "VZ",
+  "ABBV",
+  "TMO",
+  "BSX",
+  "FCX",
+  "MS",
+  "KO",
+  "MRK",
+  "ABT",
+  "PFE",
+  "TMUS",
+  "NKE",
+  "DIS",
+  "AXP",
+  "RTX",
+  "COF",
+  "CEG",
+  "ETN",
+  "T",
+  "NEM",
+  "LIN",
+  "SPGI",
+  "COP",
+  "SCHW",
+  "MCD",
+  "LMT",
+  "AAL",
+  "ISRG",
+  "PEP",
+  "F",
+  "SLB",
+  "OXY",
+  "DHR",
+  "NEE",
+  "CMCSA",
+  "DE",
+  "SBUX",
+  "HON",
+  "AMGN",
+  "BLK",
+  "UNP",
+  "PM",
+  "RCL",
+  "GILD",
+  "MDT",
+  "VLO",
+  "SYK",
+  "UAL",
+  "AZO",
+  "DAL",
+  "CCL",
+  "TJX",
+  "MCK",
+  "PWR",
+  "LOW",
+  "CME",
+  "CVS",
+  "PH",
+  "DVN",
+  "FDX",
+  "UPS",
+  "TT",
+  "MO",
+  "CMG",
+  "BMY",
+  "PGR",
+  "WBD",
+  "MMM",
+  "GM",
+  "EOG",
+  "VRTX",
+  "SHW",
+  "NOC",
+  "MCO",
+  "REGN",
+  "HLT",
+  "ABNB",
+  "ELV",
+  "ZTS",
+  "KMB",
+  "HCA",
+  "URI",
+  "ICE",
+  "EQT",
+  "USB",
+  "CMI",
+  "MDLZ",
+  "BKR",
+  "JCI",
+  "WELL",
+  "HAL",
+  "CL",
+  "TDG",
+  "ORLY",
+  "AMT",
+  "MAR",
+  "CB",
+  "MPC",
+  "FANG",
+  "EBAY",
+  "EQIX",
+  "CHTR",
+  "DOW",
+  "SO",
+  "AJG",
+  "LULU",
+  "PNC",
+  "ROST"
+ ],
+ "detail": [
+  {
+   "symbol": "NVDA",
+   "rank": 1,
+   "sector": "Information Technology",
+   "mean_bar_dollar_volume": 2092468813
+  },
+  {
+   "symbol": "TSLA",
+   "rank": 2,
+   "sector": "Consumer Discretionary",
+   "mean_bar_dollar_volume": 1692090669
+  },
+  {
+   "symbol": "MU",
+   "rank": 3,
+   "sector": "Information Technology",
+   "mean_bar_dollar_volume": 1409857864
+  },
+  {
+   "symbol": "MSFT",
+   "rank": 4,
+   "sector": "Information Technology",
+   "mean_bar_dollar_volume": 850908272
+  },
+  {
+   "symbol": "AMD",
+   "rank": 5,
+   "sector": "Information Technology",
+   "mean_bar_dollar_volume": 695304357
+  },
+  {
+   "symbol": "AMZN",
+   "rank": 6,
+   "sector": "Consumer Discretionary",
+   "mean_bar_dollar_volume": 692745016
+  },
+  {
+   "symbol": "AAPL",
+   "rank": 7,
+   "sector": "Information Technology",
+   "mean_bar_dollar_volume": 681347284
+  },
+  {
+   "symbol": "GOOGL",
+   "rank": 8,
+   "sector": "Communication Services",
+   "mean_bar_dollar_volume": 617293157
+  },
+  {
+   "symbol": "META",
+   "rank": 9,
+   "sector": "Communication Services",
+   "mean_bar_dollar_volume": 613511388
+  },
+  {
+   "symbol": "INTC",
+   "rank": 10,
+   "sector": "Information Technology",
+   "mean_bar_dollar_volume": 525566304
+  },
+  {
+   "symbol": "AVGO",
+   "rank": 11,
+   "sector": "Information Technology",
+   "mean_bar_dollar_volume": 493245078
+  },
+  {
+   "symbol": "GOOG",
+   "rank": 12,
+   "sector": "Communication Services",
+   "mean_bar_dollar_volume": 396914510
+  },
+  {
+   "symbol": "ORCL",
+   "rank": 13,
+   "sector": "Information Technology",
+   "mean_bar_dollar_volume": 291202572
+  },
+  {
+   "symbol": "NFLX",
+   "rank": 14,
+   "sector": "Communication Services",
+   "mean_bar_dollar_volume": 250453819
+  },
+  {
+   "symbol": "LLY",
+   "rank": 15,
+   "sector": "Health Care",
+   "mean_bar_dollar_volume": 184356871
+  },
+  {
+   "symbol": "XOM",
+   "rank": 16,
+   "sector": "Energy",
+   "mean_bar_dollar_volume": 182512987
+  },
+  {
+   "symbol": "UNH",
+   "rank": 17,
+   "sector": "Health Care",
+   "mean_bar_dollar_volume": 173018728
+  },
+  {
+   "symbol": "NOW",
+   "rank": 18,
+   "sector": "Information Technology",
+   "mean_bar_dollar_volume": 160604327
+  },
+  {
+   "symbol": "JPM",
+   "rank": 19,
+   "sector": "Financials",
+   "mean_bar_dollar_volume": 159725754
+  },
+  {
+   "symbol": "WMT",
+   "rank": 20,
+   "sector": "Consumer Staples",
+   "mean_bar_dollar_volume": 158090639
+  },
+  {
+   "symbol": "CRM",
+   "rank": 21,
+   "sector": "Information Technology",
+   "mean_bar_dollar_volume": 157429687
+  },
+  {
+   "symbol": "QCOM",
+   "rank": 22,
+   "sector": "Information Technology",
+   "mean_bar_dollar_volume": 155982191
+  },
+  {
+   "symbol": "LRCX",
+   "rank": 23,
+   "sector": "Information Technology",
+   "mean_bar_dollar_volume": 148096286
+  },
+  {
+   "symbol": "V",
+   "rank": 24,
+   "sector": "Financials",
+   "mean_bar_dollar_volume": 143968458
+  },
+  {
+   "symbol": "AMAT",
+   "rank": 25,
+   "sector": "Information Technology",
+   "mean_bar_dollar_volume": 143239396
+  },
+  {
+   "symbol": "BRK.B",
+   "rank": 26,
+   "sector": "Financials",
+   "mean_bar_dollar_volume": 134490863
+  },
+  {
+   "symbol": "STX",
+   "rank": 27,
+   "sector": "Information Technology",
+   "mean_bar_dollar_volume": 133545874
+  },
+  {
+   "symbol": "CVX",
+   "rank": 28,
+   "sector": "Energy",
+   "mean_bar_dollar_volume": 132993265
+  },
+  {
+   "symbol": "GS",
+   "rank": 29,
+   "sector": "Financials",
+   "mean_bar_dollar_volume": 125896345
+  },
+  {
+   "symbol": "CAT",
+   "rank": 30,
+   "sector": "Industrials",
+   "mean_bar_dollar_volume": 121086542
+  },
+  {
+   "symbol": "BAC",
+   "rank": 31,
+   "sector": "Financials",
+   "mean_bar_dollar_volume": 117164765
+  },
+  {
+   "symbol": "COST",
+   "rank": 32,
+   "sector": "Consumer Staples",
+   "mean_bar_dollar_volume": 115637716
+  },
+  {
+   "symbol": "MA",
+   "rank": 33,
+   "sector": "Financials",
+   "mean_bar_dollar_volume": 115559880
+  },
+  {
+   "symbol": "GLW",
+   "rank": 34,
+   "sector": "Information Technology",
+   "mean_bar_dollar_volume": 113158108
+  },
+  {
+   "symbol": "CSCO",
+   "rank": 35,
+   "sector": "Information Technology",
+   "mean_bar_dollar_volume": 111552070
+  },
+  {
+   "symbol": "INTU",
+   "rank": 36,
+   "sector": "Information Technology",
+   "mean_bar_dollar_volume": 107458734
+  },
+  {
+   "symbol": "BA",
+   "rank": 37,
+   "sector": "Industrials",
+   "mean_bar_dollar_volume": 106696882
+  },
+  {
+   "symbol": "CRWD",
+   "rank": 38,
+   "sector": "Information Technology",
+   "mean_bar_dollar_volume": 106067805
+  },
+  {
+   "symbol": "GE",
+   "rank": 39,
+   "sector": "Industrials",
+   "mean_bar_dollar_volume": 104626788
+  },
+  {
+   "symbol": "JNJ",
+   "rank": 40,
+   "sector": "Health Care",
+   "mean_bar_dollar_volume": 102209022
+  },
+  {
+   "symbol": "IBM",
+   "rank": 41,
+   "sector": "Information Technology",
+   "mean_bar_dollar_volume": 101034449
+  },
+  {
+   "symbol": "DELL",
+   "rank": 42,
+   "sector": "Information Technology",
+   "mean_bar_dollar_volume": 99836211
+  },
+  {
+   "symbol": "PANW",
+   "rank": 43,
+   "sector": "Information Technology",
+   "mean_bar_dollar_volume": 99497890
+  },
+  {
+   "symbol": "BKNG",
+   "rank": 44,
+   "sector": "Consumer Discretionary",
+   "mean_bar_dollar_volume": 98140654
+  },
+  {
+   "symbol": "TXN",
+   "rank": 45,
+   "sector": "Information Technology",
+   "mean_bar_dollar_volume": 97301627
+  },
+  {
+   "symbol": "KLAC",
+   "rank": 46,
+   "sector": "Information Technology",
+   "mean_bar_dollar_volume": 94280123
+  },
+  {
+   "symbol": "UBER",
+   "rank": 47,
+   "sector": "Industrials",
+   "mean_bar_dollar_volume": 92075790
+  },
+  {
+   "symbol": "C",
+   "rank": 48,
+   "sector": "Financials",
+   "mean_bar_dollar_volume": 91721174
+  },
+  {
+   "symbol": "ADBE",
+   "rank": 49,
+   "sector": "Information Technology",
+   "mean_bar_dollar_volume": 91426695
+  },
+  {
+   "symbol": "HD",
+   "rank": 50,
+   "sector": "Consumer Discretionary",
+   "mean_bar_dollar_volume": 85439520
+  },
+  {
+   "symbol": "WFC",
+   "rank": 51,
+   "sector": "Financials",
+   "mean_bar_dollar_volume": 83416517
+  },
+  {
+   "symbol": "PG",
+   "rank": 52,
+   "sector": "Consumer Staples",
+   "mean_bar_dollar_volume": 82197122
+  },
+  {
+   "symbol": "VZ",
+   "rank": 53,
+   "sector": "Communication Services",
+   "mean_bar_dollar_volume": 78384790
+  },
+  {
+   "symbol": "ABBV",
+   "rank": 54,
+   "sector": "Health Care",
+   "mean_bar_dollar_volume": 77732549
+  },
+  {
+   "symbol": "TMO",
+   "rank": 55,
+   "sector": "Health Care",
+   "mean_bar_dollar_volume": 76964545
+  },
+  {
+   "symbol": "BSX",
+   "rank": 56,
+   "sector": "Health Care",
+   "mean_bar_dollar_volume": 75600268
+  },
+  {
+   "symbol": "FCX",
+   "rank": 57,
+   "sector": "Materials",
+   "mean_bar_dollar_volume": 71767488
+  },
+  {
+   "symbol": "MS",
+   "rank": 58,
+   "sector": "Financials",
+   "mean_bar_dollar_volume": 71639151
+  },
+  {
+   "symbol": "KO",
+   "rank": 59,
+   "sector": "Consumer Staples",
+   "mean_bar_dollar_volume": 70835555
+  },
+  {
+   "symbol": "MRK",
+   "rank": 60,
+   "sector": "Health Care",
+   "mean_bar_dollar_volume": 69490404
+  },
+  {
+   "symbol": "ABT",
+   "rank": 61,
+   "sector": "Health Care",
+   "mean_bar_dollar_volume": 68322001
+  },
+  {
+   "symbol": "PFE",
+   "rank": 62,
+   "sector": "Health Care",
+   "mean_bar_dollar_volume": 67635329
+  },
+  {
+   "symbol": "TMUS",
+   "rank": 63,
+   "sector": "Communication Services",
+   "mean_bar_dollar_volume": 67093726
+  },
+  {
+   "symbol": "NKE",
+   "rank": 64,
+   "sector": "Consumer Discretionary",
+   "mean_bar_dollar_volume": 67045549
+  },
+  {
+   "symbol": "DIS",
+   "rank": 65,
+   "sector": "Communication Services",
+   "mean_bar_dollar_volume": 66594291
+  },
+  {
+   "symbol": "AXP",
+   "rank": 66,
+   "sector": "Financials",
+   "mean_bar_dollar_volume": 65977942
+  },
+  {
+   "symbol": "RTX",
+   "rank": 67,
+   "sector": "Industrials",
+   "mean_bar_dollar_volume": 65459284
+  },
+  {
+   "symbol": "COF",
+   "rank": 68,
+   "sector": "Financials",
+   "mean_bar_dollar_volume": 65220767
+  },
+  {
+   "symbol": "CEG",
+   "rank": 69,
+   "sector": "Utilities",
+   "mean_bar_dollar_volume": 64929717
+  },
+  {
+   "symbol": "ETN",
+   "rank": 70,
+   "sector": "Industrials",
+   "mean_bar_dollar_volume": 64459775
+  },
+  {
+   "symbol": "T",
+   "rank": 71,
+   "sector": "Communication Services",
+   "mean_bar_dollar_volume": 63860286
+  },
+  {
+   "symbol": "NEM",
+   "rank": 72,
+   "sector": "Materials",
+   "mean_bar_dollar_volume": 63317819
+  },
+  {
+   "symbol": "LIN",
+   "rank": 73,
+   "sector": "Materials",
+   "mean_bar_dollar_volume": 63312190
+  },
+  {
+   "symbol": "SPGI",
+   "rank": 74,
+   "sector": "Financials",
+   "mean_bar_dollar_volume": 62732534
+  },
+  {
+   "symbol": "COP",
+   "rank": 75,
+   "sector": "Energy",
+   "mean_bar_dollar_volume": 62556254
+  },
+  {
+   "symbol": "SCHW",
+   "rank": 76,
+   "sector": "Financials",
+   "mean_bar_dollar_volume": 62272911
+  },
+  {
+   "symbol": "MCD",
+   "rank": 77,
+   "sector": "Consumer Discretionary",
+   "mean_bar_dollar_volume": 60689648
+  },
+  {
+   "symbol": "LMT",
+   "rank": 78,
+   "sector": "Industrials",
+   "mean_bar_dollar_volume": 60048939
+  },
+  {
+   "symbol": "AAL",
+   "rank": 79,
+   "sector": "Industrials",
+   "mean_bar_dollar_volume": 59115051
+  },
+  {
+   "symbol": "ISRG",
+   "rank": 80,
+   "sector": "Health Care",
+   "mean_bar_dollar_volume": 57965691
+  },
+  {
+   "symbol": "PEP",
+   "rank": 81,
+   "sector": "Consumer Staples",
+   "mean_bar_dollar_volume": 57799406
+  },
+  {
+   "symbol": "F",
+   "rank": 82,
+   "sector": "Consumer Discretionary",
+   "mean_bar_dollar_volume": 56304029
+  },
+  {
+   "symbol": "SLB",
+   "rank": 83,
+   "sector": "Energy",
+   "mean_bar_dollar_volume": 55892576
+  },
+  {
+   "symbol": "OXY",
+   "rank": 84,
+   "sector": "Energy",
+   "mean_bar_dollar_volume": 53373275
+  },
+  {
+   "symbol": "DHR",
+   "rank": 85,
+   "sector": "Health Care",
+   "mean_bar_dollar_volume": 52826939
+  },
+  {
+   "symbol": "NEE",
+   "rank": 86,
+   "sector": "Utilities",
+   "mean_bar_dollar_volume": 52735300
+  },
+  {
+   "symbol": "CMCSA",
+   "rank": 87,
+   "sector": "Communication Services",
+   "mean_bar_dollar_volume": 52027811
+  },
+  {
+   "symbol": "DE",
+   "rank": 88,
+   "sector": "Industrials",
+   "mean_bar_dollar_volume": 51159211
+  },
+  {
+   "symbol": "SBUX",
+   "rank": 89,
+   "sector": "Consumer Discretionary",
+   "mean_bar_dollar_volume": 49828978
+  },
+  {
+   "symbol": "HON",
+   "rank": 90,
+   "sector": "Industrials",
+   "mean_bar_dollar_volume": 49794002
+  },
+  {
+   "symbol": "AMGN",
+   "rank": 91,
+   "sector": "Health Care",
+   "mean_bar_dollar_volume": 49627551
+  },
+  {
+   "symbol": "BLK",
+   "rank": 92,
+   "sector": "Financials",
+   "mean_bar_dollar_volume": 49393377
+  },
+  {
+   "symbol": "UNP",
+   "rank": 93,
+   "sector": "Industrials",
+   "mean_bar_dollar_volume": 49284435
+  },
+  {
+   "symbol": "PM",
+   "rank": 94,
+   "sector": "Consumer Staples",
+   "mean_bar_dollar_volume": 49199072
+  },
+  {
+   "symbol": "RCL",
+   "rank": 95,
+   "sector": "Consumer Discretionary",
+   "mean_bar_dollar_volume": 48607775
+  },
+  {
+   "symbol": "GILD",
+   "rank": 96,
+   "sector": "Health Care",
+   "mean_bar_dollar_volume": 47895701
+  },
+  {
+   "symbol": "MDT",
+   "rank": 97,
+   "sector": "Health Care",
+   "mean_bar_dollar_volume": 47737214
+  },
+  {
+   "symbol": "VLO",
+   "rank": 98,
+   "sector": "Energy",
+   "mean_bar_dollar_volume": 47306991
+  },
+  {
+   "symbol": "SYK",
+   "rank": 99,
+   "sector": "Health Care",
+   "mean_bar_dollar_volume": 46051295
+  },
+  {
+   "symbol": "UAL",
+   "rank": 100,
+   "sector": "Industrials",
+   "mean_bar_dollar_volume": 45961003
+  },
+  {
+   "symbol": "AZO",
+   "rank": 101,
+   "sector": "Consumer Discretionary",
+   "mean_bar_dollar_volume": 45687988
+  },
+  {
+   "symbol": "DAL",
+   "rank": 102,
+   "sector": "Industrials",
+   "mean_bar_dollar_volume": 45627116
+  },
+  {
+   "symbol": "CCL",
+   "rank": 103,
+   "sector": "Consumer Discretionary",
+   "mean_bar_dollar_volume": 45012554
+  },
+  {
+   "symbol": "TJX",
+   "rank": 104,
+   "sector": "Consumer Discretionary",
+   "mean_bar_dollar_volume": 43585426
+  },
+  {
+   "symbol": "MCK",
+   "rank": 105,
+   "sector": "Health Care",
+   "mean_bar_dollar_volume": 42370222
+  },
+  {
+   "symbol": "PWR",
+   "rank": 106,
+   "sector": "Industrials",
+   "mean_bar_dollar_volume": 41812050
+  },
+  {
+   "symbol": "LOW",
+   "rank": 107,
+   "sector": "Consumer Discretionary",
+   "mean_bar_dollar_volume": 40225848
+  },
+  {
+   "symbol": "CME",
+   "rank": 108,
+   "sector": "Financials",
+   "mean_bar_dollar_volume": 40090075
+  },
+  {
+   "symbol": "CVS",
+   "rank": 109,
+   "sector": "Health Care",
+   "mean_bar_dollar_volume": 39834593
+  },
+  {
+   "symbol": "PH",
+   "rank": 110,
+   "sector": "Industrials",
+   "mean_bar_dollar_volume": 39687590
+  },
+  {
+   "symbol": "DVN",
+   "rank": 111,
+   "sector": "Energy",
+   "mean_bar_dollar_volume": 39468738
+  },
+  {
+   "symbol": "FDX",
+   "rank": 112,
+   "sector": "Industrials",
+   "mean_bar_dollar_volume": 39207236
+  },
+  {
+   "symbol": "UPS",
+   "rank": 113,
+   "sector": "Industrials",
+   "mean_bar_dollar_volume": 39199395
+  },
+  {
+   "symbol": "TT",
+   "rank": 114,
+   "sector": "Industrials",
+   "mean_bar_dollar_volume": 37989272
+  },
+  {
+   "symbol": "MO",
+   "rank": 115,
+   "sector": "Consumer Staples",
+   "mean_bar_dollar_volume": 37520856
+  },
+  {
+   "symbol": "CMG",
+   "rank": 116,
+   "sector": "Consumer Discretionary",
+   "mean_bar_dollar_volume": 37493058
+  },
+  {
+   "symbol": "BMY",
+   "rank": 117,
+   "sector": "Health Care",
+   "mean_bar_dollar_volume": 37218121
+  },
+  {
+   "symbol": "PGR",
+   "rank": 118,
+   "sector": "Financials",
+   "mean_bar_dollar_volume": 36835202
+  },
+  {
+   "symbol": "WBD",
+   "rank": 119,
+   "sector": "Communication Services",
+   "mean_bar_dollar_volume": 36146937
+  },
+  {
+   "symbol": "MMM",
+   "rank": 120,
+   "sector": "Industrials",
+   "mean_bar_dollar_volume": 36113289
+  },
+  {
+   "symbol": "GM",
+   "rank": 121,
+   "sector": "Consumer Discretionary",
+   "mean_bar_dollar_volume": 36091397
+  },
+  {
+   "symbol": "EOG",
+   "rank": 122,
+   "sector": "Energy",
+   "mean_bar_dollar_volume": 35946084
+  },
+  {
+   "symbol": "VRTX",
+   "rank": 123,
+   "sector": "Health Care",
+   "mean_bar_dollar_volume": 35519934
+  },
+  {
+   "symbol": "SHW",
+   "rank": 124,
+   "sector": "Materials",
+   "mean_bar_dollar_volume": 35261623
+  },
+  {
+   "symbol": "NOC",
+   "rank": 125,
+   "sector": "Industrials",
+   "mean_bar_dollar_volume": 34672431
+  },
+  {
+   "symbol": "MCO",
+   "rank": 126,
+   "sector": "Financials",
+   "mean_bar_dollar_volume": 34333663
+  },
+  {
+   "symbol": "REGN",
+   "rank": 127,
+   "sector": "Health Care",
+   "mean_bar_dollar_volume": 34232391
+  },
+  {
+   "symbol": "HLT",
+   "rank": 128,
+   "sector": "Consumer Discretionary",
+   "mean_bar_dollar_volume": 34102727
+  },
+  {
+   "symbol": "ABNB",
+   "rank": 129,
+   "sector": "Consumer Discretionary",
+   "mean_bar_dollar_volume": 33948874
+  },
+  {
+   "symbol": "ELV",
+   "rank": 130,
+   "sector": "Health Care",
+   "mean_bar_dollar_volume": 33785919
+  },
+  {
+   "symbol": "ZTS",
+   "rank": 131,
+   "sector": "Health Care",
+   "mean_bar_dollar_volume": 33592140
+  },
+  {
+   "symbol": "KMB",
+   "rank": 132,
+   "sector": "Consumer Staples",
+   "mean_bar_dollar_volume": 33560876
+  },
+  {
+   "symbol": "HCA",
+   "rank": 133,
+   "sector": "Health Care",
+   "mean_bar_dollar_volume": 33529269
+  },
+  {
+   "symbol": "URI",
+   "rank": 134,
+   "sector": "Industrials",
+   "mean_bar_dollar_volume": 33212058
+  },
+  {
+   "symbol": "ICE",
+   "rank": 135,
+   "sector": "Financials",
+   "mean_bar_dollar_volume": 33000372
+  },
+  {
+   "symbol": "EQT",
+   "rank": 136,
+   "sector": "Energy",
+   "mean_bar_dollar_volume": 32971425
+  },
+  {
+   "symbol": "USB",
+   "rank": 137,
+   "sector": "Financials",
+   "mean_bar_dollar_volume": 32962313
+  },
+  {
+   "symbol": "CMI",
+   "rank": 138,
+   "sector": "Industrials",
+   "mean_bar_dollar_volume": 32923697
+  },
+  {
+   "symbol": "MDLZ",
+   "rank": 139,
+   "sector": "Consumer Staples",
+   "mean_bar_dollar_volume": 32782236
+  },
+  {
+   "symbol": "BKR",
+   "rank": 140,
+   "sector": "Energy",
+   "mean_bar_dollar_volume": 32696534
+  },
+  {
+   "symbol": "JCI",
+   "rank": 141,
+   "sector": "Industrials",
+   "mean_bar_dollar_volume": 32199730
+  },
+  {
+   "symbol": "WELL",
+   "rank": 142,
+   "sector": "Real Estate",
+   "mean_bar_dollar_volume": 32178377
+  },
+  {
+   "symbol": "HAL",
+   "rank": 143,
+   "sector": "Energy",
+   "mean_bar_dollar_volume": 31929279
+  },
+  {
+   "symbol": "CL",
+   "rank": 144,
+   "sector": "Consumer Staples",
+   "mean_bar_dollar_volume": 31762279
+  },
+  {
+   "symbol": "TDG",
+   "rank": 145,
+   "sector": "Industrials",
+   "mean_bar_dollar_volume": 31470569
+  },
+  {
+   "symbol": "ORLY",
+   "rank": 146,
+   "sector": "Consumer Discretionary",
+   "mean_bar_dollar_volume": 31453546
+  },
+  {
+   "symbol": "AMT",
+   "rank": 147,
+   "sector": "Real Estate",
+   "mean_bar_dollar_volume": 31255644
+  },
+  {
+   "symbol": "MAR",
+   "rank": 148,
+   "sector": "Consumer Discretionary",
+   "mean_bar_dollar_volume": 31032941
+  },
+  {
+   "symbol": "CB",
+   "rank": 149,
+   "sector": "Financials",
+   "mean_bar_dollar_volume": 31017942
+  },
+  {
+   "symbol": "MPC",
+   "rank": 150,
+   "sector": "Energy",
+   "mean_bar_dollar_volume": 30963762
+  },
+  {
+   "symbol": "FANG",
+   "rank": 151,
+   "sector": "Energy",
+   "mean_bar_dollar_volume": 30839673
+  },
+  {
+   "symbol": "EBAY",
+   "rank": 152,
+   "sector": "Consumer Discretionary",
+   "mean_bar_dollar_volume": 30770860
+  },
+  {
+   "symbol": "EQIX",
+   "rank": 153,
+   "sector": "Real Estate",
+   "mean_bar_dollar_volume": 30714758
+  },
+  {
+   "symbol": "CHTR",
+   "rank": 154,
+   "sector": "Communication Services",
+   "mean_bar_dollar_volume": 30710206
+  },
+  {
+   "symbol": "DOW",
+   "rank": 155,
+   "sector": "Materials",
+   "mean_bar_dollar_volume": 30627405
+  },
+  {
+   "symbol": "SO",
+   "rank": 156,
+   "sector": "Utilities",
+   "mean_bar_dollar_volume": 30570539
+  },
+  {
+   "symbol": "AJG",
+   "rank": 157,
+   "sector": "Financials",
+   "mean_bar_dollar_volume": 30463880
+  },
+  {
+   "symbol": "LULU",
+   "rank": 158,
+   "sector": "Consumer Discretionary",
+   "mean_bar_dollar_volume": 30026858
+  },
+  {
+   "symbol": "PNC",
+   "rank": 159,
+   "sector": "Financials",
+   "mean_bar_dollar_volume": 29498974
+  },
+  {
+   "symbol": "ROST",
+   "rank": 160,
+   "sector": "Consumer Discretionary",
+   "mean_bar_dollar_volume": 29446371
+  }
+ ],
+ "ranked_but_not_selected": [
+  "APH",
+  "ANET",
+  "ACN",
+  "ADI",
+  "TER",
+  "SNPS",
+  "ON",
+  "WDAY",
+  "CDNS",
+  "MCHP",
+  "MPWR",
+  "TEAM",
+  "NXPI",
+  "AKAM",
+  "FTNT",
+  "CSX",
+  "ROP",
+  "LHX",
+  "LYB",
+  "DUK",
+  "WM",
+  "MRNA",
+  "EMR",
+  "WMB",
+  "FICO",
+  "TTWO",
+  "AON",
+  "COR",
+  "ALB",
+  "CF",
+  "MSI",
+  "CI",
+  "LYV",
+  "TFC",
+  "FITB",
+  "BDX",
+  "CARR",
+  "PSX",
+  "DHI",
+  "GD",
+  "ODFL",
+  "BK",
+  "KMI",
+  "KR",
+  "HPQ",
+  "HUM",
+  "EL",
+  "KEYS",
+  "MNST",
+  "NRG",
+  "CTSH",
+  "TRV",
+  "EW",
+  "LUV",
+  "ULTA",
+  "CHRW",
+  "AEP",
+  "OKE",
+  "HSY",
+  "RF",
+  "TSCO",
+  "EA",
+  "PCG",
+  "D",
+  "KHC",
+  "GIS",
+  "DPZ",
+  "ECL",
+  "CAH",
+  "APD",
+  "PLD",
+  "ROK",
+  "ITW",
+  "EXC",
+  "STZ",
+  "O",
+  "IQV",
+  "ENPH",
+  "WAT",
+  "PAYX",
+  "EFX",
+  "XEL",
+  "MSCI",
+  "VMC",
+  "OMC",
+  "NDAQ",
+  "DXCM",
+  "DLR",
+  "SYY",
+  "CTRA",
+  "IR",
+  "KEY",
+  "FAST",
+  "PCAR",
+  "HOLX",
+  "MLM",
+  "AIG",
+  "NSC",
+  "CPRT",
+  "RSG",
+  "ALL",
+  "SYF",
+  "SRE",
+  "IDXX",
+  "PSA",
+  "LEN",
+  "HUBB",
+  "PPL",
+  "OTIS",
+  "AMP",
+  "CFG",
+  "TRGP",
+  "BBY",
+  "TPR",
+  "ETR",
+  "NUE",
+  "CCI",
+  "KDP",
+  "CTVA",
+  "LVS",
+  "GWW",
+  "YUM",
+  "CNC",
+  "IP",
+  "CLX",
+  "AME",
+  "CBOE",
+  "VTR",
+  "RMD",
+  "SPG",
+  "NTAP",
+  "A",
+  "STT",
+  "MET",
+  "PODD",
+  "ILMN",
+  "ADM",
+  "DECK",
+  "CAG",
+  "MOS",
+  "BLDR",
+  "MOH",
+  "STLD",
+  "XYL",
+  "SWKS",
+  "FE",
+  "DOV",
+  "GPN",
+  "MKC",
+  "RL",
+  "FFIV",
+  "AFL",
+  "MTB",
+  "GNRC",
+  "TYL",
+  "WTW",
+  "CDW",
+  "PHM",
+  "BIIB",
+  "AMCR",
+  "FDS",
+  "AWK",
+  "FOXA",
+  "CNP",
+  "VICI",
+  "PEG",
+  "PRU",
+  "ZBH",
+  "HII",
+  "WAB",
+  "WEC",
+  "HEI",
+  "TROW",
+  "ETSY",
+  "CPB",
+  "FTV",
+  "SBAC",
+  "CMS",
+  "ALK",
+  "POOL",
+  "PKG",
+  "ED",
+  "RJF",
+  "CHD",
+  "EPAM",
+  "DD",
+  "BG",
+  "EIX",
+  "MGM",
+  "GDDY",
+  "MAS",
+  "ALGN",
+  "EXPD",
+  "AES",
+  "HIG",
+  "APTV",
+  "NI",
+  "ACGL",
+  "GRMN",
+  "PTC",
+  "DTE",
+  "WYNN",
+  "GPC",
+  "ATO",
+  "LH",
+  "BAX",
+  "AVB",
+  "SJM",
+  "IRM",
+  "BAH",
+  "LDOS",
+  "DGX",
+  "LNT",
+  "BWA",
+  "INVH",
+  "JKHY",
+  "ROL",
+  "EXR",
+  "TSN",
+  "DOC",
+  "CRL",
+  "AEE",
+  "HST",
+  "SWK",
+  "INCY",
+  "NVR",
+  "EVRG",
+  "NTRS",
+  "ES",
+  "EQR",
+  "WY",
+  "ALLY",
+  "UHS",
+  "VFC",
+  "KMX",
+  "GEN",
+  "CE",
+  "UDR",
+  "IVZ",
+  "BEN",
+  "COO",
+  "TXT",
+  "FBIN",
+  "ALLE",
+  "RVTY",
+  "BALL",
+  "MTCH",
+  "PFG",
+  "IFF",
+  "BXP",
+  "J",
+  "SNA",
+  "BMRN",
+  "ESS",
+  "TFX",
+  "EMN",
+  "ARE",
+  "QRVO",
+  "KIM",
+  "LW",
+  "MAA",
+  "PNW",
+  "CPT",
+  "AVY",
+  "AOS",
+  "NWSA",
+  "NDSN",
+  "CINF",
+  "REG",
+  "MKTX",
+  "LKQ",
+  "RHI",
+  "FRT",
+  "FOX",
+  "FMC",
+  "ERIE",
+  "NWS",
+  "PARA"
+ ],
+ "no_data": [
+  "ANSS",
+  "CTLT",
+  "DFS",
+  "FI",
+  "HES",
+  "IPG",
+  "JNPR",
+  "K",
+  "MMC",
+  "MRO"
+ ]
+}

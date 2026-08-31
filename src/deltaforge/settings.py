@@ -25,9 +25,23 @@ CONFIG_DIR: Path = PROJECT_ROOT / "config"
 CACHE_DIR: Path = PROJECT_ROOT / "data" / "cache"
 SIP_30M_CACHE_DIR: Path = CACHE_DIR / "sip_30m"
 OPTIONS_CACHE_DIR: Path = CACHE_DIR / "options"
+LIQUIDITY_CACHE_DIR: Path = CACHE_DIR / "liquidity_30m"
 REPORTS_DIR: Path = PROJECT_ROOT / "reports"
 
+# Two universes, on purpose.
+#
+# UNIVERSE_FILE is what every backtest ran on: the sub-$150 half of ml30's
+# 80-name list, cut on each symbol's price at the 2020 start date. It must
+# not be repointed — the numbers in docs/BACKTEST.md are only reproducible
+# against it.
+#
+# LIVE_UNIVERSE_FILE is what the paper bot trades: the 160 most liquid names,
+# sector-capped, with no price cap. Live, the budget check prices the actual
+# contract, which screens affordability better than a six-year-old price cap
+# (16 of the sub-$150 survivors now trade above it). See
+# scripts/build_liquid_universe.py.
 UNIVERSE_FILE: Path = CONFIG_DIR / "universe_sub150.json"
+LIVE_UNIVERSE_FILE: Path = CONFIG_DIR / "universe_liquid160.json"
 
 # Account constants from docs/ANALYSIS.md — the $3,000 real-money account.
 ACCOUNT_EQUITY: float = 3000.0

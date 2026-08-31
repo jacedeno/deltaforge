@@ -51,6 +51,41 @@ Defaults match what the backtest settled on: $300 a position, one slot per $300
 of equity capped at 15, 0.55 delta, 7–14 DTE, exit at 5 DTE, and **signals
 whose 3R target sits under 5% away are refused**.
 
+Position size stays at **$300 while the account is under $5,000** — the goal
+is holding ten positions at once, and $500 on a $3,000 account buys only six
+slots. The lever for reaching more names is the universe, not the size.
+
+### Two universes
+
+| File | Used by | Screen |
+|---|---|---|
+| `config/universe_sub150.json` (45) | backtests | sub-$150 **at the 2020 start date** |
+| `config/universe_liquid160.json` (160) | **the live bot** | 160 most liquid S&P 500 names, sector-capped, **no price cap** |
+
+They are separate on purpose. Every artefact under `reports/` was produced on
+the sub-$150 list, so repointing it would invalidate `docs/BACKTEST.md`
+without changing a line of it.
+
+The sub-$150 cut was right for a 2020-start backtest — filtering on today's
+price would have been look-ahead — but six years on it describes nothing
+useful: 16 of its 45 survivors now trade above $150 (LLY at $1,148, MU at
+$822), and a signal on one can only ever end in `over_budget`. Live there is
+no look-ahead to avoid, because the budget check prices the real contract at
+the real moment. Measured on live chains, the swap takes the names actually
+affordable at $300 from ~22 to **37**.
+
+Rebuild with `scripts/build_liquid_universe.py --top-n 160` (needs SIP bars,
+so source `alpaca-thetaforge-competition.env` first, not the bot's own key).
+It mirrors ml30's `build_broad_liquid_universe.py` — mean per-bar dollar
+volume, greedy per-sector cap, no feature selection — so the two stay
+comparable.
+
+**This is the one place live and backtest diverge.** The new names were never
+backtested. That is defensible only because the universe was never fitted:
+ml30's walk-forward study found no stock feature predicts forward P&L, which
+is why the screen is liquidity alone. It is still worth watching per-symbol
+results before trusting the widened list.
+
 ### Two environment facts that shaped the code
 
 - **The account cannot query recent SIP data** ("subscription does not permit").

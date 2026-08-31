@@ -27,7 +27,7 @@ from deltaforge.live.broker import Broker
 from deltaforge.live.events import ERROR, EventLog
 from deltaforge.live.executor import BotConfig, Executor
 from deltaforge.live.journal import Journal
-from deltaforge.settings import PROJECT_ROOT, UNIVERSE_FILE
+from deltaforge.settings import LIVE_UNIVERSE_FILE, PROJECT_ROOT
 
 log = structlog.get_logger(__name__)
 
@@ -75,7 +75,7 @@ def seconds_to_next_bar() -> float:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--env-file", type=Path, required=True)
-    parser.add_argument("--universe-file", type=Path, default=UNIVERSE_FILE)
+    parser.add_argument("--universe-file", type=Path, default=LIVE_UNIVERSE_FILE)
     parser.add_argument("--data-dir", type=Path, default=PROJECT_ROOT / "data")
     parser.add_argument("--logs-dir", type=Path, default=PROJECT_ROOT / "logs")
     parser.add_argument("--position-size", type=float, default=300.0)
