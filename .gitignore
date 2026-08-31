@@ -10,3 +10,9 @@ uv.lock
 # live. The JSON artifacts next to them are the results worth keeping.
 reports/**/*.log
 data/snapshots/
+
+# The 100k competition instance keeps its own journal and logs beside the
+# $3,000 account's, so the two never write over each other.
+data-100k/
+logs-100k/
+logs/

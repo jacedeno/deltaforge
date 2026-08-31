@@ -1,0 +1,29 @@
+[Unit]
+Description=DeltaForge 100k Paper Bot (ML30 30m signal, long calls, 7-14 DTE, $7000/position)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/root/repos/deltaforge
+# Same code and same strategy as deltaforge-bot; only the account and the
+# sizing differ. Separate --data-dir and --logs-dir keep the two journals from
+# writing over each other.
+ExecStart=/root/.local/bin/uv run python scripts/run_paper_bot.py \
+    --env-file /root/.secrets/alpaca-deltaforge-100k.env \
+    --position-size 7000 \
+    --max-slots 14 \
+    --data-dir /root/repos/deltaforge/data-100k \
+    --logs-dir /root/repos/deltaforge/logs-100k
+Restart=on-failure
+RestartSec=30
+# The bot sleeps between 30-minute bars, so a stop can wait for the current
+# pass to finish rather than interrupting an order it is waiting on a fill for.
+KillSignal=SIGTERM
+TimeoutStopSec=180
+StandardOutput=append:/root/repos/deltaforge/logs-100k/bot.log
+StandardError=append:/root/repos/deltaforge/logs-100k/bot.log
+
+[Install]
+WantedBy=multi-user.target

@@ -55,6 +55,44 @@ Position size stays at **$300 while the account is under $5,000** — the goal
 is holding ten positions at once, and $500 on a $3,000 account buys only six
 slots. The lever for reaching more names is the universe, not the size.
 
+### The 100k competition instance
+
+A second account runs the **same code and the same strategy** at hackathon
+scale: Alpaca paper **PA3YN2XF0XWT**, opened 2026-08-31 with $100,000, keys in
+`homelab-secrets/alpaca-deltaforge-100k.env`. It is a second systemd unit
+(`deltaforge-100k-bot`, tracked at `deploy/deltaforge-100k-bot.service`) with
+its own `data-100k/` and `logs-100k/`, so neither journal can write over the
+other. **The $3,000 account keeps running untouched as the control** — if the
+two diverge, the difference is sizing, not strategy.
+
+Only two flags differ: `--position-size 7000 --max-slots 14`.
+
+**Why $7,000 and not $10,000.** The budget sweep (`reports/budget/`) is an
+inverted U on a $3,000 account: $150 a position returns +304%, $300 returns
++395%, and $500 returns +268% with the drawdown widening from -23% to -40%.
+The optimum is $300, i.e. **10% of equity**. Scaling that to $100,000 would
+say $10,000 — but the $300 cap was doing two jobs at once, sizing the position
+*and* refusing 760 contracts as too expensive. That is why the winning run
+held only 6.6 positions on average, about 66% invested.
+
+At $100,000 the second job disappears: the contracts that were unaffordable at
+$300 cost $400–1,200, and nothing is out of reach. More signals clear, so more
+positions are held concurrently, and 10% each would sit near fully invested in
+long premium — well past what the sweep actually tested. **$7,000 (7%) keeps
+the validated ~66-70% exposure at the higher trade count.** Fourteen slots
+rather than ten also spread the same money across more names, which matters
+for a structure that wins 36.7% of the time and lives on its right tail.
+
+Measured from the 1,623 backtested trades: 2.6 signals a session, median hold
+3.8 days, mean concurrency 6.6 and a maximum of 28. Starting flat, the book
+fills at roughly four positions a day and does not reach steady state for over
+a week.
+
+**This sizing is an extrapolation, not a measured point.** No sweep run
+combined a large absolute budget with a 7% concentration, because a $3,000
+account cannot express that combination. The strategy's worst historical
+drawdown is -29%.
+
 ### Two universes
 
 | File | Used by | Screen |
@@ -126,13 +164,18 @@ hosts.
 
 The bot runs as `deltaforge-bot.service` on AlgoTrader (unit tracked at
 `deploy/deltaforge-bot.service`), enabled so it survives a reboot. It sleeps
-between 30-minute bars and only scans while the market is open.
+between 30-minute bars and only scans while the market is open. The 100k
+instance is the sibling unit `deltaforge-100k-bot.service`, also enabled.
 
 ```bash
-systemctl status deltaforge-bot
+systemctl status deltaforge-bot deltaforge-100k-bot
 journalctl -u deltaforge-bot -n 50          # or logs/bot.log
 systemctl restart deltaforge-bot            # picks up a git pull
 ```
+
+Both must be **enabled**, not merely started: a bot launched by hand with
+`setsid` dies at the next reboot while its sibling comes back, and the two
+accounts silently stop being comparable.
 
 `Restart=on-failure` with a 30s delay, and `TimeoutStopSec=180` so a stop waits
 for the current pass rather than interrupting an order awaiting a fill.
@@ -150,6 +193,10 @@ curl -s -o /dev/null -w '%{http_code}\n' https://deltaforge.geekendzone.net   # 
 ssh root@192.168.68.102 'curl -s localhost:3779/api/snapshot | head -c 300'
 ssh root@192.168.68.102 'curl -s localhost:3779/api/health'
 ssh root@192.168.68.102 'ps -eo pid,cmd | grep -E "run_paper_bot|next-server" | grep -v grep'
+
+# both accounts alive, and exactly one process per account
+ssh root@192.168.68.102 'systemctl is-active deltaforge-bot deltaforge-100k-bot'
+ssh root@192.168.68.102 'grep bot.start /root/repos/deltaforge/logs-100k/bot.log | tail -1'
 ```
 
 After any tunnel edit, confirm the neighbours too — `thetaforge` and
