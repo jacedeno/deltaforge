@@ -41,6 +41,7 @@ from deltaforge.ml30_bridge import (
     AlpacaHistoricalClient,
     Coordinator,
     CoordinatorResult,
+    Direction,
     add_indicators,
     deltaforge_commit,
     ml30_commit,
@@ -226,6 +227,12 @@ def main() -> None:
     parser.add_argument("--cooldown-bars", type=int, default=BARS_PER_DAY_30M)
     parser.add_argument("--min-dollar-risk", type=float, default=0.01)
     parser.add_argument("--cache-dir", type=Path, default=SIP_30M_CACHE_DIR)
+    parser.add_argument(
+        "--direction",
+        default="long",
+        choices=["long", "short"],
+        help="ml30 runs a book one way or the other, never mixed.",
+    )
     parser.add_argument("--entry-ranking", default="file", choices=["file", "random"])
     parser.add_argument("--ranking-seed", type=int, default=42)
     parser.add_argument("--label", required=True)
@@ -240,6 +247,7 @@ def main() -> None:
     log.info(
         "phase1.run.start",
         label=args.label,
+        direction=args.direction,
         symbols=len(symbols),
         start=args.start,
         end=args.end,
@@ -264,6 +272,7 @@ def main() -> None:
         sma_fast_period=args.sma_fast,
         sma_slow_period=args.sma_slow,
         cooldown_bars=args.cooldown_bars,
+        direction=Direction.SHORT if args.direction == "short" else Direction.LONG,
         entry_ranking=args.entry_ranking,
         ranking_seed=args.ranking_seed,
     )
@@ -284,6 +293,7 @@ def main() -> None:
         "sma_fast": args.sma_fast,
         "sma_slow": args.sma_slow,
         "cooldown_bars": args.cooldown_bars,
+        "direction": args.direction,
         "min_dollar_risk": args.min_dollar_risk,
         "entry_ranking": args.entry_ranking,
         "ranking_seed": args.ranking_seed,

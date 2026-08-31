@@ -1,0 +1,239 @@
+{
+ "closed_trades": 7104,
+ "expectancy_r": -0.0602,
+ "expectancy_r_stop_fill_minus_1_3": -0.2898,
+ "profit_factor": 0.921,
+ "profit_factor_stop_fill_minus_1_3": 0.709,
+ "target_touch_rate_pct": 23.49,
+ "stop_rate_pct": 76.51,
+ "duration_trading_days": {
+  "median": 2.0,
+  "p75": 6.0,
+  "p90": 13.0,
+  "max": 429
+ },
+ "entry_to_target_pct": {
+  "p10": -12.66,
+  "median": -5.37,
+  "p90": -2.43
+ },
+ "per_year": {
+  "2020": {
+   "trades": 1102,
+   "expectancy_r": -0.1,
+   "profit_factor": 0.871
+  },
+  "2021": {
+   "trades": 1097,
+   "expectancy_r": -0.11,
+   "profit_factor": 0.858
+  },
+  "2022": {
+   "trades": 1118,
+   "expectancy_r": 0.109,
+   "profit_factor": 1.151
+  },
+  "2023": {
+   "trades": 1073,
+   "expectancy_r": -0.012,
+   "profit_factor": 0.984
+  },
+  "2024": {
+   "trades": 1116,
+   "expectancy_r": -0.147,
+   "profit_factor": 0.813
+  },
+  "2025": {
+   "trades": 1052,
+   "expectancy_r": -0.106,
+   "profit_factor": 0.863
+  },
+  "2026": {
+   "trades": 546,
+   "expectancy_r": -0.055,
+   "profit_factor": 0.928
+  }
+ },
+ "per_symbol": {
+  "ABBV": {
+   "trades": 172,
+   "total_r": -40.0
+  },
+  "ABT": {
+   "trades": 151,
+   "total_r": -19.0
+  },
+  "AMD": {
+   "trades": 144,
+   "total_r": 16.0
+  },
+  "BAC": {
+   "trades": 182,
+   "total_r": 6.0
+  },
+  "BSX": {
+   "trades": 181,
+   "total_r": -9.0
+  },
+  "C": {
+   "trades": 157,
+   "total_r": -25.0
+  },
+  "CAT": {
+   "trades": 181,
+   "total_r": -25.0
+  },
+  "CCL": {
+   "trades": 173,
+   "total_r": 23.0
+  },
+  "CEG": {
+   "trades": 99,
+   "total_r": -35.0
+  },
+  "CMCSA": {
+   "trades": 124,
+   "total_r": -16.0
+  },
+  "COF": {
+   "trades": 179,
+   "total_r": -7.0
+  },
+  "COP": {
+   "trades": 180,
+   "total_r": 8.0
+  },
+  "CSCO": {
+   "trades": 165,
+   "total_r": -29.0
+  },
+  "CSX": {
+   "trades": 180,
+   "total_r": -16.0
+  },
+  "CVX": {
+   "trades": 169,
+   "total_r": -17.0
+  },
+  "DIS": {
+   "trades": 144,
+   "total_r": 16.0
+  },
+  "ETN": {
+   "trades": 185,
+   "total_r": -61.0
+  },
+  "F": {
+   "trades": 149,
+   "total_r": -1.0
+  },
+  "FCX": {
+   "trades": 170,
+   "total_r": -6.0
+  },
+  "GE": {
+   "trades": 167,
+   "total_r": -39.0
+  },
+  "INTC": {
+   "trades": 140,
+   "total_r": 12.0
+  },
+  "JNJ": {
+   "trades": 160,
+   "total_r": -8.0
+  },
+  "JPM": {
+   "trades": 173,
+   "total_r": -5.0
+  },
+  "KO": {
+   "trades": 189,
+   "total_r": -49.0
+  },
+  "LLY": {
+   "trades": 148,
+   "total_r": -28.0
+  },
+  "MDT": {
+   "trades": 157,
+   "total_r": -1.0
+  },
+  "MRK": {
+   "trades": 149,
+   "total_r": 7.0
+  },
+  "MS": {
+   "trades": 174,
+   "total_r": -22.0
+  },
+  "MU": {
+   "trades": 157,
+   "total_r": -17.0
+  },
+  "NEM": {
+   "trades": 160,
+   "total_r": 0.0
+  },
+  "NKE": {
+   "trades": 133,
+   "total_r": 59.0
+  },
+  "ORCL": {
+   "trades": 140,
+   "total_r": -4.0
+  },
+  "PFE": {
+   "trades": 144,
+   "total_r": 20.0
+  },
+  "PG": {
+   "trades": 190,
+   "total_r": -14.0
+  },
+  "RCL": {
+   "trades": 170,
+   "total_r": -2.0
+  },
+  "SCHW": {
+   "trades": 159,
+   "total_r": -31.0
+  },
+  "SLB": {
+   "trades": 158,
+   "total_r": 2.0
+  },
+  "T": {
+   "trades": 170,
+   "total_r": 10.0
+  },
+  "TMUS": {
+   "trades": 129,
+   "total_r": -37.0
+  },
+  "UBER": {
+   "trades": 160,
+   "total_r": -12.0
+  },
+  "VZ": {
+   "trades": 101,
+   "total_r": 7.0
+  },
+  "WBD": {
+   "trades": 106,
+   "total_r": 14.0
+  },
+  "WFC": {
+   "trades": 171,
+   "total_r": 9.0
+  },
+  "WMT": {
+   "trades": 143,
+   "total_r": -35.0
+  },
+  "XOM": {
+   "trades": 171,
+   "total_r": -27.0
+  }
+ }
+}

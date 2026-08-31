@@ -1,0 +1,40 @@
+{
+ "label": "events30m_short",
+ "config": {
+  "universe_file": "/home/geekendzone/repos/deltaforge/config/universe_sub150.json",
+  "symbols_requested": 45,
+  "start": "2020-01-01",
+  "end": "2026-08-01",
+  "timeframe": "30min",
+  "feed": "sip",
+  "max_concurrent": 999,
+  "max_position_pct": 0.001,
+  "r_target": 3.0,
+  "stop_lookback": 8,
+  "sma_fast": 21,
+  "sma_slow": 55,
+  "cooldown_bars": 13,
+  "direction": "short",
+  "min_dollar_risk": 0.01,
+  "entry_ranking": "file",
+  "ranking_seed": 42,
+  "ml30_commit": "e99294227db3f9303b6031d8971cd3b0983260d7",
+  "deltaforge_commit": "563a22f9896a75282fb096ec153318856ec93507"
+ },
+ "elapsed_seconds": 359.3,
+ "initial_equity": 1000000.0,
+ "final_equity": 981739.57,
+ "total_return_pct": -1.826,
+ "num_trades": 7104,
+ "win_rate_pct": 23.49,
+ "expectancy_r": -0.0602,
+ "profit_factor": 0.853,
+ "max_drawdown_pct": 2.55,
+ "sharpe_ratio": -0.036,
+ "exit_reason_counts": {
+  "STOP": 5435,
+  "TARGET": 1669
+ },
+ "skipped_entries_due_to_cap": 0,
+ "symbols_traded": 45
+}

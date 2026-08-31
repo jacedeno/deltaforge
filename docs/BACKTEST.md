@@ -339,6 +339,49 @@ months to expiry), so leverage here comes from the structure's delta and never
 from borrowing. Rows implying more than 100% deployment are arithmetic, not
 plans.
 
+## The short side does not have an edge
+
+The overlay is long-only because every signal ever backtested was long. The
+obvious way to roughly double the trade count is to mirror the signal, which
+ml30 supports natively (`Coordinator(direction=Direction.SHORT)`, an exact
+mirror of the entry, stop and 3R bracket). Run over the same universe,
+window and parameters as Phase 1:
+
+| | Long | Short |
+|---|---|---|
+| Closed trades | 6,724 | 7,104 |
+| Expectancy | **+0.162 R** | **−0.060 R** |
+| Profit factor | **1.229** | **0.921** |
+| At −1.3R stop fills | −0.050 R / 0.945 | −0.290 R / 0.709 |
+| Target-touch rate | 29.1% | 23.5% |
+| Median duration | 3 days | 2 days |
+| $3,000 portfolio, 3 slots | **$18,788 (+526%)** | **$1,228 (−59%)** |
+| Max drawdown | 23.1% | **69.8%** |
+
+It is negative in six of seven years; the exception is 2022, the bear
+market. That is the whole story — a mirrored trend-following entry on a
+universe of large caps in a market that rose over the period.
+
+**The one argument for building it anyway, and why it loses.** Phase 1's
+gate is expectancy on the underlying, but the overlay does not inherit the
+underlying's payoff: measured on the ≥5% long trades, a stop costs the
+option **−17.9% of debit** where shares lose a full R, and a target pays
+**+112.2%**. That truncation can rescue a signal shares cannot trade.
+Applying the same two multipliers to the short stream's exit mix (21.9%
+target / 78.1% stop) projects **+10.5% of debit per trade**, against
++23.5% for the long.
+
+Positive — but less than half the long's edge, and resting on the
+assumption that puts behave like calls. They do not: put skew makes
+downside strikes systematically richer, which comes straight out of that
++10.5%. Building put structures and running the full pipeline to chase
+half the edge, on a signal whose underlying loses money in six years of
+seven, is not where the next week goes. Revisit only if the live long
+book shows the truncation effect running stronger than modelled.
+
+Reproduce with `--direction short` (artifacts: `events30m_short_*`,
+`bench30m_short_*`).
+
 ## Why the pre-2024 extension was abandoned
 
 The plan called for extending the backtest to 2020–2024 with Black-Scholes
