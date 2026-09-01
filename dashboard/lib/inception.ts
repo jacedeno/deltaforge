@@ -1,15 +1,18 @@
 /**
- * Where DeltaForge's record begins.
+ * Where DeltaForge's record begins: 2026-08-31 at $100,000, the opening
+ * balance of account PA3YN2XF0XWT.
  *
- * The Alpaca account is not new — it ran a retired ML30 fractional paper bot
- * until 2026-08-30, and its portfolio history still carries those months.
- * Everything this dashboard reports is measured from inception instead, so the
- * curve starts flat at the opening balance rather than inheriting a stranger's
- * P&L. Trades are naturally clean already: the journal is DeltaForge's own and
- * starts empty.
+ * The rebasing below is defensive rather than necessary now. It was written
+ * for a borrowed account that carried months of a retired ML30 bot's P&L, and
+ * the current account is clean — opened for DeltaForge, traded by nothing
+ * else. It is kept because the cost is a comparison per point and the failure
+ * it prevents (an inherited curve reported as this strategy's) is silent.
+ *
+ * The defaults are the live account's, so a missing .env.local degrades to
+ * correct numbers rather than to a retired account's.
  */
 export const INCEPTION_DATE = process.env.DF_INCEPTION_DATE ?? "2026-08-31";
-export const INCEPTION_EQUITY = Number(process.env.DF_INCEPTION_EQUITY ?? "3030.85");
+export const INCEPTION_EQUITY = Number(process.env.DF_INCEPTION_EQUITY ?? "100000");
 
 /** Equity points at or after inception, rebased so the first is the opening balance. */
 export function sinceInception(
