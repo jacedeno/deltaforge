@@ -161,6 +161,26 @@ Port **3779** (3777 is ThetaForge, 3778 the ml30 screener — both on this
 fleet). The deploy script's kill is **port-scoped on purpose**; `pkill
 next-server` would take the neighbours down.
 
+`dashboard/.env.local` is not in git and is the whole configuration:
+
+```
+ALPACA_PAPER_API_KEY / ALPACA_PAPER_SECRET   from alpaca-deltaforge-100k.env
+DF_DB_PATH          .../data-100k/deltaforge.db
+DF_EVENTS_PATH      .../logs-100k/events.jsonl
+DF_HEARTBEAT_PATH   .../data-100k/heartbeat.json
+DF_INCEPTION_DATE   2026-08-31
+DF_INCEPTION_EQUITY 100000
+```
+
+**The three paths are not optional.** Without them the code falls back to
+`../data` and `../logs`, which is the retired $300 bot's journal — a frozen one
+that still parses, so the dashboard renders a plausible page of stale numbers
+rather than failing. They are read at runtime by the route handlers, so a
+restart is enough; no rebuild is needed to change an account.
+
+After any account change, check `/api/snapshot` reports the account number you
+expect, not just that the page loads.
+
 Published at **https://deltaforge.geekendzone.net** through Cloudflare tunnel
 CT 101 (`73869032-…`), ingress v183 → `http://192.168.68.102:3779`, with a
 proxied CNAME on the zone. Behind **Cloudflare Access** app `deltaforge`
