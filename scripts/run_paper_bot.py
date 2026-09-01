@@ -4,7 +4,10 @@ Wakes shortly after each 30-minute bar closes during regular hours, runs one
 pass (manage open positions, then look for entries), and sleeps. Everything
 it does is journalled to SQLite and to an event log the dashboard narrates.
 
-    python scripts/run_paper_bot.py --env-file ~/.secrets/alpaca-deltaforge.env
+    python scripts/run_paper_bot.py \
+        --env-file ~/.secrets/alpaca-deltaforge-100k.env \
+        --position-size 7000 --max-slots 14 \
+        --data-dir data-100k --logs-dir logs-100k
 
 The env file must define ALPACA_PAPER_API_KEY and ALPACA_PAPER_SECRET. It is
 passed explicitly and never inferred: pointing this at the wrong account is

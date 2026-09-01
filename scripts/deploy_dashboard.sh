@@ -14,7 +14,7 @@ PORT=3779
 cd "$(dirname "$0")/../dashboard"
 
 if [ ! -f .env.local ]; then
-  echo "missing dashboard/.env.local — copy the keys from ~/.secrets/alpaca-deltaforge.env" >&2
+  echo "missing dashboard/.env.local — copy the keys from ~/.secrets/alpaca-deltaforge-100k.env" >&2
   exit 1
 fi
 

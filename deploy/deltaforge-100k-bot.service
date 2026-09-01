@@ -7,9 +7,10 @@ Wants=network-online.target
 Type=simple
 User=root
 WorkingDirectory=/root/repos/deltaforge
-# Same code and same strategy as deltaforge-bot; only the account and the
-# sizing differ. Separate --data-dir and --logs-dir keep the two journals from
-# writing over each other.
+# The only DeltaForge bot that runs. Its retired sibling deltaforge-bot is
+# stopped and disabled; the -100k suffixes on --data-dir and --logs-dir date
+# from when the two ran side by side and are kept to avoid renaming a live
+# journal.
 ExecStart=/root/.local/bin/uv run python scripts/run_paper_bot.py \
     --env-file /root/.secrets/alpaca-deltaforge-100k.env \
     --position-size 7000 \

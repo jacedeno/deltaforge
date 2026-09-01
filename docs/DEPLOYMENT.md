@@ -10,22 +10,33 @@ not run the bot.
 
 ## Account
 
-Alpaca paper **PA3HBSB6VT9C**, nickname "DeltaForge", options trading level 3,
-opened 2026-08-30 with $3,000.
-
-It briefly ran against PA35JTJLBB0O, borrowed from the retired
-`ml30-paper-bot-v1-5m-frac` service. That was abandoned the same day: the
-inherited positions and months of unrelated portfolio history made every
-number ambiguous, and a second paper account costs nothing. The old bot stays
-stopped and disabled, and its liquidation orders remain queued so that account
-closes itself out. Keys:
-`homelab-secrets/alpaca-deltaforge.env`, mirrored to
-`/root/.secrets/alpaca-deltaforge.env` on AlgoTrader and to
+Alpaca paper **PA3YN2XF0XWT**, options trading level 3, opened 2026-08-31 with
+$100,000. Keys: `homelab-secrets/alpaca-deltaforge-100k.env`, mirrored to
+`/root/.secrets/alpaca-deltaforge-100k.env` on AlgoTrader and to
 `dashboard/.env.local` (Next reads that at boot — a running dashboard keeps
 using an old key until restarted).
 
-Inception is **2026-08-31** at **$3,000.00** — the account's opening balance,
-now that its history starts with DeltaForge.
+Inception is **2026-08-31** at **$100,000.00**.
+
+**One bot, one account.** The fleet runs exactly three bots — ml30's real-money
+V1-5m-Top20 and DeltaForge here, both on AlgoTrader, plus ThetaForge on
+GeekForge. DeltaForge is this account and nothing else.
+
+### Two retired accounts
+
+**PA3HBSB6VT9C** held the $300-a-position instance from 2026-08-30 to
+2026-08-31. Its credentials stopped authenticating while the service was still
+up, so its last hours were spent raising `401 Authorization Required` on the
+opening `get_clock` of every pass — 29 of them — without ever reaching the
+order path. Stopped and disabled 2026-08-31. The unit file is kept at
+`deploy/deltaforge-bot.service`; reviving it means minting new keys first, and
+deciding whether two DeltaForge accounts are worth the ambiguity a second time.
+
+**PA35JTJLBB0O** was borrowed for a few hours on 2026-08-30 from the retired
+`ml30-paper-bot-v1-5m-frac` service. Abandoned the same day: the inherited
+positions and months of unrelated portfolio history made every number
+ambiguous. Its liquidation orders remain queued so that account closes itself
+out.
 
 ## Bot
 
@@ -36,36 +47,36 @@ export PATH=$PATH:/root/.local/bin
 
 # one pass, no orders — the safe way to check a change
 uv run python scripts/run_paper_bot.py \
-    --env-file /root/.secrets/alpaca-deltaforge.env --once --dry-run
+    --env-file /root/.secrets/alpaca-deltaforge-100k.env \
+    --position-size 7000 --max-slots 14 \
+    --data-dir /root/repos/deltaforge/data-100k \
+    --logs-dir /root/repos/deltaforge/logs-100k \
+    --once --dry-run
 
 # the real thing
 uv run python scripts/run_paper_bot.py \
-    --env-file /root/.secrets/alpaca-deltaforge.env
+    --env-file /root/.secrets/alpaca-deltaforge-100k.env \
+    --position-size 7000 --max-slots 14 \
+    --data-dir /root/repos/deltaforge/data-100k \
+    --logs-dir /root/repos/deltaforge/logs-100k
 ```
 
 `--env-file` is required and never inferred. ml30's own settings module carries
 a long comment about why: a stray `ALPACA_PAPER_API_KEY` in the environment
 once outranked `--env-file` and two bots reported the same account.
 
-Defaults match what the backtest settled on: $300 a position, one slot per $300
-of equity capped at 15, 0.55 delta, 7–14 DTE, exit at 5 DTE, and **signals
-whose 3R target sits under 5% away are refused**.
+The script's own defaults are the backtest's: $300 a position, one slot per
+$300 of equity capped at 15, 0.55 delta, 7–14 DTE, exit at 5 DTE, and **signals
+whose 3R target sits under 5% away are refused**. Delta, DTE and the 5% target
+gate are used as they stand; **sizing is overridden on the command line** —
+`--position-size 7000 --max-slots 14` — and the journal is redirected to
+`data-100k/` and `logs-100k/`.
 
-Position size stays at **$300 while the account is under $5,000** — the goal
-is holding ten positions at once, and $500 on a $3,000 account buys only six
-slots. The lever for reaching more names is the universe, not the size.
+Those directory flags are historical. They were named when a $3,000 sibling
+owned the unsuffixed `data/` and `logs/`, and they stayed after it was retired
+rather than risk a rename against a live journal.
 
-### The 100k competition instance
-
-A second account runs the **same code and the same strategy** at hackathon
-scale: Alpaca paper **PA3YN2XF0XWT**, opened 2026-08-31 with $100,000, keys in
-`homelab-secrets/alpaca-deltaforge-100k.env`. It is a second systemd unit
-(`deltaforge-100k-bot`, tracked at `deploy/deltaforge-100k-bot.service`) with
-its own `data-100k/` and `logs-100k/`, so neither journal can write over the
-other. **The $3,000 account keeps running untouched as the control** — if the
-two diverge, the difference is sizing, not strategy.
-
-Only two flags differ: `--position-size 7000 --max-slots 14`.
+### Why $7,000 a position
 
 **Why $7,000 and not $10,000.** The budget sweep (`reports/budget/`) is an
 inverted U on a $3,000 account: $150 a position returns +304%, $300 returns
@@ -92,6 +103,11 @@ a week.
 combined a large absolute budget with a 7% concentration, because a $3,000
 account cannot express that combination. The strategy's worst historical
 drawdown is -29%.
+
+It was briefly meant to be checked against the $3,000 account running the same
+code as a control. That never produced a single comparable session — the
+control's credentials had already failed — and the account is now retired, so
+**the 7% figure rests on the sweep and the reasoning above, not on a live A/B.**
 
 ### Two universes
 
@@ -162,20 +178,24 @@ hosts.
 
 ## Service
 
-The bot runs as `deltaforge-bot.service` on AlgoTrader (unit tracked at
-`deploy/deltaforge-bot.service`), enabled so it survives a reboot. It sleeps
-between 30-minute bars and only scans while the market is open. The 100k
-instance is the sibling unit `deltaforge-100k-bot.service`, also enabled.
+The bot runs as `deltaforge-100k-bot.service` on AlgoTrader (unit tracked at
+`deploy/deltaforge-100k-bot.service`), enabled so it survives a reboot. It
+sleeps between 30-minute bars and only scans while the market is open.
 
 ```bash
-systemctl status deltaforge-bot deltaforge-100k-bot
-journalctl -u deltaforge-bot -n 50          # or logs/bot.log
-systemctl restart deltaforge-bot            # picks up a git pull
+systemctl status deltaforge-100k-bot
+journalctl -u deltaforge-100k-bot -n 50     # or logs-100k/bot.log
+systemctl restart deltaforge-100k-bot       # picks up a git pull
 ```
 
-Both must be **enabled**, not merely started: a bot launched by hand with
-`setsid` dies at the next reboot while its sibling comes back, and the two
-accounts silently stop being comparable.
+`deltaforge-bot.service` — the retired $300 instance — is **stopped and
+disabled**. Its unit file is still installed on AlgoTrader and still tracked in
+`deploy/`, so `systemctl start` would bring back a bot with dead keys. Leave it
+alone.
+
+The live unit must be **enabled**, not merely started: a bot launched by hand
+with `setsid` dies at the next reboot and the account goes quiet without
+anything reporting it.
 
 `Restart=on-failure` with a 30s delay, and `TimeoutStopSec=180` so a stop waits
 for the current pass rather than interrupting an order awaiting a fill.
@@ -194,10 +214,17 @@ ssh root@192.168.68.102 'curl -s localhost:3779/api/snapshot | head -c 300'
 ssh root@192.168.68.102 'curl -s localhost:3779/api/health'
 ssh root@192.168.68.102 'ps -eo pid,cmd | grep -E "run_paper_bot|next-server" | grep -v grep'
 
-# both accounts alive, and exactly one process per account
-ssh root@192.168.68.102 'systemctl is-active deltaforge-bot deltaforge-100k-bot'
+# alive, and exactly one process on the account
+ssh root@192.168.68.102 'systemctl is-active deltaforge-100k-bot'
 ssh root@192.168.68.102 'grep bot.start /root/repos/deltaforge/logs-100k/bot.log | tail -1'
+
+# the retired instance must stay down
+ssh root@192.168.68.102 'systemctl is-active deltaforge-bot; systemctl is-enabled deltaforge-bot'
 ```
+
+`/api/health` reporting `degraded` with a `401` in its `note` means the
+dashboard is authenticating with a revoked key — check `dashboard/.env.local`
+against `homelab-secrets/alpaca-deltaforge-100k.env`, then redeploy.
 
 After any tunnel edit, confirm the neighbours too — `thetaforge` and
 `wireguard` should answer 200, `screener` and `term` 302.
