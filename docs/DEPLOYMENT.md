@@ -183,13 +183,15 @@ expect, not just that the page loads.
 
 Published at **https://deltaforge.geekendzone.net** through Cloudflare tunnel
 CT 101 (`73869032-…`), ingress v183 → `http://192.168.68.102:3779`, with a
-proxied CNAME on the zone. Behind **Cloudflare Access** app `deltaforge`
-(`08cf2ae1-96f4-4fd3-9ac6-9ff0234e02d0`), 24h session, policy
-`Allow_Jose_y_Samary` — the same two email includes as the screener.
+proxied CNAME on the zone.
 
-**A 302 is the healthy answer** from the public URL: that is the Access login
-redirect, not a failure. Pre-change tunnel backup:
-`~/.cloudflare/backups/tunnel-ct101-20260830T142019Z.json` on GeekForge.
+**Public since 2026-09-02** — the Cloudflare Access app in front of it was
+removed for the hackathon judging window (the dashboard is read-only: every
+API route is a GET and none can reach an order endpoint). A 200 is the
+healthy answer from the public URL. The deleted Access app and its policy
+are backed up under `~/.cloudflare/backups/access-deltaforge-*.json` on
+GeekForge for restoring after the competition; the pre-change tunnel backup
+is `tunnel-ct101-20260830T142019Z.json` in the same place.
 
 The working Cloudflare token is in `homelab-secrets/cloudflare-geekforge.env`.
 The one in `cloudflare-dns-tunnel.env` is **revoked** (both the local copy and
