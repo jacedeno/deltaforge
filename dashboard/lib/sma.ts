@@ -1,7 +1,7 @@
 import type { Time } from "lightweight-charts";
 import { isExtendedHours, toLocal } from "./localtime";
 
-export type Bar = { t: number; o: number; h: number; l: number; c: number };
+export type Bar = { t: number; o: number; h: number; l: number; c: number; v: number };
 
 /**
  * Simple moving average, matching the bot: 21/55 over regular-hours 30m bars.

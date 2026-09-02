@@ -10,10 +10,14 @@ import {
   type ISeriesApi,
   type ISeriesMarkersPluginApi,
   type LogicalRange,
+  type MouseEventParams,
   type Time,
   type UTCTimestamp,
 } from "lightweight-charts";
 import { daysToCover, sma, type Bar } from "@/lib/sma";
+import {
+  ANCHOR_COLOURS, avwap, loadAnchors, saveAnchors, type Anchor,
+} from "@/lib/avwap";
 import { EXTENDED_HOURS_SHADE, isExtendedHours, toLocal } from "@/lib/localtime";
 import { useThemeTick, token } from "./theme";
 
@@ -55,6 +59,13 @@ function barIndexAt(bars: Bar[], sec: number): number {
   return idx;
 }
 
+/** Default label for a new anchor: the bar it sits on, in the viewer's zone. */
+function anchorLabel(sec: number): string {
+  return new Date(sec * 1000).toLocaleString(undefined, {
+    day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit",
+  });
+}
+
 /**
  * The underlying with the signal's own levels drawn on it.
  *
@@ -82,11 +93,17 @@ export default function TradeChart({
 }) {
   const [tf, setTf] = useState<Tf>(defaultTf);
   const [bars, setBars] = useState<Bar[] | null>(null);
+  const [anchors, setAnchors] = useState<Anchor[]>([]);
+  const [arming, setArming] = useState(false);
+  // Consolidated-volume copy of the same window, fetched only once an anchor
+  // exists. Null means "fall back to the IEX bars already on screen".
+  const [volBars, setVolBars] = useState<Bar[] | null>(null);
   const box = useRef<HTMLDivElement>(null);
   const chart = useRef<IChartApi | null>(null);
   const candles = useRef<ISeriesApi<"Candlestick"> | null>(null);
   const lines = useRef<ISeriesApi<"Line">[]>([]);
   const markers = useRef<ISeriesMarkersPluginApi<Time> | null>(null);
+  const vwaps = useRef(new Map<string, ISeriesApi<"Line">>());
   const tick = useThemeTick();
 
   // Refs, not state: the pan handler reads them without re-subscribing.
@@ -138,6 +155,19 @@ export default function TradeChart({
     });
     return () => { cancelled = true; };
   }, [fetchBars, tf, windowStart, windowEnd]);
+
+  // Anchors are per symbol and outlive the page — see lib/avwap.
+  useEffect(() => {
+    setAnchors(loadAnchors(symbol));
+  }, [symbol]);
+
+  const update = useCallback(
+    (next: Anchor[]) => {
+      setAnchors(next);
+      saveAnchors(symbol, next);
+    },
+    [symbol],
+  );
 
   const loadOlder = useCallback(async () => {
     if (loading.current || exhausted.current) return;
@@ -212,8 +242,96 @@ export default function TradeChart({
       candles.current = null;
       lines.current = [];
       markers.current = null;
+      // The VWAP handles died with the chart; dropping them stops the sync
+      // effect from calling removeSeries on a destroyed chart.
+      vwaps.current.clear();
     };
   }, [tick, entry, stop, target]);
+
+  // Consolidated volume for the anchored VWAPs. Prices stay IEX — only the
+  // weights come from SIP, and only when there is an anchor to weight.
+  useEffect(() => {
+    if (anchors.length === 0 || !bars || bars.length === 0) {
+      setVolBars(null);
+      return;
+    }
+    let cancelled = false;
+    const from = bars[0].t * 1000;
+    // The account's entitlement covers historical SIP but not its last 15
+    // minutes, so the request stops short of that; the tail keeps IEX weights.
+    const to = Math.min(bars[bars.length - 1].t * 1000 + 60_000, Date.now() - 16 * 60_000);
+    if (to <= from) {
+      setVolBars(null);
+      return;
+    }
+    const q = new URLSearchParams({
+      symbol, tf, feed: "sip",
+      from: new Date(from).toISOString(),
+      to: new Date(to).toISOString(),
+    });
+    fetch(`/api/bars?${q}`)
+      .then((r) => r.json())
+      .then((d) => {
+        if (!cancelled) setVolBars((d.bars ?? []).length > 0 ? (d.bars as Bar[]) : null);
+      })
+      .catch(() => {
+        if (!cancelled) setVolBars(null);
+      });
+    return () => { cancelled = true; };
+  }, [anchors.length, bars, symbol, tf]);
+
+  // Arm, then click a candle to anchor there. Without arming, a click on the
+  // chart does nothing — panning would otherwise drop anchors everywhere.
+  useEffect(() => {
+    const c = chart.current;
+    if (!c || !arming || !bars || bars.length === 0) return;
+    const onClick = (p: MouseEventParams) => {
+      if (typeof p.logical !== "number") return;
+      const idx = Math.round(p.logical);
+      if (idx < 0 || idx >= bars.length) return;
+      const t = bars[idx].t;
+      setArming(false);
+      if (anchors.some((a) => a.t === t)) return;
+      update([
+        ...anchors,
+        {
+          id: `${t}`,
+          t,
+          name: anchorLabel(t),
+          color: ANCHOR_COLOURS[anchors.length % ANCHOR_COLOURS.length],
+        },
+      ]);
+    };
+    c.subscribeClick(onClick);
+    return () => c.unsubscribeClick(onClick);
+  }, [arming, bars, anchors, update, tick]);
+
+  // One line series per anchor, rebuilt whenever the anchors, the data or the
+  // theme change. A handful of anchors makes the churn cheaper than diffing.
+  useEffect(() => {
+    const c = chart.current;
+    if (!c) return;
+    for (const s of vwaps.current.values()) {
+      try { c.removeSeries(s); } catch { /* chart already torn down */ }
+    }
+    vwaps.current.clear();
+
+    const src = volBars ?? bars;
+    if (!src || src.length === 0) return;
+    for (const a of anchors) {
+      const idx = barIndexAt(src, a.t);
+      if (idx < 0) continue;
+      const s = c.addSeries(LineSeries, {
+        color: a.color,
+        lineWidth: 2,
+        title: a.name,
+        priceLineVisible: false,
+        lastValueVisible: true,
+      });
+      s.setData(avwap(src, idx));
+      vwaps.current.set(a.id, s);
+    }
+  }, [anchors, bars, volBars, tick]);
 
   // Pull older bars when the viewer pans or zooms toward the left edge.
   useEffect(() => {
@@ -315,8 +433,19 @@ export default function TradeChart({
             {t.replace("Min", "m").replace("Hour", "h").replace("Day", "d")}
           </button>
         ))}
+        <button
+          onClick={() => setArming((a) => !a)}
+          className="font-mono2 text-[10px] px-2 py-0.5 rounded ml-auto"
+          style={{
+            background: arming ? "var(--accent)" : "transparent",
+            color: arming ? "var(--page)" : "var(--ink-muted)",
+          }}
+          title="Anchored VWAP: arm, then click the candle to anchor to"
+        >
+          {arming ? "click a candle…" : "⚓ anchor VWAP"}
+        </button>
       </div>
-      <div className="relative">
+      <div className="relative" style={{ cursor: arming ? "crosshair" : undefined }}>
         <div ref={box} />
         {bars && bars.length === 0 && (
           <div
@@ -327,6 +456,43 @@ export default function TradeChart({
           </div>
         )}
       </div>
+      {anchors.length > 0 && (
+        <div className="flex flex-wrap items-center gap-2 mt-2">
+          {anchors.map((a) => (
+            <span
+              key={a.id}
+              className="inline-flex items-center gap-1.5 px-1.5 py-0.5 rounded"
+              style={{ background: "var(--surface-2)" }}
+            >
+              <span
+                style={{
+                  background: a.color, width: 8, height: 8, borderRadius: 2, flex: "none",
+                }}
+              />
+              <input
+                value={a.name}
+                onChange={(e) =>
+                  update(anchors.map((x) => (x.id === a.id ? { ...x, name: e.target.value } : x)))
+                }
+                className="font-mono2 text-[10px] bg-transparent outline-none"
+                style={{ color: "var(--ink-secondary)", width: `${Math.max(a.name.length, 4)}ch` }}
+                aria-label="anchor name"
+              />
+              <button
+                onClick={() => update(anchors.filter((x) => x.id !== a.id))}
+                className="text-[10px] leading-none"
+                style={{ color: "var(--ink-muted)" }}
+                aria-label={`remove ${a.name}`}
+              >
+                ×
+              </button>
+            </span>
+          ))}
+          <span className="font-mono2 text-[10px]" style={{ color: "var(--ink-muted)" }}>
+            volume: {volBars ? "SIP" : "IEX"}
+          </span>
+        </div>
+      )}
     </div>
   );
 }

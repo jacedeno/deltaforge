@@ -5,6 +5,7 @@ export const dynamic = "force-dynamic";
 
 const TIMEFRAMES = new Set(["5Min", "15Min", "30Min", "1Hour", "1Day"]);
 const SYMBOL = /^[A-Z.]{1,10}$/;
+const FEEDS = new Set(["iex", "sip"]);
 
 // Alpaca caps a single page at 10,000 bars and hands back a token for the
 // rest. Six pages covers any window the chart asks for; without the loop the
@@ -12,29 +13,37 @@ const SYMBOL = /^[A-Z.]{1,10}$/;
 // over a long trade lost its most recent candles rather than its oldest.
 const MAX_PAGES = 6;
 
-type RawBar = { t: string; o: number; h: number; l: number; c: number };
+type RawBar = { t: string; o: number; h: number; l: number; c: number; v: number };
 
 /**
- * Underlying bars for the trade charts. IEX, matching the feed the bot reads —
- * a chart drawn on the consolidated tape would show highs and lows the strategy
- * never acted on, and every stop/target marker would look subtly wrong.
+ * Underlying bars for the trade charts. IEX by default, matching the feed the
+ * bot reads — a chart drawn on the consolidated tape would show highs and lows
+ * the strategy never acted on, and every stop/target marker would look subtly
+ * wrong.
+ *
+ * `feed=sip` exists for the anchored VWAPs alone. IEX carries about 3% of
+ * consolidated volume, so a volume-weighted average built on it drifts from
+ * the level the rest of the market is watching — measured at up to 0.56% on
+ * DELL. Prices stay IEX; only the weights come from the consolidated tape.
  */
 export async function GET(req: Request) {
   const url = new URL(req.url);
   const symbol = (url.searchParams.get("symbol") ?? "").toUpperCase();
   const tf = url.searchParams.get("tf") ?? "30Min";
+  const feed = url.searchParams.get("feed") ?? "iex";
   const from = url.searchParams.get("from");
   const to = url.searchParams.get("to");
 
   if (!SYMBOL.test(symbol)) return NextResponse.json({ error: "bad symbol" }, { status: 400 });
   if (!TIMEFRAMES.has(tf)) return NextResponse.json({ error: "bad timeframe" }, { status: 400 });
+  if (!FEEDS.has(feed)) return NextResponse.json({ error: "bad feed" }, { status: 400 });
 
   try {
-    const bars: { t: number; o: number; h: number; l: number; c: number }[] = [];
+    const bars: { t: number; o: number; h: number; l: number; c: number; v: number }[] = [];
     let pageToken: string | undefined;
 
     for (let page = 0; page < MAX_PAGES; page++) {
-      const q = new URLSearchParams({ timeframe: tf, feed: "iex", limit: "10000" });
+      const q = new URLSearchParams({ timeframe: tf, feed, limit: "10000" });
       if (from) q.set("start", from);
       if (to) q.set("end", to);
       if (pageToken) q.set("page_token", pageToken);
@@ -43,14 +52,14 @@ export async function GET(req: Request) {
       for (const b of (r.bars ?? []) as RawBar[]) {
         bars.push({
           t: Math.floor(Date.parse(b.t) / 1000),
-          o: b.o, h: b.h, l: b.l, c: b.c,
+          o: b.o, h: b.h, l: b.l, c: b.c, v: b.v ?? 0,
         });
       }
       pageToken = r.next_page_token ?? undefined;
       if (!pageToken) break;
     }
 
-    return NextResponse.json({ symbol, tf, bars });
+    return NextResponse.json({ symbol, tf, feed, bars });
   } catch (err) {
     return NextResponse.json({ error: String(err).slice(0, 300) }, { status: 500 });
   }
