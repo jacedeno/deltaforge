@@ -140,7 +140,16 @@ export default function Dashboard() {
                       <PayoffDiagram strike={p.strike} premium={p.entryFill} spot={p.spot}
                                      stop={p.levels.stop} target={p.levels.target}
                                      width={160} height={56} compact />
-                      <span style={{ color: "var(--ink-muted)" }}>{isOpen ? "▾" : "▸"}</span>
+                      {/* The whole row toggles, but a lone muted glyph told
+                          nobody that — this chip is the visible handle. */}
+                      <span className="font-mono2 text-[11px] px-2.5 py-1.5 rounded-md flex-none"
+                            style={{
+                              background: isOpen ? "var(--accent)" : "var(--surface-1)",
+                              color: isOpen ? "var(--page)" : "var(--ink-secondary)",
+                              border: "1px solid var(--border)",
+                            }}>
+                        {isOpen ? "▾ close" : "▸ chart"}
+                      </span>
                     </button>
                     {isOpen && (
                       <div className="px-4 pb-4">

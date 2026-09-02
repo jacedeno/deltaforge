@@ -103,7 +103,14 @@ export default function TradeHistory() {
                   <span className="w-20 text-right font-mono2 text-[11px]" style={{ color: "var(--ink-muted)" }}>
                     {t.debit ? `${(((t.pnl ?? 0) / t.debit) * 100).toFixed(0)}%` : ""}
                   </span>
-                  <span style={{ color: "var(--ink-muted)" }}>{isOpen ? "▾" : "▸"}</span>
+                  <span className="font-mono2 text-[11px] px-2.5 py-1.5 rounded-md flex-none"
+                        style={{
+                          background: isOpen ? "var(--accent)" : "var(--surface-1)",
+                          color: isOpen ? "var(--page)" : "var(--ink-secondary)",
+                          border: "1px solid var(--border)",
+                        }}>
+                    {isOpen ? "▾ close" : "▸ chart"}
+                  </span>
                 </button>
 
                 {isOpen && (
