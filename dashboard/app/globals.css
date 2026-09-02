@@ -17,7 +17,9 @@
   --baseline: #383835;
   --border: rgba(255, 255, 255, 0.08);
   --series-1: #3987e5;      /* signal blue — shared with ThetaForge */
-  --series-2: #8b6ce0;      /* delta violet */
+  --series-2: #8b6ce0;      /* delta violet — the entry bar and its marker */
+  --sma-fast: #8fc0ec;      /* SMA21 — momentum confirmation (c3) */
+  --sma-slow: #f97316;      /* SMA55 — the line price must cross to fire (c1/c2) */
   --accent: #8b6ce0;
   --good: #0ca30c;
   --critical: #d03b3b;
@@ -42,6 +44,8 @@
   --border: rgba(11, 11, 11, 0.1);
   --series-1: #2a78d6;
   --series-2: #6a45cc;
+  --sma-fast: #8fc0ec;
+  --sma-slow: #f97316;
   --accent: #5b36bd;        /* violet darkened for light-surface contrast */
   --good: #0ca30c;
   --critical: #d03b3b;
