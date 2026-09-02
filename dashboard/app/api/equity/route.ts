@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { trading } from "@/lib/alpaca";
-import { INCEPTION_EQUITY, sinceInception } from "@/lib/inception";
+import { INCEPTION_EQUITY, nyDay, sinceInception } from "@/lib/inception";
 
 export const dynamic = "force-dynamic";
 
@@ -36,10 +36,19 @@ export async function GET(req: Request) {
       );
       const { t, equity } = sinceInception(h.timestamp ?? [], h.equity ?? []);
       if (t.length > 1) {
+        const points = t.map((ts, j) => ({ t: ts * 1000, equity: equity[j] }));
+        // The daily series only gains today's row once it settles, so on a
+        // daily timeframe the curve stops at yesterday even after the close.
+        // The account's live equity fills that gap.
+        const last = points[points.length - 1];
+        if (nyDay(last.t) !== nyDay(Date.now())) {
+          const live = Number((await trading("/v2/account")).equity);
+          if (Number.isFinite(live) && live > 0) points.push({ t: Date.now(), equity: live });
+        }
         return NextResponse.json({
           range: key,
           fellBack: key !== requested,
-          points: t.map((ts, j) => ({ t: ts * 1000, equity: equity[j] })),
+          points,
           inceptionEquity: INCEPTION_EQUITY,
         });
       }

@@ -54,7 +54,8 @@ TF_30M = TimeFrame(30, TimeFrameUnit.Minute)
 BARS_PER_DAY_30M = 13  # 09:30-16:00 RTH
 
 # Live stop fills on the 5m book averaged -1.315R vs the modelled -1.00R
-# (ml30 CLAUDE.md). The go/no-go expectancy must survive this repricing.
+# (measured on the ml30 production account). The go/no-go expectancy must
+# survive this repricing.
 STOP_FILL_SENSITIVITY_R = -1.3
 
 
