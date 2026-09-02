@@ -185,6 +185,12 @@ Published at **https://deltaforge.geekendzone.net** through Cloudflare tunnel
 CT 101 (`73869032-…`), ingress v183 → `http://192.168.68.102:3779`, with a
 proxied CNAME on the zone.
 
+**Entries paused for judging (2026-09-02)** — a systemd drop-in on
+AlgoTrader (`deltaforge-100k-bot.service.d/override.conf`) runs the bot with
+`--max-slots 1`: with six positions open no free slot ever exists, so exits
+keep being managed while nothing new opens into the judged session. Revert
+Friday by removing the drop-in, `daemon-reload`, restart.
+
 **Public since 2026-09-02** — the Cloudflare Access app in front of it was
 removed for the hackathon judging window (the dashboard is read-only: every
 API route is a GET and none can reach an order endpoint). A 200 is the
