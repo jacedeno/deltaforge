@@ -25,7 +25,7 @@ profit. See "What did not survive" in [`docs/BACKTEST.md`](docs/BACKTEST.md).
 Run it:
 
 ```bash
-set -a; source ~/.secrets/alpaca-thetaforge-competition.env; set +a
+export ALPACA_API_KEY=... ALPACA_SECRET_KEY=...   # historical SIP entitlement needed
 uv run python scripts/run_phase1_underlying.py --help   # phase 1: signal on shares
 uv run python scripts/backtest_overlay.py --help        # phase 2: options overlay
 uv run python scripts/sweep_overlay.py --help           # phase 3: variations
@@ -34,10 +34,19 @@ uv run python scripts/sweep_overlay.py --help           # phase 3: variations
 ## The one-line thesis
 
 The ML30 cross gives three things an options structure can be anchored to —
-a direction, a stop price, and a 3R target price. A bull call debit spread
-with its short strike at the 3R target is the literal translation of the
-system into options: it caps exactly the upside the strategy never captures
-anyway, and the short leg pays for the theta.
+a direction, a stop price, and a 3R target price. The overlay buys a
+slightly-ITM call at 7–14 DTE and lets the underlying's own levels close it.
+
+The edge is not in reaching the target: measured over 2,345 trades, the 3R
+target is touched **13%** of the time. It is in the asymmetry at the stop.
+A stop that costs shares a full R costs the call about a third of the debit,
+because the option cannot lose more than was paid for it and still carries
+time value when the underlying touches the level. Truncating the loss that
+way is what pays for the 13% that fly (+120% of debit on average).
+
+The original thesis was a bull call debit spread with its short strike at
+the 3R target — the literal translation of the system into options. It was
+discarded on verification, not on preference; the section below says why.
 
 ## Ground rules
 
