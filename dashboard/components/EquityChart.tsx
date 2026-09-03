@@ -33,6 +33,37 @@ export default function EquityChart() {
   const option = useMemo(() => {
     const pts = data?.points ?? [];
     const inception = pts.length ? pts[0].equity : 0;
+    const intraday = range === "1D" || range === "1W";
+
+    // A time axis gives the overnight gap real width, so a two-day week drew
+    // 17 dead hours between sessions as a long flat run and squeezed the
+    // trading into the margins. On a category axis one session butts against
+    // the next and every pixel is a minute the market was open.
+    const labels = pts.map((p) => new Date(p.t).toISOString());
+    const values = pts.map((p) => p.equity);
+
+    const dayAt = (ms: number) =>
+      new Intl.DateTimeFormat("en-CA", {
+        timeZone: "America/New_York", year: "numeric", month: "2-digit", day: "2-digit",
+      }).format(new Date(ms));
+
+    // Where one session ends and the next begins — with the gap closed, the
+    // seam needs saying out loud or a jump overnight reads as a jump in trade.
+    const seams = intraday
+      ? pts.reduce<number[]>((acc, p, i) => {
+          if (i > 0 && dayAt(p.t) !== dayAt(pts[i - 1].t)) acc.push(i);
+          return acc;
+        }, [])
+      : [];
+
+    const fmt = (iso: string) =>
+      new Date(iso).toLocaleString(undefined, {
+        timeZone: "America/New_York",
+        ...(intraday
+          ? { hour: "2-digit", minute: "2-digit", hour12: false }
+          : { month: "short", day: "numeric" }),
+      });
+
     return {
       animation: false,
       grid: { left: 56, right: 16, top: 16, bottom: 28 },
@@ -41,13 +72,22 @@ export default function EquityChart() {
         backgroundColor: token("--surface-2", tick),
         borderColor: token("--border", tick),
         textStyle: { color: token("--ink-primary", tick), fontSize: 12 },
-        formatter: (p: { value: [number, number] }[]) =>
-          `${new Date(p[0].value[0]).toLocaleString()}<br/><b>${money(p[0].value[1])}</b>`,
+        formatter: (p: { name: string; value: number }[]) =>
+          `${new Date(p[0].name).toLocaleString(undefined, { timeZone: "America/New_York" })} ET`
+          + `<br/><b>${money(p[0].value)}</b>`,
       },
       xAxis: {
-        type: "time",
+        type: "category",
+        data: labels,
+        boundaryGap: false,
         axisLine: { lineStyle: { color: token("--grid", tick) } },
-        axisLabel: { color: token("--ink-muted", tick), fontSize: 11 },
+        axisTick: { show: false },
+        axisLabel: {
+          color: token("--ink-muted", tick),
+          fontSize: 11,
+          hideOverlap: true,
+          formatter: fmt,
+        },
       },
       yAxis: {
         type: "value",
@@ -62,19 +102,27 @@ export default function EquityChart() {
           smooth: false,
           lineStyle: { width: 2, color: token("--series-1", tick) },
           areaStyle: { color: token("--series-1", tick), opacity: 0.08 },
-          data: pts.map((p) => [p.t, p.equity]),
-          // The opening balance, so every glance answers "up or down since we started".
+          data: values,
           markLine: {
             silent: true,
             symbol: "none",
             lineStyle: { color: token("--baseline", tick), type: "dashed", width: 1 },
             label: { show: false },
-            data: [{ yAxis: inception }],
+            data: [
+              // The opening balance, so every glance answers "up or down since
+              // we started".
+              { yAxis: inception },
+              // One per session seam.
+              ...seams.map((i) => ({
+                xAxis: i,
+                lineStyle: { color: token("--grid", tick), type: "solid" as const, width: 1 },
+              })),
+            ],
           },
         },
       ],
     };
-  }, [data, tick]);
+  }, [data, tick, range]);
 
   return (
     <div className="card p-5">

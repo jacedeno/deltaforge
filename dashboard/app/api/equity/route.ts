@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { trading } from "@/lib/alpaca";
-import { INCEPTION_EQUITY, sinceInception } from "@/lib/inception";
+import { INCEPTION_EQUITY, nyDay, sinceInception } from "@/lib/inception";
 
 export const dynamic = "force-dynamic";
 
@@ -41,15 +41,20 @@ export async function GET(req: Request) {
       if (t.length > 1) {
         const points = t.map((ts, j) => ({ t: ts * 1000, equity: equity[j] }));
         // The curve must end where the header's equity is. History lags the
-        // account two different ways — the daily series only gains today's row
-        // once it settles, and the intraday series stops at the last session
-        // bar, which after the close still shows intraday marks while the
-        // account has been re-marked at the closing bids. Whenever the last
-        // point is stale, the account's live equity finishes the line.
+        // account two ways: the daily series only gains today's row once it
+        // settles, and the intraday series stops at the closing bar while the
+        // account goes on being re-marked at the closing bids.
+        //
+        // Correcting the last bar in place rather than appending is what keeps
+        // the curve inside market hours — an extra point stamped `now` sat
+        // hours past the close and drew a long flat tail across dead time.
         const last = points[points.length - 1];
         if (Date.now() - last.t > 10 * 60_000) {
           const live = Number((await trading("/v2/account")).equity);
-          if (Number.isFinite(live) && live > 0) points.push({ t: Date.now(), equity: live });
+          if (Number.isFinite(live) && live > 0) {
+            if (nyDay(last.t) === nyDay(Date.now())) last.equity = live;
+            else points.push({ t: Date.now(), equity: live });
+          }
         }
         return NextResponse.json({
           range: key,
