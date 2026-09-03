@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" role="img" aria-label="lablab.ai">
+  <!-- lablab.ai's stacked wordmark, redrawn from their favicon so it stays
+       crisp at any size: black grotesk LAB/LAB on a white tile. -->
+  <rect width="48" height="48" fill="#ffffff"/>
+  <text x="7" y="22" font-family="Helvetica, Arial, sans-serif" font-weight="700" font-size="14" letter-spacing="0.5" fill="#0b0b0b">LAB</text>
+  <text x="7" y="38" font-family="Helvetica, Arial, sans-serif" font-weight="700" font-size="14" letter-spacing="0.5" fill="#0b0b0b">LAB</text>
+</svg>

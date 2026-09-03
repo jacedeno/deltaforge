@@ -71,6 +71,36 @@ export default function Dashboard() {
               around 0.55 delta — and exits on the underlying&apos;s own stop, its 3R target,
               or the five-day expiry clock. Alpaca paper.
             </p>
+            {/* Credit line, not a banner: the sponsor marks keep their own
+                colours at chip size, everything else stays in the header's
+                quiet register. */}
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-2 mt-3">
+              <span className="eyebrow">built for</span>
+              <a
+                href="https://lablab.ai/ai-hackathons/alpaca-ai-trading-agents-hackathon"
+                target="_blank" rel="noopener noreferrer"
+                className="flex items-center gap-2 transition-opacity hover:opacity-80"
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/alpaca.png" width={20} height={20} alt="Alpaca" className="rounded"
+                     style={{ border: "1px solid var(--border)" }} />
+                <span className="font-mono2 text-[11px]" style={{ color: "var(--ink-secondary)" }}>
+                  Alpaca AI Trading Agents Hackathon
+                </span>
+              </a>
+              <span className="font-mono2 text-[11px]" style={{ color: "var(--ink-muted)" }}>·</span>
+              <a
+                href="https://lablab.ai" target="_blank" rel="noopener noreferrer"
+                className="flex items-center gap-2 transition-opacity hover:opacity-80"
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/lablab.svg" width={20} height={20} alt="lablab.ai" className="rounded"
+                     style={{ border: "1px solid var(--border)" }} />
+                <span className="font-mono2 text-[11px]" style={{ color: "var(--ink-secondary)" }}>
+                  lablab.ai
+                </span>
+              </a>
+            </div>
           </div>
           <ThemeToggle />
         </header>
@@ -91,7 +121,7 @@ export default function Dashboard() {
           <Tile
             label="open positions"
             value={snap ? String(snap.positions.length) : "—"}
-            sub={acct ? `of ${Math.min(15, Math.floor(acct.equity / 300))} slots` : undefined}
+            sub={acct ? `of ${Math.min(14, Math.floor(acct.equity / 7000))} slots` : undefined}
           />
           <Tile
             label="capital deployed"

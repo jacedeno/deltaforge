@@ -4,9 +4,12 @@ import { INCEPTION_EQUITY, sinceInception } from "@/lib/inception";
 
 export const dynamic = "force-dynamic";
 
+// The finest resolution Alpaca serves at each span: minute bars for a day,
+// five-minute for a week (~395 points), and daily beyond that — the API
+// refuses intraday timeframes past 30 days.
 const RANGES: Record<string, { period: string; timeframe: string }> = {
-  "1D": { period: "1D", timeframe: "5Min" },
-  "1W": { period: "1W", timeframe: "1H" },
+  "1D": { period: "1D", timeframe: "1Min" },
+  "1W": { period: "1W", timeframe: "5Min" },
   "1M": { period: "1M", timeframe: "1D" },
   ALL: { period: "3M", timeframe: "1D" },
 };
