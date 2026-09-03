@@ -35,7 +35,12 @@ export default function StatusStrip({ marketOpen }: { marketOpen: boolean | null
       ? { label: `BOT DEGRADED (${health.failures} failed passes)`, color: "var(--critical)" }
       : health.alive
         ? { label: "BOT LIVE", color: "var(--good)" }
-        : { label: "BOT DOWN", color: "var(--critical)" };
+        : // A stale heartbeat with zero failed passes is a bot that was shut
+          // down, not one that died mid-flight — the operator stopping it
+          // (as after closing the book to cash) should not read as an outage.
+          (health.failures ?? 0) > 0
+          ? { label: "BOT DOWN", color: "var(--critical)" }
+          : { label: "BOT STOPPED", color: "var(--ink-muted)" };
 
   return (
     <div
