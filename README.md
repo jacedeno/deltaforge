@@ -20,6 +20,13 @@ what it did on the [dashboard](https://deltaforge.geekendzone.net). Built for
 the [Alpaca AI Trading Agents Hackathon](https://lablab.ai/ai-hackathons/alpaca-ai-trading-agents-hackathon);
 the first commit landed four hours after kickoff.
 
+![The open book on the dashboard: six long calls with their debit, live
+bid/ask, days to expiry and P&L, each with the payoff diagram at its current
+price](docs/images/dashboard-open-positions.png)
+
+<sub>The agent's open book, 2026-09-02. Every one of these positions was
+opened by the bot, unattended.</sub>
+
 ## How it trades
 
 The ML30 momentum signal fires when, on a single 30-minute candle close,
@@ -38,6 +45,13 @@ $7,000 a position. The underlying's own levels close the trade — stop touch,
 target touch, or a DTE clock at 5 days to expiry — and signals whose 3R
 target sits under 5% away are refused, because a short walk cannot pay for
 an option's bid-ask and theta.
+
+![NVDA on 30-minute bars: the 21 and 55 SMAs, the entry candle marked at the
+cross, and the frozen stop and 3R target the agent is holding](docs/images/trade-chart-nvda.png)
+
+<sub>The three anchors, as the dashboard draws them: the cross that fired the
+entry, the 8-bar pivot stop below it, and the 3R target above. The chart
+renders the same moving averages the bot computes — not a reconstruction.</sub>
 
 ## Where the edge comes from
 
