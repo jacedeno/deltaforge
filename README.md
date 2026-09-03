@@ -20,12 +20,12 @@ what it did on the [dashboard](https://deltaforge.geekendzone.net). Built for
 the [Alpaca AI Trading Agents Hackathon](https://lablab.ai/ai-hackathons/alpaca-ai-trading-agents-hackathon);
 the first commit landed four hours after kickoff.
 
-![The open book on the dashboard: six long calls with their debit, live
-bid/ask, days to expiry and P&L, each with the payoff diagram at its current
-price](docs/images/dashboard-open-positions.png)
+![The dashboard at the judged close: equity $107,247.11, up $7,247.11 since
+inception, zero open positions, and the week's equity curve](docs/images/dashboard-equity-curve.png)
 
-<sub>The agent's open book, 2026-09-02. Every one of these positions was
-opened by the bot, unattended.</sub>
+<sub>The judged week, closed to cash: <b>+$7,247.11 on $100,000</b>, no
+position left open. The curve is the whole record — the day-one drawdown,
+the recovery, and the flat line after the book was closed.</sub>
 
 ## How it trades
 
@@ -103,6 +103,12 @@ measures.
   2020–2026 distribution, so signals are few and narrow — documented in the
   backtest report before the event began. Few trades is the filter working.
 
+![Six open long calls — UAL, INTC, NVDA, DELL, MS, UNH — with their debit,
+live bid/ask, days left and P&L](docs/images/dashboard-open-positions.png)
+
+<sub>The book mid-ramp: six of fourteen slots filled, winners and losers
+side by side. This is what a one-week window actually measures.</sub>
+
 The 30-month record above, the falsification work below, and a live journal
 that matches the backtest's mechanics bar for bar are the useful evidence.
 Three sessions of P&L — good or bad — are not.
@@ -140,6 +146,17 @@ would make the paper phase measure something other than what was tested.
 What the backtest could not model and the bot must, it measures: limit
 orders at mid, chased no further than the haircut the backtest assumed,
 abandoned rather than crossed.
+
+![A closed DELL trade: contract DELL260911C00467500, delta at entry 0.542,
+asked 21.68 filled 21.50, exit filled 42.55, debit $6,450, fees $3.90, and
+the two fills with their timestamps](docs/images/trade-detail-dell.png)
+
+<sub>What the journal keeps for every position: the contract, the delta it
+was chosen at, what was asked versus what filled on both legs, the fees,
+the three levels, and the fill log. This one closed at <b>+$6,311.10</b>.
+Its exit is tagged <code>MANUAL</code> because it was the close-to-cash for
+judging, not one of the three mechanical exits — the journal labels it
+rather than hiding it.</sub>
 
 ## Run it
 
