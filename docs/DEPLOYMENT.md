@@ -19,7 +19,7 @@ using an old key until restarted).
 Inception is **2026-08-31** at **$100,000.00**.
 
 **One bot, one account.** The fleet runs exactly three bots — ml30's real-money
-V1-5m-Top20 and DeltaForge here, both on AlgoTrader, plus ThetaForge on
+V1-5m-Top20 and DeltaForge here, both on AlgoTrader, plus a third on
 GeekForge. DeltaForge is this account and nothing else.
 
 ### Two retired accounts
@@ -129,8 +129,9 @@ the real moment. Measured on live chains, the swap takes the names actually
 affordable at $300 from ~22 to **37**.
 
 Rebuild with `scripts/build_liquid_universe.py --top-n 160` (needs SIP bars,
-so source `alpaca-thetaforge-competition.env` first, not the bot's own key).
-It mirrors ml30's `build_broad_liquid_universe.py` — mean per-bar dollar
+so source the SIP-entitled key file from `homelab-secrets` first, not the
+bot's own key). It mirrors ml30's `build_broad_liquid_universe.py` — mean
+per-bar dollar
 volume, greedy per-sector cap, no feature selection — so the two stay
 comparable.
 
@@ -157,9 +158,9 @@ results before trusting the widened list.
 ssh root@192.168.68.102 'cd /root/repos/deltaforge && ./scripts/deploy_dashboard.sh'
 ```
 
-Port **3779** (3777 is ThetaForge, 3778 the ml30 screener — both on this
-fleet). The deploy script's kill is **port-scoped on purpose**; `pkill
-next-server` would take the neighbours down.
+Port **3779** (3777 and 3778 belong to neighbouring apps on this fleet,
+3778 being the ml30 screener). The deploy script's kill is **port-scoped
+on purpose**; `pkill next-server` would take the neighbours down.
 
 `dashboard/.env.local` is not in git and is the whole configuration:
 
@@ -299,5 +300,5 @@ ssh root@192.168.68.102 'systemctl is-active deltaforge-bot; systemctl is-enable
 dashboard is authenticating with a revoked key — check `dashboard/.env.local`
 against `homelab-secrets/alpaca-deltaforge-100k.env`, then redeploy.
 
-After any tunnel edit, confirm the neighbours too — `thetaforge` and
-`wireguard` should answer 200, `screener` and `term` 302.
+After any tunnel edit, confirm the neighbours too — the sibling dashboard
+and `wireguard` routes should answer 200, `screener` and `term` 302.

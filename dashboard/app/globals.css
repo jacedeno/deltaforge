@@ -1,10 +1,8 @@
 @import "tailwindcss";
 
-/* ---- DeltaForge tokens — dark-first, sibling of ThetaForge ----
-   Same structure and the same signal blue; the accent moves from ThetaForge's
-   ember to violet so the two dashboards are never mistaken for each other at a
-   glance, and so the accent never collides with the green/red P&L semantics
-   that matter more on a directional book. */
+/* ---- DeltaForge tokens — dark-first ----
+   Signal blue carries the price series and violet the accent, kept clear of
+   the green/red P&L semantics that matter more on a directional book. */
 :root {
   color-scheme: dark;
   --page: #0d0e10;
@@ -16,7 +14,7 @@
   --grid: #26282c;
   --baseline: #383835;
   --border: rgba(255, 255, 255, 0.08);
-  --series-1: #3987e5;      /* signal blue — shared with ThetaForge */
+  --series-1: #3987e5;      /* signal blue — the price series */
   --series-2: #8b6ce0;      /* delta violet — the entry bar and its marker */
   --sma-fast: #8fc0ec;      /* SMA21 — momentum confirmation (c3) */
   --sma-slow: #f97316;      /* SMA55 — the line price must cross to fire (c1/c2) */

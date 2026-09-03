@@ -70,13 +70,13 @@ and post-breakout IV crush hurts even correct directional calls. On $3k
 the premium restricts the universe to underlyings under ~$100. Use as the
 exception for the calmest, strongest signals — not as the base structure.
 
-### 3. Put credit spreads (the ThetaForge structure) — NO at this size
+### 3. Put credit spreads — NO at this size
 
-ThetaForge's edge is the law of large numbers: many small premiums across
-15 concurrent positions. At $3,000 that becomes 2–3 slots of $1-wide
-spreads collecting $10–20 credits, where round-trip fees (~$2.60) are
-15–25% of the credit and $1-wide strikes are illiquid on many names. The
-math that works at $100k does not scale down to $3k.
+A credit-spread book's edge is the law of large numbers: many small
+premiums across 15 concurrent positions. At $3,000 that becomes 2–3 slots
+of $1-wide spreads collecting $10–20 credits, where round-trip fees
+(~$2.60) are 15–25% of the credit and $1-wide strikes are illiquid on many
+names. The math that works at $100k does not scale down to $3k.
 
 ### 4. Cash-secured puts — NO
 

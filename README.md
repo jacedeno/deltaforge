@@ -2,7 +2,7 @@
   <img src="dashboard/public/logo.svg" width="96" alt="The DeltaForge mark — a faceted delta with a strike line">
   <h1>DeltaForge</h1>
   <p><em>A directional options overlay on a validated momentum signal.<br>
-  Where its sibling ThetaForge sells time, DeltaForge buys direction.</em></p>
+  The signal picks the direction; the option shapes the payoff.</em></p>
   <p>
     <a href="https://deltaforge.geekendzone.net"><b>Live dashboard</b></a> ·
     <a href="docs/ANALYSIS.md">Strategy analysis</a> ·
@@ -167,12 +167,10 @@ new during the event with the required $100,000 starting balance.
 joseangel.cedeno@gmail.com
 
 I run a small fleet of automated trading systems out of a self-hosted
-homelab: a real-money ML30 momentum bot, [ThetaForge](https://github.com/jacedeno/thetaforge)
-(short premium on the same signal — the other half of this hackathon's
-work), and DeltaForge. The signal research, the backtesting practice and
-the infrastructure underneath — from the Proxmox cluster and its
-failover to the dashboards on top — are built and operated end to end by
-me.
+homelab: a real-money ML30 momentum bot and DeltaForge. The signal
+research, the backtesting practice and the infrastructure underneath —
+from the Proxmox cluster and its failover to the dashboards on top — are
+built and operated end to end by me.
 
 ## Disclaimer
 

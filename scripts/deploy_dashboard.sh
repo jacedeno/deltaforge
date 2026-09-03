@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 # DeltaForge dashboard — build and (re)start on AlgoTrader, port 3779.
 #
-# Runs beside the bot so `..` reaches its journal and event log, the same
-# convention ThetaForge uses. Published at deltaforge.geekendzone.net through
+# Runs beside the bot so `..` reaches its journal and event log. Published
+# at deltaforge.geekendzone.net through
 # the CT 101 Cloudflare tunnel, behind Cloudflare Access.
 #
 # The kill is PORT-scoped on purpose — never `pkill next-server`. Other Next
-# apps share this fleet (ThetaForge 3777, ml30-screener 3778) and a broad kill
+# apps share this fleet (ports 3777 and 3778) and a broad kill
 # would take them down with it.
 set -euo pipefail
 

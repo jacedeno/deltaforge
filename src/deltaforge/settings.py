@@ -56,8 +56,8 @@ UNIVERSE_PRICE_CAP: float = 150.0
 def alpaca_keys() -> tuple[str, str]:
     """Alpaca (key, secret) — process env first, ml30's .env as fallback.
 
-    Source the canonical file before running data scripts:
-        set -a; source ~/.secrets/alpaca-thetaforge-competition.env; set +a
+    Export SIP-entitled keys before running data scripts:
+        export ALPACA_API_KEY=... ALPACA_SECRET_KEY=...
     (the keys in ml30's own .env were found revoked on 2026-08-28).
     """
     key, secret = os.environ.get("ALPACA_API_KEY"), os.environ.get("ALPACA_SECRET_KEY")

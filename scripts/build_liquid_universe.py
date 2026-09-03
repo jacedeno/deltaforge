@@ -24,7 +24,7 @@ alone: every artefact under ``reports/`` was produced on it, and repointing
 it would quietly invalidate the numbers in ``docs/BACKTEST.md``.
 
 Usage:
-    set -a; source ~/.secrets/alpaca-thetaforge-competition.env; set +a
+    export ALPACA_API_KEY=... ALPACA_SECRET_KEY=...   # SIP-entitled keys
     python scripts/build_liquid_universe.py --top-n 160
 """
 

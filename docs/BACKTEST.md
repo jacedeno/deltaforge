@@ -412,7 +412,7 @@ question only live quotes can settle.
 ## Reproducing
 
 ```bash
-set -a; source ~/.secrets/alpaca-thetaforge-competition.env; set +a
+export ALPACA_API_KEY=... ALPACA_SECRET_KEY=...   # SIP-entitled keys
 uv run python scripts/build_universe.py --start 2020-01-01 --end 2026-08-01
 uv run python scripts/run_phase1_underlying.py --label bench30m \
     --start 2020-01-01 --end 2026-08-01 \

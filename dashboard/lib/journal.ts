@@ -5,8 +5,8 @@ import Database from "better-sqlite3";
 /**
  * Read-only access to the bot's journal.
  *
- * The dashboard runs with cwd = <repo>/dashboard, so `..` is the bot's root —
- * the same convention ThetaForge uses. Opened read-only against a WAL database,
+ * The dashboard runs with cwd = <repo>/dashboard, so `..` is the bot's root.
+ * Opened read-only against a WAL database,
  * so reads never block the bot's writes and the page can never corrupt them.
  */
 const DB_PATH = process.env.DF_DB_PATH ?? path.join(process.cwd(), "..", "data", "deltaforge.db");
