@@ -191,6 +191,51 @@ AlgoTrader (`deltaforge-100k-bot.service.d/override.conf`) runs the bot with
 keep being managed while nothing new opens into the judged session. Revert
 Friday by removing the drop-in, `daemon-reload`, restart.
 
+### The judged session (2026-09-03) — book closed to cash, bot stopped
+
+The hackathon's judged number is total equity at EOD Thursday Sep 3. The
+plan for the day was a bracket: a protective floor under the book's
+mid-marked equity, and failing that, a full sweep to cash mid-afternoon —
+because a session that ends with the score has no "later" for a drawdown to
+recover into.
+
+The floor fired at 10:33 ET. The book's mid-marked equity fell from
+$112,454 to $107,583 in six minutes; on the second consecutive reading
+below the $109,500 floor, all six positions were closed by the operator
+with limit orders at mid, repriced once toward the bid. Fills, against a
+falling tape: DELL 42.55, NVDA 7.95, UNH 9.10, MS 3.90, INTC 2.36,
+UAL 1.72 — $336 of total friction against the trigger reading, with price
+improvement on two legs. **Final equity $107,247.11, all cash, +7.25% from
+the $100,000 inception in four sessions.** Cash cannot be re-marked, so
+that is the judged number whatever the tape did afterwards.
+
+What it did afterwards deserves recording: the drop was the low of a
+V-reversal, and an hour later the same six positions marked ~$11,800
+higher than where they were sold. Two honest notes on that. The floor was
+mis-calibrated — $2,500 of cushion under a book measured the previous
+afternoon swinging $5–6k intraday, so it was primed to fire on noise
+rather than only on a genuine break. And the giveback it was defending
+against is real but unmeasured: the backtests record entry and exit, never
+the floating maximum in between, so no rule of this kind currently has
+evidence behind it. That measurement (peak-to-exit giveback, trailing-exit
+sweeps in `lifecycle.py`) is the first study queued after the competition.
+
+Because the closes were the operator's, not the bot's, the journal was
+reconciled by hand: each of the six rows carries its real Alpaca fill,
+order id and timestamp, fees at the bot's own schedule, and
+`exit_reason='manual'` so the record says who closed them. The bot was
+then stopped (`systemctl stop`) — with the book flat it has nothing to
+manage, and a stopped bot cannot open a position into a judged tape. The
+status strip shows this as `BOT STOPPED` (muted), a state distinct from
+`BOT DOWN` (red): stale heartbeat with zero failed passes means shut down
+on purpose, not died.
+
+**Resuming after the competition** means, in order: remove the
+`--max-slots 1` drop-in, `systemctl daemon-reload`, `systemctl start
+deltaforge-100k-bot`, and restore the Cloudflare Access app from the
+backups noted below. None of it should happen by reflex — restarting the
+bot is a decision to keep trading the strategy, not a repair.
+
 **Public since 2026-09-02** — the Cloudflare Access app in front of it was
 removed for the hackathon judging window (the dashboard is read-only: every
 API route is a GET and none can reach an order endpoint). A 200 is the
