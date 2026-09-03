@@ -71,48 +71,50 @@ export default function Dashboard() {
               around 0.55 delta — and exits on the underlying&apos;s own stop, its 3R target,
               or the five-day expiry clock. Alpaca paper.
             </p>
-            {/* The marks carry this, so they are sized to be read rather than
-                noticed: 40px, the same as the DeltaForge logo above them, on
-                their own panel so the header reads title → what it does →
-                who it was built for. */}
-            <div
-              className="inline-flex flex-wrap items-center gap-x-5 gap-y-3 mt-4 px-4 py-3 rounded-lg"
-              style={{ background: "var(--surface-2)", border: "1px solid var(--border)" }}
-            >
-              <span className="eyebrow">built for</span>
-              <a
-                href="https://lablab.ai/ai-hackathons/alpaca-ai-trading-agents-hackathon"
-                target="_blank" rel="noopener noreferrer"
-                className="flex items-center gap-2.5 transition-opacity hover:opacity-75"
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/alpaca.png" width={40} height={40} alt="Alpaca" className="rounded-md"
-                     style={{ border: "1px solid var(--border)" }} />
-                <span className="text-[13px] leading-tight" style={{ color: "var(--ink-primary)" }}>
-                  Alpaca<br />
-                  <span className="font-mono2 text-[11px]" style={{ color: "var(--ink-muted)" }}>
-                    AI Trading Agents Hackathon
-                  </span>
-                </span>
-              </a>
-              <a
-                href="https://lablab.ai" target="_blank" rel="noopener noreferrer"
-                className="flex items-center gap-2.5 transition-opacity hover:opacity-75"
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/lablab.svg" width={40} height={40} alt="lablab.ai" className="rounded-md"
-                     style={{ border: "1px solid var(--border)" }} />
-                <span className="text-[13px] leading-tight" style={{ color: "var(--ink-primary)" }}>
-                  lablab.ai<br />
-                  <span className="font-mono2 text-[11px]" style={{ color: "var(--ink-muted)" }}>
-                    hackathon host
-                  </span>
-                </span>
-              </a>
-            </div>
           </div>
           <ThemeToggle />
         </header>
+
+        {/* Full-bleed on purpose. Prose stays at a readable measure in the
+            header column, but a panel hugging its content under that column
+            reads as orphaned against the full-width cards below — so the
+            credit spans the grid like everything else. */}
+        <section className="card px-5 py-4 flex flex-wrap items-center gap-x-8 gap-y-4">
+          <span className="eyebrow">built for</span>
+          <a
+            href="https://lablab.ai/ai-hackathons/alpaca-ai-trading-agents-hackathon"
+            target="_blank" rel="noopener noreferrer"
+            className="flex items-center gap-3 transition-opacity hover:opacity-75"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/alpaca.png" width={44} height={44} alt="Alpaca" className="rounded-md"
+                 style={{ border: "1px solid var(--border)" }} />
+            <span className="text-sm leading-tight" style={{ color: "var(--ink-primary)" }}>
+              Alpaca<br />
+              <span className="font-mono2 text-[11px]" style={{ color: "var(--ink-muted)" }}>
+                AI Trading Agents Hackathon
+              </span>
+            </span>
+          </a>
+          <a
+            href="https://lablab.ai" target="_blank" rel="noopener noreferrer"
+            className="flex items-center gap-3 transition-opacity hover:opacity-75"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/lablab.svg" width={44} height={44} alt="lablab.ai" className="rounded-md"
+                 style={{ border: "1px solid var(--border)" }} />
+            <span className="text-sm leading-tight" style={{ color: "var(--ink-primary)" }}>
+              lablab.ai<br />
+              <span className="font-mono2 text-[11px]" style={{ color: "var(--ink-muted)" }}>
+                hackathon host
+              </span>
+            </span>
+          </a>
+          <span className="font-mono2 text-[11px] ml-auto text-right"
+                style={{ color: "var(--ink-muted)" }}>
+            paper account PA3YN2XF0XWT
+          </span>
+        </section>
 
         {snap?.error && (
           <div className="card p-4 font-mono2 text-[12px]" style={{ color: "var(--critical)" }}>
