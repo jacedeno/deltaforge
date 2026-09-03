@@ -71,33 +71,42 @@ export default function Dashboard() {
               around 0.55 delta — and exits on the underlying&apos;s own stop, its 3R target,
               or the five-day expiry clock. Alpaca paper.
             </p>
-            {/* Credit line, not a banner: the sponsor marks keep their own
-                colours at chip size, everything else stays in the header's
-                quiet register. */}
-            <div className="flex flex-wrap items-center gap-x-3 gap-y-2 mt-3">
+            {/* The marks carry this, so they are sized to be read rather than
+                noticed: 40px, the same as the DeltaForge logo above them, on
+                their own panel so the header reads title → what it does →
+                who it was built for. */}
+            <div
+              className="inline-flex flex-wrap items-center gap-x-5 gap-y-3 mt-4 px-4 py-3 rounded-lg"
+              style={{ background: "var(--surface-2)", border: "1px solid var(--border)" }}
+            >
               <span className="eyebrow">built for</span>
               <a
                 href="https://lablab.ai/ai-hackathons/alpaca-ai-trading-agents-hackathon"
                 target="_blank" rel="noopener noreferrer"
-                className="flex items-center gap-2 transition-opacity hover:opacity-80"
+                className="flex items-center gap-2.5 transition-opacity hover:opacity-75"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/alpaca.png" width={20} height={20} alt="Alpaca" className="rounded"
+                <img src="/alpaca.png" width={40} height={40} alt="Alpaca" className="rounded-md"
                      style={{ border: "1px solid var(--border)" }} />
-                <span className="font-mono2 text-[11px]" style={{ color: "var(--ink-secondary)" }}>
-                  Alpaca AI Trading Agents Hackathon
+                <span className="text-[13px] leading-tight" style={{ color: "var(--ink-primary)" }}>
+                  Alpaca<br />
+                  <span className="font-mono2 text-[11px]" style={{ color: "var(--ink-muted)" }}>
+                    AI Trading Agents Hackathon
+                  </span>
                 </span>
               </a>
-              <span className="font-mono2 text-[11px]" style={{ color: "var(--ink-muted)" }}>·</span>
               <a
                 href="https://lablab.ai" target="_blank" rel="noopener noreferrer"
-                className="flex items-center gap-2 transition-opacity hover:opacity-80"
+                className="flex items-center gap-2.5 transition-opacity hover:opacity-75"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/lablab.svg" width={20} height={20} alt="lablab.ai" className="rounded"
+                <img src="/lablab.svg" width={40} height={40} alt="lablab.ai" className="rounded-md"
                      style={{ border: "1px solid var(--border)" }} />
-                <span className="font-mono2 text-[11px]" style={{ color: "var(--ink-secondary)" }}>
-                  lablab.ai
+                <span className="text-[13px] leading-tight" style={{ color: "var(--ink-primary)" }}>
+                  lablab.ai<br />
+                  <span className="font-mono2 text-[11px]" style={{ color: "var(--ink-muted)" }}>
+                    hackathon host
+                  </span>
                 </span>
               </a>
             </div>
