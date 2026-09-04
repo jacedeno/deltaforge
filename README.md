@@ -148,7 +148,9 @@ frozen stop, same-bar precedence, same DTE clock — because any divergence
 would make the paper phase measure something other than what was tested.
 What the backtest could not model and the bot must, it measures: limit
 orders at mid, chased no further than the haircut the backtest assumed,
-abandoned rather than crossed.
+abandoned rather than crossed. Orders reach Alpaca through the
+[Alpaca CLI](https://github.com/alpacahq/cli) (`--broker cli`, the default);
+the SDK is kept for account, clock, positions and the option chain.
 
 ![A closed DELL trade: contract DELL260911C00467500, delta at entry 0.542,
 asked 21.68 filled 21.50, exit filled 42.55, debit $6,450, fees $3.90, and
@@ -168,7 +170,7 @@ export ALPACA_API_KEY=... ALPACA_SECRET_KEY=...   # historical SIP entitlement n
 uv run python scripts/run_phase1_underlying.py --help   # phase 1: signal on shares
 uv run python scripts/backtest_overlay.py --help        # phase 2: options overlay
 uv run python scripts/sweep_overlay.py --help           # phase 3: variations
-uv run python scripts/run_paper_bot.py --help           # the bot itself
+uv run python scripts/run_paper_bot.py --help           # the bot itself (orders via the Alpaca CLI)
 ```
 
 ## Pre-event work disclosure

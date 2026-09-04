@@ -18,6 +18,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import signal
 import sys
 import time
@@ -27,6 +28,7 @@ from pathlib import Path
 import structlog
 
 from deltaforge.live.broker import Broker
+from deltaforge.live.cli_broker import CliBroker
 from deltaforge.live.events import ERROR, EventLog
 from deltaforge.live.executor import BotConfig, Executor
 from deltaforge.live.journal import Journal
@@ -90,13 +92,17 @@ def main() -> None:
     parser.add_argument("--min-target-pct", type=float, default=5.0)
     parser.add_argument("--once", action="store_true", help="single pass, then exit")
     parser.add_argument("--dry-run", action="store_true", help="scan and log, place no orders")
+    parser.add_argument(
+        "--broker", choices=("cli", "sdk"), default=os.environ.get("DF_BROKER", "cli"),
+        help="how orders reach Alpaca: the alpaca CLI (default) or the Python SDK",
+    )
     args = parser.parse_args()
 
     signal.signal(signal.SIGTERM, _handle_signal)
     signal.signal(signal.SIGINT, _handle_signal)
 
     key, secret = load_env(args.env_file)
-    broker = Broker(key, secret, paper=True)
+    broker = (CliBroker if args.broker == "cli" else Broker)(key, secret, paper=True)
     account = broker.account()
     universe = json.loads(args.universe_file.read_text())["symbols"]
 

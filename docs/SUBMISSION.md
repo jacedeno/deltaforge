@@ -13,7 +13,7 @@ Everything the lablab.ai form asks for, ready to paste. Deadline:
 | GitHub repository | `https://github.com/jacedeno/deltaforge` |
 | Application URL | `https://deltaforge.geekendzone.net` |
 | Alpaca paper account ID | `PA3YN2XF0XWT` |
-| Technologies | Alpaca Trading API · Alpaca Market Data (options + SIP/IEX stocks) · Python · pandas · Next.js · SQLite · lightweight-charts · ECharts |
+| Technologies | Alpaca Trading API · Alpaca CLI (order routing) · Alpaca MCP server (supervision, read-only) · Alpaca Market Data (options + SIP/IEX stocks) · Python · pandas · Next.js · SQLite · lightweight-charts · ECharts |
 | Social links (≤5) | *(paste the X / LinkedIn posts from the week)* |
 
 ## Short description (≤255 characters)

@@ -192,6 +192,32 @@ AlgoTrader (`deltaforge-100k-bot.service.d/override.conf`) runs the bot with
 keep being managed while nothing new opens into the judged session. Revert
 Friday by removing the drop-in, `daemon-reload`, restart.
 
+### Order routing through the Alpaca CLI (added 2026-09-03, after the judged week)
+
+The hackathon requires the agent to trade through Alpaca's MCP server or
+CLI, not the raw REST API. During the judged week the bot placed its orders
+through the official Python SDK (`alpaca-py`), and the supervisory agent
+used the Alpaca MCP server only for read-only account checks. That gap was
+closed the evening of Sep 3: `deltaforge.live.cli_broker.CliBroker` routes
+every order the executor places — entries, stop/target/DTE exits, cancels
+and fill polls — through `alpaca order submit / get / cancel`. The SDK is
+kept for what is not an order: account, clock, positions and the option
+chain. `scripts/run_paper_bot.py --broker cli` is the default; `--broker
+sdk` (or `DF_BROKER=sdk`) restores the judged-week path.
+
+Credentials are passed to each CLI subprocess as `ALPACA_API_KEY` /
+`ALPACA_SECRET_KEY` and are written nowhere. CLI failures come back as JSON
+objects carrying an `error` key, sometimes with exit code 0, so the broker
+decides on that key rather than the exit status.
+
+Verified live on 2026-09-03 21:47 CDT against a spare paper account (not the
+judged one, which stays untouched): `buy_to_open` of one
+`SPY260908C00500000` at a $0.01 limit was `accepted` (`asset_class:
+us_option`), read back through `get_order`, cancelled through `cancel`, and
+read back `canceled`, leaving zero open orders. The unit tests in
+`tests/test_cli_broker.py` cover the argv shape, the credential handling and
+the error-object parsing without a network.
+
 ### The judged session (2026-09-03) — book closed to cash, bot stopped
 
 The hackathon's judged number is total equity at EOD Thursday Sep 3. The
