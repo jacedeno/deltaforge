@@ -195,15 +195,18 @@ Friday by removing the drop-in, `daemon-reload`, restart.
 ### The judged session (2026-09-03) — book closed to cash, bot stopped
 
 The hackathon's judged number is total equity at EOD Thursday Sep 3. The
-plan for the day was a bracket: a protective floor under the book's
+plan for the day — approved before the open and run by a supervisory agent
+outside the bot — was a bracket: a protective floor under the book's
 mid-marked equity, and failing that, a full sweep to cash mid-afternoon —
 because a session that ends with the score has no "later" for a drawdown to
 recover into.
 
-The floor fired at 10:33 ET. The book's mid-marked equity fell from
-$112,454 to $107,583 in six minutes; on the second consecutive reading
-below the $109,500 floor, all six positions were closed by the operator
-with limit orders at mid, repriced once toward the bid. Fills, against a
+The floor fired at 10:33 ET. The watcher (`scripts/bracket_watch.sh`; its
+log is `reports/judged_session_bracket.log`) read the book's mid-marked
+equity falling from $112,454 to $107,583 in six minutes; on the second
+consecutive reading below the $109,500 floor it woke the supervisory
+agent, which closed all six positions with limit orders at mid, repriced
+once toward the bid. Fills, against a
 falling tape: DELL 42.55, NVDA 7.95, UNH 9.10, MS 3.90, INTC 2.36,
 UAL 1.72 — $336 of total friction against the trigger reading, with price
 improvement on two legs. **Final equity $107,247.11, all cash, +7.25% from
@@ -221,7 +224,7 @@ the floating maximum in between, so no rule of this kind currently has
 evidence behind it. That measurement (peak-to-exit giveback, trailing-exit
 sweeps in `lifecycle.py`) is the first study queued after the competition.
 
-Because the closes were the operator's, not the bot's, the journal was
+Because the closes were the supervisory agent's, not the bot's, the journal was
 reconciled by hand: each of the six rows carries its real Alpaca fill,
 order id and timestamp, fees at the bot's own schedule, and
 `exit_reason='manual'` so the record says who closed them. The bot was

@@ -13,9 +13,10 @@
 
 ---
 
-**Status: trading on paper since 2026-08-31.** One autonomous bot against one
+**Status: traded on paper 2026-08-31 → 2026-09-03, closed to cash at +7.25%
+for judging.** One autonomous bot against one
 account — Alpaca paper **`PA3YN2XF0XWT`** (the competition account), $100,000,
-$7,000 a position across 14 slots — placing every order itself and narrating
+$7,000 a position across 14 slots — opening every position itself and narrating
 what it did on the [dashboard](https://deltaforge.geekendzone.net). Built for
 the [Alpaca AI Trading Agents Hackathon](https://lablab.ai/ai-hackathons/alpaca-ai-trading-agents-hackathon);
 the first commit landed four hours after kickoff.
@@ -154,9 +155,9 @@ the two fills with their timestamps](docs/images/trade-detail-dell.png)
 <sub>What the journal keeps for every position: the contract, the delta it
 was chosen at, what was asked versus what filled on both legs, the fees,
 the three levels, and the fill log. This one closed at <b>+$6,311.10</b>.
-Its exit is tagged <code>MANUAL</code> because it was the close-to-cash for
-judging, not one of the three mechanical exits — the journal labels it
-rather than hiding it.</sub>
+Its exit is tagged <code>MANUAL</code> because the judging-day protective
+floor (<code>scripts/bracket_watch.sh</code>) closed it, not one of the bot's
+three mechanical exits — the journal keeps the two apart.</sub>
 
 ## Run it
 

@@ -1,0 +1,7 @@
+2026-09-03T09:27:58-05:00 bracket armed: floor=109500 sweep=14:30ET
+2026-09-03T09:27:59-05:00 1027 ET  eq_mid=112454 eq_mark=110525 pos=6 badq=0 below=0
+2026-09-03T09:29:16-05:00 1029 ET  eq_mid=111612 eq_mark=109564 pos=6 badq=0 below=0
+2026-09-03T09:30:32-05:00 1030 ET  eq_mid=110220 eq_mark=108429 pos=6 badq=0 below=0
+2026-09-03T09:31:48-05:00 1031 ET  eq_mid=109061 eq_mark=107433 pos=6 badq=0 below=0
+2026-09-03T09:33:04-05:00 1033 ET  eq_mid=107583 eq_mark=106394 pos=6 badq=0 below=1
+2026-09-03T09:33:04-05:00 FLOOR breached: 107583
