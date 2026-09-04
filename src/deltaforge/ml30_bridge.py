@@ -1,16 +1,17 @@
-"""Single import seam to the validated ml30-sp500-strategy code.
+"""Single import seam to the ML30 signal code.
 
-ml30-sp500-strategy is not an installable package (top-level packages with
-absolute cross-imports, no ``[project]`` table), and it must not be modified —
-it runs the live paper bots. So DeltaForge reaches it the one honest way
-left: this module inserts the repo at ``sys.path[0]`` and re-exports exactly
-the symbols DeltaForge is allowed to use. Every DeltaForge import of ml30
-code MUST go through this module — never ``from strategy.entry import ...``
-directly — so the dependency surface stays auditable in one place.
+The live bot's surface — the 21/55 cross entry, its indicators, the frozen
+8-bar pivot stop, the ``Direction`` enum, the Alpaca historical client and
+its settings — is vendored in ``deltaforge.ml30`` (see that package's
+docstring for provenance), so the repository runs on its own. Every
+DeltaForge import of ML30 code MUST still go through this module, never
+``from deltaforge.ml30.entry import ...`` directly, so the dependency
+surface stays auditable in one place.
 
-Position 0 on ``sys.path`` also guarantees ml30's regular packages
-(``strategy``, ``backtest``, ``data``, ``config``) win over any same-named
-namespace directories in the DeltaForge repo root.
+The backtest-only symbols (``Coordinator``, ``Trade``, ``ExitLogic``, …) are
+not vendored. They resolve lazily from an external ml30-sp500-strategy
+checkout at ``ML30_REPO_PATH`` when one is present; the bot has no business
+failing to start over a symbol it never calls.
 
 For reproducibility, run artifacts should record ``ml30_commit()`` alongside
 DeltaForge's own commit.
@@ -21,15 +22,26 @@ from __future__ import annotations
 import subprocess
 import sys
 
+from deltaforge.ml30 import VENDORED_COMMIT, VENDORED_FROM
+from deltaforge.ml30.alpaca_client import AlpacaClientError, AlpacaHistoricalClient
+from deltaforge.ml30.entry import EntryLogic
+from deltaforge.ml30.indicators import add_indicators
+from deltaforge.ml30.settings import Settings as Ml30Settings
+from deltaforge.ml30.sizing import calculate_initial_stop
 from deltaforge.settings import ML30_REPO_PATH
 
 
+def external_repo_available() -> bool:
+    """True when a full ml30-sp500-strategy checkout is reachable for the backtest-only symbols."""
+    return (ML30_REPO_PATH / "strategy" / "entry.py").exists()
+
+
 def _ensure_repo_on_path() -> None:
-    marker = ML30_REPO_PATH / "strategy" / "entry.py"
-    if not marker.exists():
+    if not external_repo_available():
         raise RuntimeError(
             f"ml30-sp500-strategy repo not found at {ML30_REPO_PATH} "
-            "(set ML30_REPO_PATH to override)"
+            "(set ML30_REPO_PATH to override). The live bot does not need it; "
+            "the backtest-only symbols do."
         )
     path = str(ML30_REPO_PATH)
     if path not in sys.path:
@@ -37,13 +49,15 @@ def _ensure_repo_on_path() -> None:
 
 
 def ml30_commit() -> str:
-    """Current commit SHA of the ml30 repo, for run provenance."""
-    return subprocess.run(
-        ["git", "-C", str(ML30_REPO_PATH), "rev-parse", "HEAD"],
-        capture_output=True,
-        text=True,
-        check=True,
-    ).stdout.strip()
+    """Provenance of the signal code: the external checkout's HEAD when present, else the vendored pin."""
+    if external_repo_available():
+        return subprocess.run(
+            ["git", "-C", str(ML30_REPO_PATH), "rev-parse", "HEAD"],
+            capture_output=True,
+            text=True,
+            check=True,
+        ).stdout.strip()
+    return f"{VENDORED_FROM}@{VENDORED_COMMIT} (vendored)"
 
 
 def deltaforge_commit() -> str:
@@ -58,29 +72,11 @@ def deltaforge_commit() -> str:
     ).stdout.strip()
 
 
-_ensure_repo_on_path()
-
-# Re-exports — the whole ml30 surface DeltaForge is allowed to touch.
-#
-# Only what the *live* bot needs is imported eagerly. The backtest-only
-# symbols (Coordinator, Trade, …) load on first use instead, because the
-# ml30 checkout on AlgoTrader trails the one here — it is pinned to whatever
-# the real-money bot runs and must not be pulled forward — and it lacks some
-# of them. The bot has no business failing to start over a symbol it never
-# calls.
-from config.settings import Settings as Ml30Settings  # noqa: E402
-from data.alpaca_client import (  # noqa: E402
-    AlpacaClientError,
-    AlpacaHistoricalClient,
-)
-
-
 def settings_with_credentials(api_key: str, secret_key: str) -> "Ml30Settings":
-    """An ml30 Settings carrying credentials we chose, not ones it found.
+    """An ML30 Settings carrying credentials we chose, not ones it found.
 
-    ``AlpacaHistoricalClient`` otherwise resolves keys from the ml30 repo's
-    own ``.env``, which is dead on both machines as of 2026-08-30 (HTTP 401).
-    Inheriting whatever happens to be on disk is also how a bot ends up
+    ``AlpacaHistoricalClient`` otherwise resolves keys from a ``.env`` on
+    disk. Inheriting whatever happens to be there is how a bot ends up
     trading an account nobody pointed it at, so the caller passes them in.
     """
     from pydantic import SecretStr
@@ -89,14 +85,9 @@ def settings_with_credentials(api_key: str, secret_key: str) -> "Ml30Settings":
     s.alpaca.api_key = SecretStr(api_key)
     s.alpaca.secret_key = SecretStr(secret_key)
     return s
-from strategy.entry import EntryLogic  # noqa: E402
-from strategy.indicators import add_indicators  # noqa: E402
-from strategy.sizing import calculate_initial_stop  # noqa: E402
 
-# The eager set above is exactly what the live bot calls, and every one of
-# those signatures is compatible across both checkouts (AlgoTrader sits a
-# month behind at ccade12). Everything else — including `Direction`, which
-# that checkout predates entirely — resolves on first use.
+
+# Backtest-only: resolved on first use from the external checkout (PEP 562).
 _LAZY = {
     "Coordinator": ("backtest.coordinator", "Coordinator"),
     "CoordinatorResult": ("backtest.coordinator", "CoordinatorResult"),
@@ -104,18 +95,20 @@ _LAZY = {
     "Trade": ("backtest.trade", "Trade"),
     "ExitLogic": ("strategy.exit", "ExitLogic"),
     "ExitReason": ("strategy.exit", "ExitReason"),
-    "Direction": ("strategy.direction", "Direction"),
 }
 
 
 def __getattr__(name: str):
-    """Resolve backtest-only symbols on first use (PEP 562)."""
     if name in _LAZY:
         module, attr = _LAZY[name]
         import importlib
 
+        _ensure_repo_on_path()
         return getattr(importlib.import_module(module), attr)
     raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
+
+
+from deltaforge.ml30.direction import Direction  # noqa: E402  (vendored; was lazy)
 
 __all__ = [
     "ENTRY_RANKINGS",
@@ -132,6 +125,7 @@ __all__ = [
     "add_indicators",
     "calculate_initial_stop",
     "deltaforge_commit",
+    "external_repo_available",
     "ml30_commit",
     "settings_with_credentials",
 ]

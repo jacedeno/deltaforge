@@ -128,10 +128,12 @@ the same suspicion.
 ## What is in the repo
 
 ```
-src/deltaforge/        backtest engine — ml30 bridge, hybrid pricing ladder
+src/deltaforge/        backtest engine — hybrid pricing ladder
                        (real minute prints → BS anchored to observed IV → BS),
                        structures, per-trade lifecycle, portfolio replay
 src/deltaforge/live/   the bot — contract selector, broker, executor, journal
+src/deltaforge/ml30/   the ML30 signal code the bot runs on, vendored (entry,
+                       indicators, pivot stop, Alpaca historical client)
 dashboard/             Next.js dashboard: candles with the strategy's own SMAs
                        and levels, anchored VWAPs, equity curve, trade journal
 scripts/               phase 1–3 pipelines, the bot entrypoint, universe builders
@@ -140,8 +142,8 @@ reports/               every artifact the docs cite, reproducible from the CLI
 config/                trading universes and IV calibration
 ```
 
-The live executor mirrors the backtest's mechanics exactly — same entry
-logic imported from the validated repo rather than reimplemented, same
+The live executor mirrors the backtest's mechanics exactly — the same entry
+logic the backtests ran, vendored rather than reimplemented, same
 frozen stop, same-bar precedence, same DTE clock — because any divergence
 would make the paper phase measure something other than what was tested.
 What the backtest could not model and the bot must, it measures: limit
@@ -173,7 +175,9 @@ uv run python scripts/run_paper_bot.py --help           # the bot itself
 
 The ML30 signal this overlay trades — the 21/55 cross on 30-minute bars, the
 8-bar pivot stop, the 3R target — comes from the author's prior research and
-a separate production system that predates the event. Everything in this
+a separate production system that predates the event. The exact modules the
+bot calls are vendored in `src/deltaforge/ml30/` (pinned to that system's
+commit `c7ad990`, 2026-09-02) so this repository runs on its own. Everything in this
 repository — the overlay analysis, the backtest engine, the paper bot and
 the dashboard — was designed, built and shipped inside the hackathon window
 (first commit 2026-08-28 14:41 CDT), and the account it trades was opened

@@ -1,13 +1,13 @@
 """DeltaForge runtime configuration.
 
 Lives inside the package (not in the top-level ``config/`` directory) on
-purpose: the ml30 bridge puts the ml30-sp500-strategy repo at ``sys.path[0]``,
-whose top-level ``config`` package would collide with any importable
-``config`` here. The repo-root ``config/`` directory therefore holds only
-data files (JSON universes, TOML parameter sets), never Python.
+purpose: the vendored ML30 code under ``deltaforge.ml30`` carries its own
+``settings`` module, and the repo-root ``config/`` directory holds only data
+files (JSON universes, TOML parameter sets), never Python.
 
-Alpaca credentials are NOT duplicated here — they come from the ml30 repo's
-``.env`` via ``config.settings`` once the bridge is up (see ``ml30_bridge``).
+Alpaca credentials are NOT duplicated here — ``alpaca_keys()`` reads the
+process environment first and falls back to the repo's ``.env`` through the
+vendored ML30 settings.
 """
 
 from __future__ import annotations
@@ -54,7 +54,7 @@ UNIVERSE_PRICE_CAP: float = 150.0
 
 
 def alpaca_keys() -> tuple[str, str]:
-    """Alpaca (key, secret) — process env first, ml30's .env as fallback.
+    """Alpaca (key, secret) — process env first, the repo's .env as fallback.
 
     Export SIP-entitled keys before running data scripts:
         export ALPACA_API_KEY=... ALPACA_SECRET_KEY=...
@@ -63,8 +63,7 @@ def alpaca_keys() -> tuple[str, str]:
     key, secret = os.environ.get("ALPACA_API_KEY"), os.environ.get("ALPACA_SECRET_KEY")
     if key and secret:
         return key, secret
-    from deltaforge import ml30_bridge  # noqa: F401  (puts ml30 on sys.path)
-    from config.settings import settings as ml30_settings
+    from deltaforge.ml30.settings import settings as ml30_settings
 
     return (
         ml30_settings.alpaca.api_key.get_secret_value(),
