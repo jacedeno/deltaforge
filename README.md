@@ -187,7 +187,7 @@ new during the event with the required $100,000 starting balance.
 
 ## About the author
 
-**Jose Cedeño** · [github.com/jacedeno](https://github.com/jacedeno) ·
+**Jose Cedeno** · [github.com/jacedeno](https://github.com/jacedeno) ·
 joseangel.cedeno@gmail.com
 
 I run a small fleet of automated trading systems out of a self-hosted
