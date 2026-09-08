@@ -14,7 +14,7 @@ Everything the lablab.ai form asks for, ready to paste. Deadline:
 | Application URL | `https://deltaforge.geekendzone.net` |
 | Alpaca paper account ID | `PA3YN2XF0XWT` |
 | Technologies | Alpaca Trading API · Alpaca CLI (order routing) · Alpaca MCP server (supervision, read-only) · Alpaca Market Data (options + SIP/IEX stocks) · Python · pandas · Next.js · SQLite · lightweight-charts · ECharts |
-| Social links (≤5) | *(paste the X / LinkedIn posts from the week)* |
+| Social links (≤5) | The two LinkedIn posts of 2026-09-08 — text, replies and answers in [`POSTS.md`](POSTS.md) |
 
 ## Short description (≤255 characters)
 
