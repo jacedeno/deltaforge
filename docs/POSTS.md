@@ -2,8 +2,9 @@
 
 What was said about DeltaForge in public, and what was answered. Kept here
 because the submission form asks for social links, and because the lablab.ai
-replies are the only outside reading of the project so far. Both posts went
-out on LinkedIn on 2026-09-08, the Monday after judging.
+replies are the only outside reading of the project so far. The first two posts went
+out on LinkedIn on 2026-09-08, the Monday after judging; the third on
+2026-09-14, when the certificate arrived.
 
 ## 1. Wrap-up post
 
@@ -92,6 +93,39 @@ Two chart images attached: the DELL and NVDA trades on the dashboard's
 > journal can't answer that, the numbers are decoration. Next step is
 > putting those exit types side by side on the dashboard so the split is
 > visible at a glance, not buried in a table.
+
+## 3. Certificate post (2026-09-14)
+
+Posted the Monday after lablab.ai emailed the participation certificate
+(the certificate lives on the lablab.ai profile page). Winners had not been
+announced yet.
+
+> Certificate in hand for the Alpaca AI Trading Agents Hackathon with
+> lablab.ai.
+>
+> I am not posting it for the paper. I am posting it because of what it
+> took to earn it.
+>
+> For a long time I had a strategy idea and a dashboard sitting
+> half-finished on my list, the kind of project you keep promising yourself
+> you will close "when there is time." The hackathon gave me a deadline and
+> no excuses. In three days the strategy went from notes to an autonomous
+> bot placing real option orders on a paper account, and the dashboard I
+> had wanted for months was finally live, journaling every decision the bot
+> made.
+>
+> No prizes here, and honestly that is fine. The win was finishing.
+> Watching something you designed run on its own through five market
+> sessions, without you touching it, is a feeling I would recommend to
+> anyone who builds.
+>
+> Thank you Alpaca and lablab.ai for the push. Sometimes a deadline is the
+> best mentor.
+>
+> What the bot did, trade by trade: https://deltaforge.geekendzone.net
+> Code: https://github.com/jacedeno/deltaforge
+
+Certificate image attached.
 
 ## What the replies confirm
 
