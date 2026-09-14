@@ -61,7 +61,10 @@ export default function StatusStrip({ marketOpen }: { marketOpen: boolean | null
           <span>last scan {new Date(health.lastScan).toLocaleTimeString()}</span>
         )}
         {health?.ageSeconds != null && <span>heartbeat {health.ageSeconds}s ago</span>}
-        {health?.uptimeSeconds ? <span>uptime {hhmm(health.uptimeSeconds)}</span> : null}
+        {/* The heartbeat carries the uptime of the process that wrote it.
+            Once that process is gone the figure only grows staler, so it is
+            shown while the bot is alive and dropped the moment it is not. */}
+        {health?.alive && health.uptimeSeconds ? <span>uptime {hhmm(health.uptimeSeconds)}</span> : null}
         {health?.note ? <span style={{ color: "var(--ink-muted)" }}>{health.note}</span> : null}
       </div>
     </div>

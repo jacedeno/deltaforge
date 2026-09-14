@@ -10,6 +10,7 @@ import BrainFeed from "./BrainFeed";
 import PayoffDiagram from "./PayoffDiagram";
 import Logo from "./Logo";
 import TradeChart from "./TradeChart";
+import JudgedWeek from "./JudgedWeek";
 
 type Position = {
   id: number; symbol: string; occ: string; strike: number; expiry: string; contracts: number;
@@ -41,12 +42,27 @@ function Tile({ label, value, sub, tone }: { label: string; value: string; sub?:
 
 export default function Dashboard() {
   const [snap, setSnap] = useState<Snapshot | null>(null);
+  const [running, setRunning] = useState<boolean | null>(null);
   const [expanded, setExpanded] = useState<number | null>(null);
 
   useEffect(() => {
     const load = () => fetch("/api/snapshot").then((r) => r.json()).then(setSnap).catch(() => {});
     load();
     const id = setInterval(load, 15_000);
+    return () => clearInterval(id);
+  }, []);
+
+  // An empty book reads very differently depending on whether the bot is
+  // hunting or switched off, and the page was claiming the first while the
+  // second was true.
+  useEffect(() => {
+    const load = () =>
+      fetch("/api/health")
+        .then((r) => r.json())
+        .then((h) => setRunning(Boolean(h?.alive)))
+        .catch(() => {});
+    load();
+    const id = setInterval(load, 20_000);
     return () => clearInterval(id);
   }, []);
 
@@ -116,11 +132,24 @@ export default function Dashboard() {
           </span>
         </section>
 
+        <JudgedWeek />
+
         {snap?.error && (
           <div className="card p-4 font-mono2 text-[12px]" style={{ color: "var(--critical)" }}>
             {snap.error}
           </div>
         )}
+
+        {/* Everything below this line is the account as it stands now, which
+            stopped being the hackathon result the moment the bot traded on
+            past the window. The heading is what keeps the two apart. */}
+        <section className="pt-2">
+          <div className="eyebrow">the account today</div>
+          <p className="text-sm mt-1" style={{ color: "var(--ink-secondary)" }}>
+            The bot kept running after the competition closed and is now stopped, flat and in
+            cash. These are live figures, not the judged ones.
+          </p>
+        </section>
 
         <section className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           <Tile
@@ -148,8 +177,9 @@ export default function Dashboard() {
           <div className="eyebrow mb-4">open positions</div>
           {!snap || snap.positions.length === 0 ? (
             <div className="py-8 text-center text-sm" style={{ color: "var(--ink-muted)" }}>
-              No open positions — the bot is waiting for a signal whose 3R target is far
-              enough away to be worth an option.
+              {running === false
+                ? "No open positions — the bot is stopped and the account is flat, in cash."
+                : "No open positions — the bot is waiting for a signal whose 3R target is far enough away to be worth an option."}
             </div>
           ) : (
             <div className="space-y-3">
@@ -224,7 +254,7 @@ export default function Dashboard() {
                 Only if the 3R target sits 5%+ away — nearer than that, the option cannot
                 pay for its own spread and theta.</li>
               <li><span className="font-mono2 text-[11px]" style={{ color: "var(--accent)" }}>03 · STRUCTURE</span><br />
-                One call near 0.55 delta, 7–14 DTE, $300 a position, limit at mid.</li>
+                One call near 0.55 delta, 7–14 DTE, $7,000 a position, limit at mid.</li>
               <li><span className="font-mono2 text-[11px]" style={{ color: "var(--accent)" }}>04 · MANAGE</span><br />
                 Exit on the underlying&apos;s stop, its 3R target, or five days to expiry —
                 first touch wins, stop before target.</li>
