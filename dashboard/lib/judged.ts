@@ -16,6 +16,12 @@
  */
 export const JUDGED_START = "2026-08-31";
 
+/**
+ * The hackathon account's opening balance. A recorded fact of a closed run,
+ * not configuration: the live account has its own inception in inception.ts.
+ */
+export const JUDGED_INCEPTION_EQUITY = 100_000;
+
 /** Thursday's close. The competition measured equity end-of-day here. */
 export const JUDGED_END = "2026-09-03";
 

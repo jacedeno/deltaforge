@@ -24,6 +24,7 @@ type Snapshot = {
   market: { isOpen: boolean };
   account: { number: string; equity: number; cash: number; optionsBuyingPower: number;
              inceptionEquity: number; pnlSinceInception: number };
+  sizing: { positionSize: number; maxSlots: number; slots: number };
   positions: Position[]; deployed: number; error?: string;
 };
 
@@ -128,28 +129,15 @@ export default function Dashboard() {
           </a>
           <span className="font-mono2 text-[11px] ml-auto text-right"
                 style={{ color: "var(--ink-muted)" }}>
-            paper account PA3YN2XF0XWT
+            {acct ? `paper account ${acct.number}` : "paper account"}
           </span>
         </section>
-
-        <JudgedWeek />
 
         {snap?.error && (
           <div className="card p-4 font-mono2 text-[12px]" style={{ color: "var(--critical)" }}>
             {snap.error}
           </div>
         )}
-
-        {/* Everything below this line is the account as it stands now, which
-            stopped being the hackathon result the moment the bot traded on
-            past the window. The heading is what keeps the two apart. */}
-        <section className="pt-2">
-          <div className="eyebrow">the account today</div>
-          <p className="text-sm mt-1" style={{ color: "var(--ink-secondary)" }}>
-            The bot kept running after the competition closed and is now stopped, flat and in
-            cash. These are live figures, not the judged ones.
-          </p>
-        </section>
 
         <section className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           <Tile
@@ -161,7 +149,7 @@ export default function Dashboard() {
           <Tile
             label="open positions"
             value={snap ? String(snap.positions.length) : "—"}
-            sub={acct ? `of ${Math.min(14, Math.floor(acct.equity / 7000))} slots` : undefined}
+            sub={snap?.sizing ? `of ${snap.sizing.slots} slots` : undefined}
           />
           <Tile
             label="capital deployed"
@@ -254,7 +242,9 @@ export default function Dashboard() {
                 Only if the 3R target sits 5%+ away — nearer than that, the option cannot
                 pay for its own spread and theta.</li>
               <li><span className="font-mono2 text-[11px]" style={{ color: "var(--accent)" }}>03 · STRUCTURE</span><br />
-                One call near 0.55 delta, 7–14 DTE, $7,000 a position, limit at mid.</li>
+                One call near 0.55 delta, 7–14 DTE,{" "}
+                {snap?.sizing ? money(snap.sizing.positionSize).replace(/\.00$/, "") : "a fixed amount"} a
+                position, limit at mid.</li>
               <li><span className="font-mono2 text-[11px]" style={{ color: "var(--accent)" }}>04 · MANAGE</span><br />
                 Exit on the underlying&apos;s stop, its 3R target, or five days to expiry —
                 first touch wins, stop before target.</li>
@@ -264,6 +254,11 @@ export default function Dashboard() {
 
         <TradeHistory />
         <BrainFeed />
+
+        {/* The hackathon ran on a different account, so its result is history
+            rather than a figure about this one — folded away below the live
+            book instead of leading the page. */}
+        <JudgedWeek />
 
         <footer className="pt-6 pb-10 font-mono2 text-[11px]" style={{ color: "var(--ink-muted)" }}>
           <div className="flex flex-wrap items-center justify-between gap-4">

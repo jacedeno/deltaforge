@@ -1,9 +1,8 @@
 import { NextResponse } from "next/server";
-import { trading } from "@/lib/alpaca";
-import { readTrades, summarise } from "@/lib/journal";
-import { INCEPTION_EQUITY } from "@/lib/inception";
+import { judgedTrading } from "@/lib/alpaca";
+import { JUDGED_DB_PATH, readTrades, summarise } from "@/lib/journal";
 import {
-  JUDGED_CLOSE_MS, JUDGED_END, JUDGED_FETCH_END, JUDGED_START, inJudgedWindow,
+  JUDGED_CLOSE_MS, JUDGED_END, JUDGED_FETCH_END, JUDGED_INCEPTION_EQUITY, JUDGED_START, inJudgedWindow,
 } from "@/lib/judged";
 
 export const dynamic = "force-dynamic";
@@ -20,10 +19,14 @@ export const dynamic = "force-dynamic";
  *
  * Unlike /api/equity, nothing here is re-marked to the live account. The
  * window is closed. Its last point is its last point.
+ *
+ * It reads the hackathon account and journal, never the live ones: the bot has
+ * since moved to a fresh account, and that account's history holds nothing
+ * from the judged week.
  */
 export async function GET() {
   try {
-    const intraday = await trading(
+    const intraday = await judgedTrading(
       `/v2/account/portfolio/history?start=${JUDGED_START}&end=${JUDGED_FETCH_END}` +
         `&timeframe=5Min&intraday_reporting=market_hours`,
     ).catch(() => null);
@@ -33,7 +36,7 @@ export async function GET() {
     let resolution = "5Min";
 
     if (ts.length < 2) {
-      const daily = await trading(
+      const daily = await judgedTrading(
         `/v2/account/portfolio/history?start=${JUDGED_START}&end=${JUDGED_FETCH_END}&timeframe=1D`,
       );
       ts = daily.timestamp ?? [];
@@ -53,7 +56,7 @@ export async function GET() {
 
     const closeEquity = points.length ? points[points.length - 1].equity : null;
 
-    const { trades, ready } = readTrades(300);
+    const { trades, ready } = readTrades(300, JUDGED_DB_PATH);
     // Entered inside the window. The book was closed to cash on the judged
     // day, so every one of these also exits inside it.
     const judged = trades
@@ -64,10 +67,10 @@ export async function GET() {
       window: { start: JUDGED_START, end: JUDGED_END, closedAt: new Date(JUDGED_CLOSE_MS).toISOString() },
       resolution,
       journalReady: ready,
-      inceptionEquity: INCEPTION_EQUITY,
+      inceptionEquity: JUDGED_INCEPTION_EQUITY,
       closeEquity,
-      pnl: closeEquity == null ? null : closeEquity - INCEPTION_EQUITY,
-      pnlPct: closeEquity == null ? null : ((closeEquity - INCEPTION_EQUITY) / INCEPTION_EQUITY) * 100,
+      pnl: closeEquity == null ? null : closeEquity - JUDGED_INCEPTION_EQUITY,
+      pnlPct: closeEquity == null ? null : ((closeEquity - JUDGED_INCEPTION_EQUITY) / JUDGED_INCEPTION_EQUITY) * 100,
       points,
       trades: judged.map((t) => ({
         id: t.id,

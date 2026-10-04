@@ -6,6 +6,14 @@ import { INCEPTION_EQUITY } from "@/lib/inception";
 export const dynamic = "force-dynamic";
 
 /**
+ * The bot's sizing, mirrored from its command line so the page can say how
+ * many slots the account has. Defaults are run_paper_bot.py's own: $300 a
+ * position, one slot per $300 of equity, capped at 15.
+ */
+const POSITION_SIZE = Number(process.env.DF_POSITION_SIZE ?? "300");
+const MAX_SLOTS = Number(process.env.DF_MAX_SLOTS ?? "15");
+
+/**
  * The hub: account, clock, and every open position priced at the live mid.
  *
  * Open positions come from the journal, not from the broker, because the
@@ -75,6 +83,12 @@ export async function GET() {
         optionsBuyingPower: Number(account.options_buying_power ?? account.buying_power),
         inceptionEquity: INCEPTION_EQUITY,
         pnlSinceInception: equity - INCEPTION_EQUITY,
+      },
+      sizing: {
+        positionSize: POSITION_SIZE,
+        maxSlots: MAX_SLOTS,
+        // Same rule as Executor.slots(): one per position size of equity, at least one.
+        slots: Math.max(1, Math.min(MAX_SLOTS, Math.floor(equity / POSITION_SIZE))),
       },
       positions,
       deployed: positions.reduce((a, p) => a + (p.debit ?? 0), 0),

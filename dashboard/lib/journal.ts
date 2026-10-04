@@ -11,6 +11,13 @@ import Database from "better-sqlite3";
  */
 const DB_PATH = process.env.DF_DB_PATH ?? path.join(process.cwd(), "..", "data", "deltaforge.db");
 
+/**
+ * The hackathon journal. A new account means a new journal, so the judged
+ * week's trades stay in the one the $100,000 run wrote.
+ */
+export const JUDGED_DB_PATH =
+  process.env.DF_JUDGED_DB_PATH ?? path.join(process.cwd(), "..", "data-100k", "deltaforge.db");
+
 export type TradeRow = {
   id: number;
   status: string;
@@ -49,13 +56,13 @@ export type FillRow = {
   leg: string;
 };
 
-function open(): Database.Database | null {
-  if (!fs.existsSync(DB_PATH)) return null;
-  return new Database(DB_PATH, { readonly: true, fileMustExist: true });
+function open(dbPath = DB_PATH): Database.Database | null {
+  if (!fs.existsSync(dbPath)) return null;
+  return new Database(dbPath, { readonly: true, fileMustExist: true });
 }
 
-export function readTrades(limit = 300): { trades: TradeRow[]; ready: boolean } {
-  const db = open();
+export function readTrades(limit = 300, dbPath = DB_PATH): { trades: TradeRow[]; ready: boolean } {
+  const db = open(dbPath);
   if (!db) return { trades: [], ready: false };
   try {
     const rows = db

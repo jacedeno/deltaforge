@@ -55,9 +55,14 @@ function Tile({ label, value, sub, tone }: { label: string; value: string; sub?:
  * for the curve, the bot's journal for the trades — and nothing is re-marked
  * to the live account. That is the point of the view: the window is closed, so
  * these numbers never move again, while the live figures above them do.
+ *
+ * It sits folded at the foot of the page. The bot now trades a different
+ * account, so this is the strategy's history, not a reading of the book above;
+ * the header still carries the result so it never needs opening to be seen.
  */
 export default function JudgedWeek() {
   const [d, setD] = useState<Judged | null>(null);
+  const [open, setOpen] = useState(false);
   const tick = useThemeTick();
 
   useEffect(() => {
@@ -133,8 +138,9 @@ export default function JudgedWeek() {
   const up = (d?.pnl ?? 0) >= 0;
 
   return (
-    <section className="card p-5 space-y-4" style={{ borderColor: "var(--accent)" }}>
-      <div className="flex flex-wrap items-baseline justify-between gap-2">
+    <section className="card p-5 space-y-4">
+      <button onClick={() => setOpen(!open)}
+              className="w-full flex flex-wrap items-center justify-between gap-2 text-left">
         <div>
           <div className="eyebrow">hackathon result · judged close</div>
           <div className="font-mono2 text-[11px] mt-1" style={{ color: "var(--ink-muted)" }}>
@@ -142,16 +148,29 @@ export default function JudgedWeek() {
             measured at the Thursday close · account PA3YN2XF0XWT
           </div>
         </div>
-        <div className="font-mono2 text-[11px] px-2.5 py-1 rounded-md"
-             style={{ background: "var(--surface-2)", color: "var(--ink-secondary)", border: "1px solid var(--border)" }}>
-          final · does not update
+        <div className="flex items-center gap-3">
+          {d?.pnl != null && (
+            <span className="font-mono2 text-sm" style={{ color: up ? "var(--delta-up)" : "var(--delta-down)" }}>
+              {`${d.pnl >= 0 ? "+" : ""}${money(d.pnl)}`}
+              {d.pnlPct != null && ` · ${d.pnlPct >= 0 ? "+" : "−"}${Math.abs(d.pnlPct).toFixed(2)}%`}
+            </span>
+          )}
+          <span className="font-mono2 text-[11px] px-2.5 py-1.5 rounded-md flex-none"
+                style={{
+                  background: open ? "var(--accent)" : "var(--surface-2)",
+                  color: open ? "var(--page)" : "var(--ink-secondary)",
+                  border: "1px solid var(--border)",
+                }}>
+            {open ? "▾ close" : "▸ final · does not update"}
+          </span>
         </div>
-      </div>
+      </button>
 
-      {d?.error && (
+      {open && d?.error && (
         <div className="font-mono2 text-[12px]" style={{ color: "var(--critical)" }}>{d.error}</div>
       )}
 
+      {open && (<>
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <Tile
           label="equity at the close"
@@ -233,6 +252,7 @@ export default function JudgedWeek() {
           coded protective floor closing the book to cash on judging day, not a human clicking sell.
         </p>
       </div>
+      </>)}
     </section>
   );
 }
