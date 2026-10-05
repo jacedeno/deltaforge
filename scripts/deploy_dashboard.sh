@@ -27,7 +27,7 @@ npm run build
 systemctl restart deltaforge-dashboard
 
 for _ in $(seq 20); do
-  if curl -fsS "http://127.0.0.1:${PORT}/" -o /dev/null 2>&1; then
+  if curl -fsS "http://127.0.0.1:${PORT}/" >/dev/null 2>&1; then
     acct=$(curl -fsS "http://127.0.0.1:${PORT}/api/snapshot" | grep -oP '"number":"\K[^"]+' || true)
     echo "dashboard up on :${PORT}, account ${acct:-unknown}"
     exit 0
