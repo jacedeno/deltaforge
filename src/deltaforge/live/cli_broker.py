@@ -44,6 +44,10 @@ class CliOrder:
     status: str
     filled_avg_price: float | None
     filled_at: datetime | None
+    # The reprice path resubmits the same contract and size from the order it
+    # read back, so these two are part of the slice, not decoration.
+    symbol: str = ""
+    qty: float = 0.0
 
     @classmethod
     def from_json(cls, o: dict) -> "CliOrder":
@@ -52,6 +56,8 @@ class CliOrder:
         return cls(
             id=str(o["id"]),
             status=str(o.get("status", "")),
+            symbol=str(o.get("symbol", "")),
+            qty=float(o.get("qty") or 0),
             filled_avg_price=float(px) if px not in (None, "") else None,
             filled_at=datetime.fromisoformat(ts.replace("Z", "+00:00")) if ts else None,
         )

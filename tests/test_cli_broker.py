@@ -77,3 +77,13 @@ def test_unfilled_order_reads_as_empty(broker, monkeypatch):
     monkeypatch.setattr(subprocess, "run", _fake_run([], json.dumps({"id": "o", "status": "accepted", "filled_avg_price": None, "filled_at": None})))
     o = broker.get_order("o")
     assert not CliBroker.is_filled(o) and CliBroker.fill_price(o) is None and CliBroker.filled_at(o) == ""
+
+
+def test_order_carries_what_the_reprice_path_resubmits(broker, monkeypatch):
+    # Executor._await_fill cancels an unfilled order and resubmits it from
+    # `order.symbol` and `order.qty`; without them the first reprice crashed
+    # the pass (2026-10-05, UBER261016C00069000).
+    payload = {"id": "o", "status": "new", "symbol": "UBER261016C00069000", "qty": "1"}
+    monkeypatch.setattr(subprocess, "run", _fake_run([], json.dumps(payload)))
+    o = broker.get_order("o")
+    assert o.symbol == "UBER261016C00069000" and int(o.qty) == 1
