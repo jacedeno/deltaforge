@@ -18,7 +18,9 @@ if [ ! -f .env.local ]; then
   exit 1
 fi
 
-npm install --silent
+# ci, not install: install rewrites package-lock.json on this host (its npm
+# drops the libc fields), which left the deploy checkout dirty.
+npm ci --silent
 npm run build
 
 pid=$(ss -ltnp 2>/dev/null | grep ":${PORT}" | grep -oP 'pid=\K[0-9]+' | head -1 || true)
