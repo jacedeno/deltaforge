@@ -23,6 +23,7 @@ import json
 import sqlite3
 import subprocess
 import sys
+import urllib.error
 import urllib.parse
 import urllib.request
 from collections import Counter
@@ -261,9 +262,16 @@ def send(token: str, chat_id: str, text: str) -> None:
     data = urllib.parse.urlencode(
         {"chat_id": chat_id, "text": text, "parse_mode": "HTML", "disable_web_page_preview": "true"}
     ).encode()
-    with urllib.request.urlopen(f"https://api.telegram.org/bot{token}/sendMessage", data=data, timeout=20) as r:
-        if not json.load(r).get("ok"):
-            raise RuntimeError("telegram refused the message")
+    try:
+        with urllib.request.urlopen(f"https://api.telegram.org/bot{token}/sendMessage", data=data, timeout=20) as r:
+            if not json.load(r).get("ok"):
+                raise RuntimeError("telegram refused the message")
+    except urllib.error.HTTPError as e:
+        # Raised without the URL: it carries the bot token, and the traceback
+        # would land in the journal. "chat not found" means nobody has sent
+        # the bot /start yet.
+        reason = json.loads(e.read() or b"{}").get("description", "")
+        raise RuntimeError(f"telegram {e.code}: {reason}") from None
 
 
 def main() -> int:
