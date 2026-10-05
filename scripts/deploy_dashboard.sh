@@ -5,16 +5,17 @@
 # at deltaforge.geekendzone.net through
 # the CT 101 Cloudflare tunnel, behind Cloudflare Access.
 #
-# The kill is PORT-scoped on purpose — never `pkill next-server`. Other Next
-# apps share this fleet (ports 3777 and 3778) and a broad kill
-# would take them down with it.
+# The server itself runs as deltaforge-dashboard.service (unit tracked in
+# deploy/), so this script builds and then restarts the unit. It used to kill
+# whatever held the port and relaunch with setsid, which raced the unit's own
+# Restart= and left a process systemd did not know about.
 set -euo pipefail
 
 PORT=3779
 cd "$(dirname "$0")/../dashboard"
 
 if [ ! -f .env.local ]; then
-  echo "missing dashboard/.env.local — copy the keys from ~/.secrets/alpaca-deltaforge-100k.env" >&2
+  echo "missing dashboard/.env.local — see docs/DEPLOYMENT.md, keys from ~/.secrets/alpaca-deltaforge-paper.env" >&2
   exit 1
 fi
 
@@ -23,19 +24,15 @@ fi
 npm ci --silent
 npm run build
 
-pid=$(ss -ltnp 2>/dev/null | grep ":${PORT}" | grep -oP 'pid=\K[0-9]+' | head -1 || true)
-if [ -n "${pid:-}" ]; then
-  echo "stopping existing dashboard (pid ${pid})"
-  kill "$pid"
+systemctl restart deltaforge-dashboard
+
+for _ in $(seq 20); do
+  if curl -fsS "http://127.0.0.1:${PORT}/" -o /dev/null 2>&1; then
+    acct=$(curl -fsS "http://127.0.0.1:${PORT}/api/snapshot" | grep -oP '"number":"\K[^"]+' || true)
+    echo "dashboard up on :${PORT}, account ${acct:-unknown}"
+    exit 0
+  fi
   sleep 1
-fi
-
-setsid nohup npm run start -- -p "$PORT" >/dev/null 2>&1 </dev/null &
-sleep 4
-
-if curl -fsS "http://127.0.0.1:${PORT}/" -o /dev/null; then
-  echo "dashboard up on :${PORT}"
-else
-  echo "dashboard did not answer on :${PORT}" >&2
-  exit 1
-fi
+done
+echo "dashboard did not answer on :${PORT} — journalctl -u deltaforge-dashboard -n 50" >&2
+exit 1

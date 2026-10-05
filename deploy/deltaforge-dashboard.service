@@ -1,0 +1,18 @@
+[Unit]
+Description=DeltaForge Dashboard (:3779)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=root
+Environment=HOME=/root
+WorkingDirectory=/root/repos/deltaforge/dashboard
+# Reads dashboard/.env.local at start; rebuild and restart with
+# scripts/deploy_dashboard.sh.
+ExecStart=/usr/bin/npm run start -- -p 3779
+Restart=on-failure
+RestartSec=15
+
+[Install]
+WantedBy=multi-user.target

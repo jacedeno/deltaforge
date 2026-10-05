@@ -170,9 +170,11 @@ results before trusting the widened list.
 ssh root@192.168.68.102 'cd /root/repos/deltaforge && ./scripts/deploy_dashboard.sh'
 ```
 
-Port **3779** (3777 and 3778 belong to neighbouring apps on this fleet,
-3778 being the ml30 screener). The deploy script's kill is **port-scoped
-on purpose**; `pkill next-server` would take the neighbours down.
+Port **3779** (3778 is the ml30 screener). The server runs as
+`deltaforge-dashboard.service` (unit tracked at `deploy/deltaforge-dashboard.service`,
+enabled); the deploy script runs `npm ci` and `npm run build`, restarts that
+unit and prints the account `/api/snapshot` reports. Never `pkill next-server`
+— the screener is another Next app on the same host.
 
 `dashboard/.env.local` is not in git and is the whole configuration:
 
