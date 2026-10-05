@@ -280,13 +280,13 @@ deltaforge-100k-bot`, and restore the Cloudflare Access app from the
 backups noted below. None of it should happen by reflex — restarting the
 bot is a decision to keep trading the strategy, not a repair.
 
-**Public since 2026-09-02** — the Cloudflare Access app in front of it was
-removed for the hackathon judging window (the dashboard is read-only: every
-API route is a GET and none can reach an order endpoint). A 200 is the
-healthy answer from the public URL. The deleted Access app and its policy
-are backed up under `~/.cloudflare/backups/access-deltaforge-*.json` on
-GeekForge for restoring after the competition; the pre-change tunnel backup
-is `tunnel-ct101-20260830T142019Z.json` in the same place.
+**Behind Cloudflare Access again since 2026-10-05** (app `deltaforge`, id
+`602a6945-…`, policy `Allow_Jose_y_Samary`, 24h sessions), recreated from the
+backup `~/.cloudflare/backups/access-deltaforge-20260902T202012Z.json` on
+GeekForge. It had been removed on 2026-09-02 so the hackathon judges could
+reach the page; a 302 to `geekendzone.cloudflareaccess.com` is now the healthy
+answer from the public URL. The pre-change tunnel backup is
+`tunnel-ct101-20260830T142019Z.json` in the same place.
 
 The working Cloudflare token is in `homelab-secrets/cloudflare-geekforge.env`.
 The one in `cloudflare-dns-tunnel.env` is **revoked** (both the local copy and
