@@ -30,10 +30,10 @@ one. The $300 is measured; fifteen concurrent slots at this capital is not
 Alpaca paper **PA3YN2XF0XWT**, opened 2026-08-31 with $100,000, traded the
 hackathon at $7,000 × 14 slots. Judged close $107,247.07 (+7.25%) on
 2026-09-03; it traded on past the window to $104,773.51 and was stopped flat
-in cash on 2026-09-14. Winners were announced 2026-10-01. The account is kept
-only so the dashboard's judged view can read its portfolio history; its keys
-stay in `homelab-secrets/alpaca-deltaforge-100k.env`, its journal in
-`data-100k/`, and `deltaforge-100k-bot.service` is stopped and disabled with
+in cash on 2026-09-14. Winners were announced 2026-10-01. Nothing reads the
+account any more — the dashboard's judged-week view was removed on 2026-10-05,
+the result lives in the README and the git history. Its keys stay in
+`homelab-secrets/alpaca-deltaforge-100k.env`, its journal in `data-100k/`, and `deltaforge-100k-bot.service` is stopped and disabled with
 its `--max-slots 1` drop-in still installed.
 
 ### Two retired accounts
@@ -185,16 +185,7 @@ DF_INCEPTION_DATE   2026-10-05
 DF_INCEPTION_EQUITY 5000
 DF_POSITION_SIZE    300      mirrors the bot's --position-size (slot count, copy)
 DF_MAX_SLOTS        15       mirrors the bot's --max-slots
-
-DF_JUDGED_API_KEY / DF_JUDGED_SECRET          hackathon account, from alpaca-deltaforge-100k.env
-DF_JUDGED_DB_PATH   .../data-100k/deltaforge.db
 ```
-
-The page leads with the live account. The hackathon result sits folded at
-the foot, read from its own account and journal through the `DF_JUDGED_*`
-variables — the live account's history holds nothing from the judged week.
-Without them the judged view shows an error in place of its figures; the
-live view is unaffected.
 
 **The three paths are not optional.** Without them the code falls back to
 `../data` and `../logs`, which is the retired $300 bot's journal — a frozen one

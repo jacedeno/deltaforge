@@ -10,7 +10,6 @@ import BrainFeed from "./BrainFeed";
 import PayoffDiagram from "./PayoffDiagram";
 import Logo from "./Logo";
 import TradeChart from "./TradeChart";
-import JudgedWeek from "./JudgedWeek";
 
 type Position = {
   id: number; symbol: string; occ: string; strike: number; expiry: string; contracts: number;
@@ -237,7 +236,7 @@ export default function Dashboard() {
             <div className="eyebrow mb-3">how it works</div>
             <ol className="space-y-3 text-sm" style={{ color: "var(--ink-secondary)" }}>
               <li><span className="font-mono2 text-[11px]" style={{ color: "var(--accent)" }}>01 · SIGNAL</span><br />
-                ML30 fresh cross on 30-minute bars across 45 liquid names under $150.</li>
+                ML30 fresh cross on 30-minute bars across the bot&apos;s liquid universe.</li>
               <li><span className="font-mono2 text-[11px]" style={{ color: "var(--accent)" }}>02 · FILTER</span><br />
                 Only if the 3R target sits 5%+ away — nearer than that, the option cannot
                 pay for its own spread and theta.</li>
@@ -254,11 +253,6 @@ export default function Dashboard() {
 
         <TradeHistory />
         <BrainFeed />
-
-        {/* The hackathon ran on a different account, so its result is history
-            rather than a figure about this one — folded away below the live
-            book instead of leading the page. */}
-        <JudgedWeek />
 
         <footer className="pt-6 pb-10 font-mono2 text-[11px]" style={{ color: "var(--ink-muted)" }}>
           <div className="flex flex-wrap items-center justify-between gap-4">

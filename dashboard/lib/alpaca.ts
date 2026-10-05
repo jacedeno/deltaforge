@@ -1,33 +1,21 @@
 const TRADING = "https://paper-api.alpaca.markets";
 const DATA = "https://data.alpaca.markets";
 
-type Creds = { keyVar: string; secretVar: string };
-
-/** The account the bot trades now. Everything live on the page reads this one. */
-const LIVE: Creds = { keyVar: "ALPACA_PAPER_API_KEY", secretVar: "ALPACA_PAPER_SECRET" };
-
-/**
- * The hackathon account, PA3YN2XF0XWT. It no longer trades; it is kept only so
- * the judged week can still be read back from its own portfolio history.
- */
-const JUDGED: Creds = { keyVar: "DF_JUDGED_API_KEY", secretVar: "DF_JUDGED_SECRET" };
-
-function headers({ keyVar, secretVar }: Creds) {
-  const key = process.env[keyVar];
-  const secret = process.env[secretVar];
-  if (!key || !secret) throw new Error(`${keyVar} / ${secretVar} not set`);
+function headers() {
+  const key = process.env.ALPACA_PAPER_API_KEY;
+  const secret = process.env.ALPACA_PAPER_SECRET;
+  if (!key || !secret) throw new Error("ALPACA_PAPER_API_KEY / ALPACA_PAPER_SECRET not set");
   return { "APCA-API-KEY-ID": key, "APCA-API-SECRET-KEY": secret };
 }
 
-async function get(base: string, path: string, creds: Creds = LIVE) {
-  const res = await fetch(`${base}${path}`, { headers: headers(creds), cache: "no-store" });
+async function get(base: string, path: string) {
+  const res = await fetch(`${base}${path}`, { headers: headers(), cache: "no-store" });
   if (!res.ok) throw new Error(`${path} → ${res.status} ${(await res.text()).slice(0, 200)}`);
   return res.json();
 }
 
 export const trading = (path: string) => get(TRADING, path);
 export const data = (path: string) => get(DATA, path);
-export const judgedTrading = (path: string) => get(TRADING, path, JUDGED);
 
 /** Latest option quotes, keyed by OCC symbol. */
 export async function optionQuotes(occ: string[]): Promise<Record<string, { bp: number; ap: number }>> {
