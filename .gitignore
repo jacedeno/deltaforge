@@ -15,4 +15,7 @@ data/snapshots/
 # $3,000 account's, so the two never write over each other.
 data-100k/
 logs-100k/
+# The post-hackathon run on the $3,000-class account, likewise.
+data-3k/
+logs-3k/
 logs/
