@@ -330,6 +330,35 @@ reported equity would otherwise count money the buying power does not have.
 Written for the borrowed account and kept for the clean one, where it should
 never fire; if it does, something else is trading this account.
 
+## Reports to Telegram
+
+Twice each trading day `scripts/daily_report.py` sends a report to Jose's
+DeltaForge chat (its own bot, token in `homelab-secrets/telegram-deltaforge.env`,
+mirrored to `/root/.secrets/` on AlgoTrader):
+
+| Timer | When (Central) | Unit |
+|---|---|---|
+| `deltaforge-report-open.timer` | Mon–Fri 09:07, after the first 30m pass | `deltaforge-report@open.service` |
+| `deltaforge-report-close.timer` | Mon–Fri 15:12, after the close | `deltaforge-report@close.service` |
+
+Each report: bot health (unit state, heartbeat age, failed passes, errors in
+today's event log, any retired unit running), account (equity, day P&L, P&L
+since the $5,000 inception, cash), every open position (P&L at mid, distance
+to stop and target, DTE and days to the 5-DTE exit), a journal-vs-broker
+reconciliation with open orders, and the day's scans, entries, exits and skips
+by reason. Any line starting `ALERT` puts a warning sign on the title.
+
+It runs under the system `python3` with the standard library only, so it
+still reports when the bot's virtualenv is the thing that broke, and every
+section degrades to an `ALERT` line rather than suppressing the message. On a
+day the market is closed it exits without sending.
+
+```bash
+ssh root@192.168.68.102 'cd /root/repos/deltaforge && python3 scripts/daily_report.py --kind open --print'
+ssh root@192.168.68.102 'systemctl start deltaforge-report@close.service'   # send one now
+ssh root@192.168.68.102 'systemctl list-timers "deltaforge-report-*"'
+```
+
 ## Checks
 
 ```bash

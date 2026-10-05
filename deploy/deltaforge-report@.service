@@ -1,0 +1,12 @@
+[Unit]
+Description=DeltaForge %i report to Telegram (account, positions, health)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=root
+WorkingDirectory=/root/repos/deltaforge
+# System python3 on purpose: the report must still go out when the bot's
+# virtualenv is what broke. Exits quietly on days the market is closed.
+ExecStart=/usr/bin/python3 scripts/daily_report.py --kind %i

@@ -1,0 +1,10 @@
+[Unit]
+Description=DeltaForge open check, weekdays 09:07 Central (after the first 30m pass)
+
+[Timer]
+OnCalendar=Mon..Fri *-*-* 09:07:00 America/Chicago
+Persistent=false
+Unit=deltaforge-report@open.service
+
+[Install]
+WantedBy=timers.target

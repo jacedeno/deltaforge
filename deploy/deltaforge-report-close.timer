@@ -1,0 +1,10 @@
+[Unit]
+Description=DeltaForge close report, weekdays 15:12 Central (after the close)
+
+[Timer]
+OnCalendar=Mon..Fri *-*-* 15:12:00 America/Chicago
+Persistent=false
+Unit=deltaforge-report@close.service
+
+[Install]
+WantedBy=timers.target
