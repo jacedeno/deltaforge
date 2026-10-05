@@ -10,17 +10,20 @@ not run the bot.
 
 ## Account
 
-**Since 2026-10 the bot trades a fresh $3,000 Alpaca paper account**, options
-level 3 — the capital every backtest in `docs/BACKTEST.md` was measured on,
-and the size of the real-money ml30 account. Keys:
-`homelab-secrets/alpaca-deltaforge-3k.env`, mirrored to
-`/root/.secrets/alpaca-deltaforge-3k.env` on AlgoTrader and to
+**Since 2026-10-05 the bot trades a fresh $5,000 Alpaca paper account,
+PA3PYB0A7982**, options level 3. The plan was $3,000 — the capital every
+backtest in `docs/BACKTEST.md` was measured on — and the account was opened
+at $5,000 instead; Jose kept it. Keys:
+`homelab-secrets/alpaca-deltaforge-paper.env`, mirrored to
+`/root/.secrets/alpaca-deltaforge-paper.env` on AlgoTrader and to
 `dashboard/.env.local` (Next reads that at boot — a running dashboard keeps
-using an old key until restarted). Journal: `data-3k/` and `logs-3k/`.
+using an old key until restarted). Journal: `data-paper/` and `logs-paper/`.
 
-Sizing is the measured optimum, not an extrapolation: **$300 a position, one
-slot per $300 of equity, capped at 15** — ten slots at $3,000. Signals refused
-as `over_budget` (about a third of them at this size) are the rule working.
+Sizing keeps the measured per-position budget: **$300 a position, one slot
+per $300 of equity, capped at 15** — so all fifteen slots are open from day
+one. The $300 is measured; fifteen concurrent slots at this capital is not
+(the backtest ran ten at $3,000), so watch exposure. Signals refused as
+`over_budget` (about a third of them at this size) are the rule working.
 
 ### The hackathon account, retired
 
@@ -58,18 +61,18 @@ export PATH=$PATH:/root/.local/bin
 
 # one pass, no orders — the safe way to check a change
 uv run python scripts/run_paper_bot.py \
-    --env-file /root/.secrets/alpaca-deltaforge-3k.env \
+    --env-file /root/.secrets/alpaca-deltaforge-paper.env \
     --position-size 300 --max-slots 15 \
-    --data-dir /root/repos/deltaforge/data-3k \
-    --logs-dir /root/repos/deltaforge/logs-3k \
+    --data-dir /root/repos/deltaforge/data-paper \
+    --logs-dir /root/repos/deltaforge/logs-paper \
     --once --dry-run
 
 # the real thing
 uv run python scripts/run_paper_bot.py \
-    --env-file /root/.secrets/alpaca-deltaforge-3k.env \
+    --env-file /root/.secrets/alpaca-deltaforge-paper.env \
     --position-size 300 --max-slots 15 \
-    --data-dir /root/repos/deltaforge/data-3k \
-    --logs-dir /root/repos/deltaforge/logs-3k
+    --data-dir /root/repos/deltaforge/data-paper \
+    --logs-dir /root/repos/deltaforge/logs-paper
 ```
 
 `--env-file` is required and never inferred. ml30's own settings module carries
@@ -79,9 +82,9 @@ once outranked `--env-file` and two bots reported the same account.
 The script's own defaults are the backtest's: $300 a position, one slot per
 $300 of equity capped at 15, 0.55 delta, 7–14 DTE, exit at 5 DTE, and **signals
 whose 3R target sits under 5% away are refused**. Delta, DTE and the 5% target
-gate are used as they stand. The 3k run uses the default sizing too; the
+gate are used as they stand. The paper run uses the default sizing too; the
 unit spells out `--position-size 300 --max-slots 15` so the command line
-says what it trades, and redirects the journal to `data-3k/` and `logs-3k/`.
+says what it trades, and redirects the journal to `data-paper/` and `logs-paper/`.
 The unsuffixed `data/` and `logs/` belong to the retired $300 instance and
 `-100k` to the hackathon run; a new account gets a new journal.
 
@@ -174,12 +177,12 @@ on purpose**; `pkill next-server` would take the neighbours down.
 `dashboard/.env.local` is not in git and is the whole configuration:
 
 ```
-ALPACA_PAPER_API_KEY / ALPACA_PAPER_SECRET   live account, from alpaca-deltaforge-3k.env
-DF_DB_PATH          .../data-3k/deltaforge.db
-DF_EVENTS_PATH      .../logs-3k/events.jsonl
-DF_HEARTBEAT_PATH   .../data-3k/heartbeat.json
-DF_INCEPTION_DATE   first session of the 3k run (YYYY-MM-DD)
-DF_INCEPTION_EQUITY 3000
+ALPACA_PAPER_API_KEY / ALPACA_PAPER_SECRET   live account, from alpaca-deltaforge-paper.env
+DF_DB_PATH          .../data-paper/deltaforge.db
+DF_EVENTS_PATH      .../logs-paper/events.jsonl
+DF_HEARTBEAT_PATH   .../data-paper/heartbeat.json
+DF_INCEPTION_DATE   2026-10-05
+DF_INCEPTION_EQUITY 5000
 DF_POSITION_SIZE    300      mirrors the bot's --position-size (slot count, copy)
 DF_MAX_SLOTS        15       mirrors the bot's --max-slots
 
@@ -301,14 +304,14 @@ hosts.
 
 ## Service
 
-The bot runs as `deltaforge-3k-bot.service` on AlgoTrader (unit tracked at
-`deploy/deltaforge-3k-bot.service`), enabled so it survives a reboot. It
+The bot runs as `deltaforge-paper-bot.service` on AlgoTrader (unit tracked at
+`deploy/deltaforge-paper-bot.service`), enabled so it survives a reboot. It
 sleeps between 30-minute bars and only scans while the market is open.
 
 ```bash
-systemctl status deltaforge-3k-bot
-journalctl -u deltaforge-3k-bot -n 50     # or logs-3k/bot.log
-systemctl restart deltaforge-3k-bot       # picks up a git pull
+systemctl status deltaforge-paper-bot
+journalctl -u deltaforge-paper-bot -n 50     # or logs-paper/bot.log
+systemctl restart deltaforge-paper-bot       # picks up a git pull
 ```
 
 **The Alpaca CLI must be on systemd's PATH.** Orders go through it by
@@ -345,8 +348,8 @@ ssh root@192.168.68.102 'curl -s localhost:3779/api/health'
 ssh root@192.168.68.102 'ps -eo pid,cmd | grep -E "run_paper_bot|next-server" | grep -v grep'
 
 # alive, and exactly one process on the account
-ssh root@192.168.68.102 'systemctl is-active deltaforge-3k-bot'
-ssh root@192.168.68.102 'grep bot.start /root/repos/deltaforge/logs-3k/bot.log | tail -1'
+ssh root@192.168.68.102 'systemctl is-active deltaforge-paper-bot'
+ssh root@192.168.68.102 'grep bot.start /root/repos/deltaforge/logs-paper/bot.log | tail -1'
 
 # the retired instances must stay down
 ssh root@192.168.68.102 'for u in deltaforge-100k-bot deltaforge-bot; do systemctl is-active $u; systemctl is-enabled $u; done'
@@ -354,7 +357,7 @@ ssh root@192.168.68.102 'for u in deltaforge-100k-bot deltaforge-bot; do systemc
 
 `/api/health` reporting `degraded` with a `401` in its `note` means the
 dashboard is authenticating with a revoked key — check `dashboard/.env.local`
-against `homelab-secrets/alpaca-deltaforge-3k.env`, then redeploy.
+against `homelab-secrets/alpaca-deltaforge-paper.env`, then redeploy.
 
 After any tunnel edit, confirm the neighbours too — the sibling dashboard
 and `wireguard` routes should answer 200, `screener` and `term` 302.

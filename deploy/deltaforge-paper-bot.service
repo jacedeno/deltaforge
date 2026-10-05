@@ -1,5 +1,5 @@
 [Unit]
-Description=DeltaForge 3k Paper Bot (ML30 30m signal, long calls, 7-14 DTE, $300/position)
+Description=DeltaForge Paper Bot (ML30 30m signal, long calls, 7-14 DTE, $300/position)
 After=network-online.target
 Wants=network-online.target
 
@@ -7,27 +7,27 @@ Wants=network-online.target
 Type=simple
 User=root
 WorkingDirectory=/root/repos/deltaforge
-# The post-hackathon run on a $3,000 paper account: the capital the backtest
-# was measured on, and the size of the real-money ml30 account. $300 a position
-# with one slot per $300 of equity, capped at 15, is the measured optimum
-# (docs/BACKTEST.md, "Budget"). Its predecessor deltaforge-100k-bot is retired.
+# The post-hackathon run on a $5,000 paper account (PA3PYB0A7982, from
+# 2026-10-05). $300 a position is the measured optimum (docs/BACKTEST.md,
+# "Budget"); one slot per $300 of equity, capped at 15, puts every slot in
+# play from the start. Its predecessor deltaforge-100k-bot is retired.
 #
 # Orders go through the Alpaca CLI (--broker cli, the default). systemd's PATH
 # does not include /root/go/bin, so the binary is symlinked into /usr/local/bin.
 ExecStart=/root/.local/bin/uv run python scripts/run_paper_bot.py \
-    --env-file /root/.secrets/alpaca-deltaforge-3k.env \
+    --env-file /root/.secrets/alpaca-deltaforge-paper.env \
     --position-size 300 \
     --max-slots 15 \
-    --data-dir /root/repos/deltaforge/data-3k \
-    --logs-dir /root/repos/deltaforge/logs-3k
+    --data-dir /root/repos/deltaforge/data-paper \
+    --logs-dir /root/repos/deltaforge/logs-paper
 Restart=on-failure
 RestartSec=30
 # The bot sleeps between 30-minute bars, so a stop can wait for the current
 # pass to finish rather than interrupting an order it is waiting on a fill for.
 KillSignal=SIGTERM
 TimeoutStopSec=180
-StandardOutput=append:/root/repos/deltaforge/logs-3k/bot.log
-StandardError=append:/root/repos/deltaforge/logs-3k/bot.log
+StandardOutput=append:/root/repos/deltaforge/logs-paper/bot.log
+StandardError=append:/root/repos/deltaforge/logs-paper/bot.log
 
 [Install]
 WantedBy=multi-user.target
