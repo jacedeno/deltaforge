@@ -7,7 +7,7 @@ const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono2" });
 
 export const metadata: Metadata = {
   title: "DeltaForge",
-  description: "Directional options overlay on the ML30 signal · Alpaca paper",
+  description: "Directional options overlay on the ML30 signal · paper trading",
 };
 
 // Apply the stored theme before first paint, or the page flashes dark then light.

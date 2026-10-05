@@ -85,7 +85,7 @@ export default function Dashboard() {
             <p className="text-sm mt-2 max-w-2xl" style={{ color: "var(--ink-secondary)" }}>
               Buys slightly in-the-money calls on the ML30 30-minute cross — 7–14 days out,
               around 0.55 delta — and exits on the underlying&apos;s own stop, its 3R target,
-              or the five-day expiry clock. Alpaca paper.
+              or the five-day expiry clock. Paper trading.
             </p>
           </div>
           <ThemeToggle />
@@ -216,7 +216,7 @@ export default function Dashboard() {
         <footer className="pt-6 pb-10 font-mono2 text-[11px]" style={{ color: "var(--ink-muted)" }}>
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div className="flex flex-wrap gap-2">
-              {["Alpaca Options API", "ML30 30m signal", "Paper Trading", "Bare metal"].map((t) => (
+              {["ML30 30m signal", "Paper Trading", "Bare metal"].map((t) => (
                 <span key={t} className="rounded-full border px-3 py-1"
                       style={{ borderColor: "var(--grid)" }}>
                   {t}
