@@ -39,6 +39,10 @@ what it did on the [dashboard](https://deltaforge.geekendzone.net). Built for
 the [Alpaca AI Trading Agents Hackathon](https://lablab.ai/ai-hackathons/alpaca-ai-trading-agents-hackathon);
 the first commit landed four hours after kickoff.
 
+**Since 2026-10-05** the same bot trades a fresh $5,000 Alpaca paper account,
+and the [dashboard](https://deltaforge.geekendzone.net) is now that run's
+monitor, with the hackathon result kept at its foot.
+
 ![The dashboard at the judged close: equity $107,247.11, up $7,247.11 since
 inception, zero open positions, and the week's equity curve](docs/images/dashboard-equity-curve.png)
 
@@ -235,8 +239,8 @@ new during the event with the required $100,000 starting balance.
 **Jose Cedeno** · [github.com/jacedeno](https://github.com/jacedeno) ·
 joseangel.cedeno@gmail.com
 
-I run a small fleet of automated trading systems out of a self-hosted
-homelab: a real-money ML30 momentum bot and DeltaForge. The signal
+I run automated trading out of a self-hosted homelab — today a single
+system, DeltaForge, trading on paper. The signal
 research, the backtesting practice and the infrastructure underneath —
 from the Proxmox cluster and its failover to the dashboards on top — are
 built and operated end to end by me.
