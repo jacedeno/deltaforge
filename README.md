@@ -9,9 +9,27 @@
     <a href="docs/BACKTEST.md">Backtest report</a> ·
     <a href="docs/DEPLOYMENT.md">Operations</a>
   </p>
+  <p>
+    <a href="#disclaimer"><img src="https://img.shields.io/badge/trading-paper-2ea44f?style=flat-square" alt="Trading: paper"></a>
+    <a href="docs/images/dashboard-equity-curve.png"><img src="https://img.shields.io/badge/judged%20week-%2B7.25%25-2ea44f?style=flat-square" alt="Judged week: +7.25%"></a>
+    <a href="docs/BACKTEST.md"><img src="https://img.shields.io/badge/backtest-2%2C345%20trades-1f6feb?style=flat-square" alt="Backtest: 2,345 trades"></a>
+    <a href="#where-the-edge-comes-from"><img src="https://img.shields.io/badge/expectancy-%2B9.9%25%20of%20debit-1f6feb?style=flat-square" alt="Expectancy: +9.9% of debit"></a>
+    <a href="https://lablab.ai/ai-hackathons/alpaca-ai-trading-agents-hackathon"><img src="https://img.shields.io/badge/hackathon-Alpaca%20AI%20Trading%20Agents-f0a030?style=flat-square" alt="Hackathon: Alpaca AI Trading Agents"></a>
+  </p>
+  <p>
+    <img src="https://img.shields.io/badge/Python-%E2%89%A5%203.13-3776ab?style=flat-square&logo=python&logoColor=white" alt="Python >= 3.13">
+    <img src="https://img.shields.io/badge/Alpaca-options%20API%20%2B%20CLI-ffd700?style=flat-square" alt="Alpaca: options API + CLI">
+    <img src="https://img.shields.io/badge/Next.js-16-000000?style=flat-square&logo=nextdotjs&logoColor=white" alt="Next.js 16">
+    <img src="https://img.shields.io/badge/uv-managed-de5fe9?style=flat-square&logo=uv&logoColor=white" alt="uv">
+    <img src="https://img.shields.io/badge/systemd-services-30d475?style=flat-square&logo=linux&logoColor=white" alt="systemd services">
+    <a href="LICENSE"><img src="https://img.shields.io/github/license/jacedeno/deltaforge?style=flat-square" alt="License"></a>
+    <img src="https://img.shields.io/github/last-commit/jacedeno/deltaforge?style=flat-square" alt="Last commit">
+  </p>
 </div>
 
 ---
+
+## Overview
 
 **Status: traded on paper 2026-08-31 → 2026-09-03, closed to cash at +7.25%
 for judging.** One autonomous bot against one
@@ -125,7 +143,23 @@ in ["What did not survive"](docs/BACKTEST.md) — kept public because the
 discard is the strongest evidence the rest of the numbers were checked with
 the same suspicion.
 
-## What is in the repo
+## Architecture
+
+```mermaid
+flowchart LR
+    M["Alpaca market data<br/>(30-minute bars)"] --> S["ML30 signal<br/>(vendored: 21/55 SMA cross, pivot stop, 3R target)"]
+    S --> C["contract selector<br/>(slightly-ITM call, 0.55 delta, 7–14 DTE)"]
+    C --> E["executor<br/>(limit at mid, frozen stop, DTE clock)"]
+    E -- "orders via the Alpaca CLI" --> A[("Alpaca paper account")]
+    E --> J["trade journal"]
+    J --> D["Next.js dashboard"]
+    A --> D
+    H["real Alpaca options data"] --> BT["backtest engine<br/>(hybrid pricing ladder)"]
+    S --> BT
+    BT --> R["reports/"]
+```
+
+### What is in the repo
 
 ```
 src/deltaforge/        backtest engine — hybrid pricing ladder
@@ -163,7 +197,18 @@ Its exit is tagged <code>MANUAL</code> because the judging-day protective
 floor (<code>scripts/bracket_watch.sh</code>) closed it, not one of the bot's
 three mechanical exits — the journal keeps the two apart.</sub>
 
-## Run it
+## Tech stack
+
+| Layer | Choice |
+|---|---|
+| Signal + backtest engine | Python ≥ 3.13, pandas, NumPy, SciPy, `alpaca-py` |
+| Order routing | [Alpaca CLI](https://github.com/alpacahq/cli) (default), Alpaca SDK for account and option chain |
+| Dashboard | Next.js 16, React 19, TypeScript, Tailwind CSS 4, lightweight-charts |
+| Packaging | uv, hatchling |
+| Deployment | systemd units in `deploy/` |
+| Tests | pytest |
+
+## Getting started
 
 ```bash
 export ALPACA_API_KEY=... ALPACA_SECRET_KEY=...   # historical SIP entitlement needed
@@ -202,3 +247,15 @@ Paper trading, simulated funds, real market data. Nothing here is
 investment advice; the backtest report is explicit about its assumptions
 and their limits, and going live is gated on evidence the paper phase has
 not yet produced.
+
+## License
+
+MIT — see [LICENSE](LICENSE).
+
+---
+
+<p align="center">
+  Built by <b>Jose Cedeno</b> ·
+  <a href="https://geekendzone.com">geekendzone.com</a> ·
+  <a href="https://www.linkedin.com/in/joseangelcedeno/">LinkedIn</a>
+</p>
